@@ -1,0 +1,1433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Nexa Bonus</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f4f6f9;
+    color:#111827;
+}
+
+button,input,select{
+    font:inherit;
+}
+
+.hidden{
+    display:none!important;
+}
+
+/* HEADER */
+.header{
+    height:65px;
+    background:#ffffff;
+    border-bottom:1px solid #e5e7eb;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 22px;
+}
+
+.logo{
+    font-size:21px;
+    font-weight:800;
+}
+
+.demo-label{
+    font-size:10px;
+    background:#fef3c7;
+    color:#92400e;
+    padding:4px 7px;
+    border-radius:10px;
+    margin-left:6px;
+}
+
+.logout{
+    border:0;
+    background:#eef2f7;
+    padding:8px 13px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+/* AUTH */
+.container{
+    max-width:1050px;
+    margin:auto;
+    padding:25px 16px;
+}
+
+.auth{
+    max-width:430px;
+    margin:45px auto;
+    background:white;
+    padding:25px;
+    border-radius:18px;
+    border:1px solid #e5e7eb;
+}
+
+.auth h1{
+    margin-bottom:8px;
+}
+
+.description{
+    color:#6b7280;
+    font-size:14px;
+    line-height:1.5;
+}
+
+.tabs{
+    display:flex;
+    gap:8px;
+    margin:22px 0;
+}
+
+.tabs button{
+    flex:1;
+    border:1px solid #ddd;
+    background:white;
+    padding:11px;
+    border-radius:9px;
+    cursor:pointer;
+}
+
+.tabs button.active{
+    background:#111827;
+    color:white;
+}
+
+label{
+    display:block;
+    font-size:13px;
+    font-weight:bold;
+    margin:14px 0 6px;
+}
+
+input,select{
+    width:100%;
+    padding:13px;
+    border:1px solid #d1d5db;
+    border-radius:9px;
+    background:white;
+    outline:none;
+}
+
+input:focus,select:focus{
+    border-color:#111827;
+}
+
+.primary{
+    width:100%;
+    margin-top:19px;
+    padding:13px;
+    border:0;
+    border-radius:10px;
+    background:#111827;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.error{
+    color:#b91c1c;
+    font-size:13px;
+    margin-top:10px;
+}
+
+.notice{
+    margin-top:16px;
+    padding:11px;
+    background:#fff8df;
+    border:1px solid #f1d477;
+    border-radius:9px;
+    color:#705600;
+    font-size:12px;
+    line-height:1.5;
+}
+
+.switch{
+    text-align:center;
+    margin-top:14px;
+    font-size:13px;
+    color:#6b7280;
+}
+
+.switch button{
+    border:0;
+    background:none;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+/* DASHBOARD */
+.dashboard-grid{
+    display:grid;
+    grid-template-columns:1fr 250px;
+    gap:18px;
+}
+
+.balance-card{
+    background:#111827;
+    color:white;
+    border-radius:20px;
+    padding:25px;
+}
+
+.balance-label{
+    color:#9ca3af;
+    font-size:13px;
+}
+
+.balance{
+    font-size:38px;
+    font-weight:800;
+    margin-top:10px;
+}
+
+.usd{
+    color:#9ca3af;
+    font-size:13px;
+    margin-top:5px;
+}
+
+.timer{
+    font-size:29px;
+    font-weight:bold;
+    margin-top:25px;
+    letter-spacing:1px;
+}
+
+.timer-status{
+    color:#a7f3d0;
+    font-size:12px;
+    margin-top:6px;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    margin-top:15px;
+}
+
+.small-card{
+    background:white;
+    border:1px solid #e5e7eb;
+    border-radius:14px;
+    padding:16px;
+}
+
+.small-card span{
+    color:#6b7280;
+    font-size:12px;
+}
+
+.small-card strong{
+    display:block;
+    margin-top:7px;
+}
+
+.panel{
+    background:white;
+    border:1px solid #e5e7eb;
+    border-radius:16px;
+    padding:20px;
+    margin-top:15px;
+}
+
+.panel h2{
+    font-size:18px;
+    margin-bottom:8px;
+}
+
+.panel p{
+    color:#6b7280;
+    font-size:13px;
+    line-height:1.5;
+}
+
+.withdraw{
+    width:100%;
+    margin-top:15px;
+    border:0;
+    background:#111827;
+    color:white;
+    padding:12px;
+    border-radius:9px;
+    cursor:pointer;
+}
+
+/* SIDE MENU */
+.side-menu{
+    display:flex;
+    flex-direction:column;
+    gap:7px;
+}
+
+.side-menu button{
+    text-align:left;
+    padding:10px 12px;
+    background:white;
+    border:1px solid #e5e7eb;
+    border-radius:9px;
+    color:#4b5563;
+    font-size:12px;
+    cursor:pointer;
+}
+
+/* MOBILE */
+@media(max-width:750px){
+
+    .dashboard-grid{
+        grid-template-columns:1fr;
+    }
+
+    .cards{
+        grid-template-columns:1fr;
+    }
+
+    .side-menu{
+        display:grid;
+        grid-template-columns:1fr 1fr;
+    }
+
+    .balance{
+        font-size:31px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+
+    <div class="logo">
+        Nexa Bonus
+        <span class="demo-label">SIMULATION</span>
+    </div>
+
+    <button id="logoutButton" class="logout hidden">
+        Log out
+    </button>
+
+</header>
+
+
+<div class="container">
+
+<!-- ================= REGISTER / LOGIN ================= -->
+
+<section id="authScreen" class="auth">
+
+    <h1>Welcome</h1>
+
+    <p class="description">
+        Create an account or log in to access your bonus dashboard.
+    </p>
+
+
+    <div class="tabs">
+
+        <button
+            id="registerTab"
+            class="active"
+            type="button">
+            Register
+        </button>
+
+        <button
+            id="loginTab"
+            type="button">
+            Login
+        </button>
+
+    </div>
+
+
+    <!-- REGISTER -->
+
+    <form id="registerForm">
+
+        <label>Full Name</label>
+
+        <input
+            id="registerName"
+            type="text"
+            placeholder="Full name"
+            required>
+
+
+        <label>Email</label>
+
+        <input
+            id="registerEmail"
+            type="email"
+            placeholder="Email address"
+            required>
+
+
+        <label>Password</label>
+
+        <input
+            id="registerPassword"
+            type="password"
+            placeholder="Minimum 6 characters"
+            minlength="6"
+            required>
+
+
+        <label>Country</label>
+
+        <select id="country" required>
+
+            <option value="">
+                Select your country
+            </option>
+
+            <option value="PE">
+                🇵🇪 Peru
+            </option>
+
+            <option value="EC">
+                🇪🇨 Ecuador
+            </option>
+
+            <option value="MX">
+                🇲🇽 Mexico
+            </option>
+
+            <option value="SV">
+                🇸🇻 El Salvador
+            </option>
+
+            <option value="BR">
+                🇧🇷 Brazil
+            </option>
+
+            <option value="CO">
+                🇨🇴 Colombia
+            </option>
+
+            <option value="VE">
+                🇻🇪 Venezuela
+            </option>
+
+            <option value="GT">
+                🇬🇹 Guatemala
+            </option>
+
+        </select>
+
+
+        <button
+            class="primary"
+            type="submit">
+
+            Create Account
+
+        </button>
+
+
+        <div
+            id="registerError"
+            class="error">
+        </div>
+
+    </form>
+
+
+    <!-- LOGIN -->
+
+    <form
+        id="loginForm"
+        class="hidden">
+
+        <label>Email</label>
+
+        <input
+            id="loginEmail"
+            type="email"
+            placeholder="Email address"
+            required>
+
+
+        <label>Password</label>
+
+        <input
+            id="loginPassword"
+            type="password"
+            placeholder="Password"
+            required>
+
+
+        <button
+            class="primary"
+            type="submit">
+
+            Log In
+
+        </button>
+
+
+        <div
+            id="loginError"
+            class="error">
+        </div>
+
+    </form>
+
+
+    <div class="notice">
+
+        This website is a simulation. Displayed bonus balances
+        are not real funds and the withdrawal function does not
+        transfer money.
+
+    </div>
+
+
+    <div class="switch">
+
+        <span id="switchText">
+            Already have an account?
+        </span>
+
+        <button
+            id="switchButton"
+            type="button">
+            Log in
+        </button>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= DASHBOARD ================= -->
+
+<section
+    id="dashboard"
+    class="hidden">
+
+    <div class="dashboard-grid">
+
+
+        <div>
+
+            <!-- BALANCE -->
+
+            <div class="balance-card">
+
+                <div class="balance-label">
+                    Available Bonus
+                </div>
+
+
+                <div
+                    id="localBalance"
+                    class="balance">
+                    $0
+                </div>
+
+
+                <div
+                    id="usdBalance"
+                    class="usd">
+                    ≈ $0 USD
+                </div>
+
+
+                <div
+                    id="timer"
+                    class="timer">
+                    15:41:55
+                </div>
+
+
+                <div
+                    id="timerStatus"
+                    class="timer-status">
+
+                    Bonus countdown active
+
+                </div>
+
+            </div>
+
+
+            <!-- ACCOUNT INFORMATION -->
+
+            <div class="cards">
+
+                <div class="small-card">
+
+                    <span>Country</span>
+
+                    <strong id="accountCountry">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="small-card">
+
+                    <span>Currency</span>
+
+                    <strong id="accountCurrency">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="small-card">
+
+                    <span>Status</span>
+
+                    <strong>
+                        Active
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- BONUS -->
+
+            <div class="panel">
+
+                <h2>
+                    Bonus Information
+                </h2>
+
+                <p>
+                    Your assigned simulation bonus remains
+                    attached to this account while the countdown
+                    is active.
+                </p>
+
+
+                <button
+                    id="withdrawButton"
+                    class="withdraw">
+
+                    Withdrawal
+
+                </button>
+
+
+                <div
+                    id="withdrawMessage"
+                    class="notice hidden">
+
+                    Simulation withdrawal is unavailable because
+                    this website does not hold or transfer real funds.
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- SIDE MENU -->
+
+        <aside class="side-menu">
+
+            <button>
+                Overview
+            </button>
+
+            <button>
+                Bonus
+            </button>
+
+            <button>
+                Transactions
+            </button>
+
+            <button>
+                Account Settings
+            </button>
+
+        </aside>
+
+    </div>
+
+</section>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   CONFIGURATION
+   ========================================================= */
+
+
+/*
+   The bonus values are simulation values.
+*/
+
+const BONUS_VALUES = [
+    300,
+    600,
+    700,
+    800,
+    1300,
+    3000,
+    7000
+];
+
+
+/*
+   Countdown:
+   15 hours
+   41 minutes
+   55 seconds
+*/
+
+const COUNTDOWN_SECONDS =
+    (15 * 60 * 60) +
+    (41 * 60) +
+    55;
+
+
+/*
+   Currency rates.
+
+   Change these numbers whenever you want.
+   Example:
+   1 USD = 3.50 PEN
+*/
+
+const COUNTRIES = {
+
+    PE:{
+        name:"Peru",
+        currency:"PEN",
+        symbol:"S/",
+        rate:3.50
+    },
+
+    EC:{
+        name:"Ecuador",
+        currency:"USD",
+        symbol:"$",
+        rate:1
+    },
+
+    MX:{
+        name:"Mexico",
+        currency:"MXN",
+        symbol:"MX$",
+        rate:19
+    },
+
+    SV:{
+        name:"El Salvador",
+        currency:"USD",
+        symbol:"$",
+        rate:1
+    },
+
+    BR:{
+        name:"Brazil",
+        currency:"BRL",
+        symbol:"R$",
+        rate:5.40
+    },
+
+    CO:{
+        name:"Colombia",
+        currency:"COP",
+        symbol:"$",
+        rate:3900
+    },
+
+    VE:{
+        name:"Venezuela",
+        currency:"VES",
+        symbol:"Bs.",
+        rate:130
+    },
+
+    GT:{
+        name:"Guatemala",
+        currency:"GTQ",
+        symbol:"Q",
+        rate:7.70
+    }
+
+};
+
+
+/* =========================================================
+   STORAGE
+   ========================================================= */
+
+const USERS_KEY =
+    "nexa_users";
+
+const SESSION_KEY =
+    "nexa_session";
+
+
+function getUsers(){
+
+    return JSON.parse(
+        localStorage.getItem(USERS_KEY) || "{}"
+    );
+
+}
+
+
+function saveUsers(users){
+
+    localStorage.setItem(
+        USERS_KEY,
+        JSON.stringify(users)
+    );
+
+}
+
+
+/* =========================================================
+   ELEMENTS
+   ========================================================= */
+
+const authScreen =
+    document.getElementById("authScreen");
+
+const dashboard =
+    document.getElementById("dashboard");
+
+const registerForm =
+    document.getElementById("registerForm");
+
+const loginForm =
+    document.getElementById("loginForm");
+
+const registerTab =
+    document.getElementById("registerTab");
+
+const loginTab =
+    document.getElementById("loginTab");
+
+const logoutButton =
+    document.getElementById("logoutButton");
+
+const switchButton =
+    document.getElementById("switchButton");
+
+const switchText =
+    document.getElementById("switchText");
+
+
+let timerInterval = null;
+
+
+/* =========================================================
+   AUTH SCREEN SWITCHING
+   ========================================================= */
+
+function showRegister(){
+
+    registerForm.classList.remove("hidden");
+
+    loginForm.classList.add("hidden");
+
+    registerTab.classList.add("active");
+
+    loginTab.classList.remove("active");
+
+    switchText.textContent =
+        "Already have an account?";
+
+    switchButton.textContent =
+        "Log in";
+
+}
+
+
+function showLogin(){
+
+    registerForm.classList.add("hidden");
+
+    loginForm.classList.remove("hidden");
+
+    loginTab.classList.add("active");
+
+    registerTab.classList.remove("active");
+
+    switchText.textContent =
+        "Don't have an account?";
+
+    switchButton.textContent =
+        "Register";
+
+}
+
+
+registerTab.addEventListener(
+    "click",
+    showRegister
+);
+
+
+loginTab.addEventListener(
+    "click",
+    showLogin
+);
+
+
+switchButton.addEventListener(
+    "click",
+    function(){
+
+        if(
+            loginForm.classList.contains("hidden")
+        ){
+
+            showLogin();
+
+        }else{
+
+            showRegister();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   FORMAT MONEY
+   ========================================================= */
+
+function formatMoney(
+    value,
+    currency
+){
+
+    return new Intl.NumberFormat(
+        undefined,
+        {
+            minimumFractionDigits:
+                currency === "COP" ||
+                currency === "VES"
+                    ? 0
+                    : 2,
+
+            maximumFractionDigits:
+                currency === "COP" ||
+                currency === "VES"
+                    ? 0
+                    : 2
+        }
+    ).format(value);
+
+}
+
+
+/* =========================================================
+   REGISTER
+   ========================================================= */
+
+registerForm.addEventListener(
+    "submit",
+    function(event){
+
+        event.preventDefault();
+
+
+        const name =
+            document
+            .getElementById("registerName")
+            .value
+            .trim();
+
+
+        const email =
+            document
+            .getElementById("registerEmail")
+            .value
+            .trim()
+            .toLowerCase();
+
+
+        const password =
+            document
+            .getElementById("registerPassword")
+            .value;
+
+
+        const country =
+            document
+            .getElementById("country")
+            .value;
+
+
+        const error =
+            document
+            .getElementById("registerError");
+
+
+        error.textContent = "";
+
+
+        if(
+            !name ||
+            !email ||
+            !password ||
+            !country
+        ){
+
+            error.textContent =
+                "Please complete all fields.";
+
+            return;
+
+        }
+
+
+        if(password.length < 6){
+
+            error.textContent =
+                "Password must contain at least 6 characters.";
+
+            return;
+
+        }
+
+
+        const users =
+            getUsers();
+
+
+        if(users[email]){
+
+            error.textContent =
+                "An account with this email already exists.";
+
+            return;
+
+        }
+
+
+        /*
+           Random bonus assignment.
+        */
+
+        const bonus =
+            BONUS_VALUES[
+                Math.floor(
+                    Math.random() *
+                    BONUS_VALUES.length
+                )
+            ];
+
+
+        /*
+           Store the exact expiration time.
+           This prevents the countdown from restarting.
+        */
+
+        const expiresAt =
+            Date.now() +
+            (COUNTDOWN_SECONDS * 1000);
+
+
+        users[email] = {
+
+            name:name,
+
+            email:email,
+
+            /*
+               Browser-only prototype.
+               Do NOT use plaintext passwords
+               for a production application.
+            */
+
+            password:password,
+
+            country:country,
+
+            bonusUSD:bonus,
+
+            createdAt:Date.now(),
+
+            expiresAt:expiresAt
+
+        };
+
+
+        saveUsers(users);
+
+
+        localStorage.setItem(
+            SESSION_KEY,
+            email
+        );
+
+
+        openDashboard(email);
+
+    }
+);
+
+
+/* =========================================================
+   LOGIN
+   ========================================================= */
+
+loginForm.addEventListener(
+    "submit",
+    function(event){
+
+        event.preventDefault();
+
+
+        const email =
+            document
+            .getElementById("loginEmail")
+            .value
+            .trim()
+            .toLowerCase();
+
+
+        const password =
+            document
+            .getElementById("loginPassword")
+            .value;
+
+
+        const error =
+            document
+            .getElementById("loginError");
+
+
+        error.textContent = "";
+
+
+        const users =
+            getUsers();
+
+
+        const user =
+            users[email];
+
+
+        if(
+            !user ||
+            user.password !== password
+        ){
+
+            error.textContent =
+                "Incorrect email or password.";
+
+            return;
+
+        }
+
+
+        localStorage.setItem(
+            SESSION_KEY,
+            email
+        );
+
+
+        openDashboard(email);
+
+    }
+);
+
+
+/* =========================================================
+   OPEN DASHBOARD
+   ========================================================= */
+
+function openDashboard(email){
+
+    const users =
+        getUsers();
+
+
+    const user =
+        users[email];
+
+
+    if(!user){
+
+        showLogin();
+
+        return;
+
+    }
+
+
+    const country =
+        COUNTRIES[user.country];
+
+
+    authScreen.classList.add(
+        "hidden"
+    );
+
+
+    dashboard.classList.remove(
+        "hidden"
+    );
+
+
+    logoutButton.classList.remove(
+        "hidden"
+    );
+
+
+    /*
+       Calculate local currency.
+    */
+
+    const localValue =
+        user.bonusUSD *
+        country.rate;
+
+
+    document
+    .getElementById("localBalance")
+    .textContent =
+        country.symbol +
+        formatMoney(
+            localValue,
+            country.currency
+        );
+
+
+    document
+    .getElementById("usdBalance")
+    .textContent =
+        "≈ $" +
+        formatMoney(
+            user.bonusUSD,
+            "USD"
+        ) +
+        " USD";
+
+
+    document
+    .getElementById("accountCountry")
+    .textContent =
+        country.name;
+
+
+    document
+    .getElementById("accountCurrency")
+    .textContent =
+        country.currency;
+
+
+    startTimer(user);
+
+}
+
+
+/* =========================================================
+   TIMER
+   ========================================================= */
+
+function startTimer(user){
+
+    clearInterval(
+        timerInterval
+    );
+
+
+    function updateTimer(){
+
+        const remaining =
+            Math.max(
+                0,
+                Math.floor(
+                    (
+                        user.expiresAt -
+                        Date.now()
+                    ) / 1000
+                )
+            );
+
+
+        const hours =
+            Math.floor(
+                remaining / 3600
+            );
+
+
+        const minutes =
+            Math.floor(
+                (remaining % 3600) / 60
+            );
+
+
+        const seconds =
+            remaining % 60;
+
+
+        document
+        .getElementById("timer")
+        .textContent =
+
+            String(hours)
+            .padStart(2,"0")
+
+            + ":" +
+
+            String(minutes)
+            .padStart(2,"0")
+
+            + ":" +
+
+            String(seconds)
+            .padStart(2,"0");
+
+
+        if(remaining <= 0){
+
+            document
+            .getElementById("timerStatus")
+            .textContent =
+                "Bonus countdown ended";
+
+            clearInterval(
+                timerInterval
+            );
+
+        }else{
+
+            document
+            .getElementById("timerStatus")
+            .textContent =
+                "Bonus countdown active";
+
+        }
+
+    }
+
+
+    updateTimer();
+
+
+    timerInterval =
+        setInterval(
+            updateTimer,
+            1000
+        );
+
+}
+
+
+/* =========================================================
+   LOGOUT
+   ========================================================= */
+
+logoutButton.addEventListener(
+    "click",
+    function(){
+
+        clearInterval(
+            timerInterval
+        );
+
+
+        localStorage.removeItem(
+            SESSION_KEY
+        );
+
+
+        dashboard.classList.add(
+            "hidden"
+        );
+
+
+        logoutButton.classList.add(
+            "hidden"
+        );
+
+
+        authScreen.classList.remove(
+            "hidden"
+        );
+
+
+        showLogin();
+
+    }
+);
+
+
+/* =========================================================
+   WITHDRAWAL BUTTON
+   ========================================================= */
+
+document
+.getElementById("withdrawButton")
+.addEventListener(
+    "click",
+    function(){
+
+        document
+        .getElementById("withdrawMessage")
+        .classList.toggle(
+            "hidden"
+        );
+
+    }
+);
+
+
+/* =========================================================
+   AUTO LOGIN
+   ========================================================= */
+
+const savedSession =
+    localStorage.getItem(
+        SESSION_KEY
+    );
+
+
+if(
+    savedSession &&
+    getUsers()[savedSession]
+){
+
+    openDashboard(
+        savedSession
+    );
+
+}else{
+
+    showRegister();
+
+}
+
+</script>
+
+</body>
+</html>
