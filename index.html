@@ -24,6 +24,40 @@ select {
     font: inherit;
 }
 
+/* LOADING SCREEN */
+.loading-screen {
+    position: fixed;
+    inset: 0;
+    background: #ffffff;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    z-index: 9999;
+}
+
+.loading-spinner {
+    width: 45px;
+    height: 45px;
+    border: 4px solid #e5e7eb;
+    border-top: 4px solid #0b5cff;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+.loading-text {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #687386;
+    font-weight: 600;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
 .header {
     height: 64px;
     background: #ffffff;
@@ -335,6 +369,12 @@ select {
 
 <body>
 
+<!-- LOADING -->
+<div id="loadingScreen" class="loading-screen">
+    <div class="loading-spinner"></div>
+    <div id="loadingText" class="loading-text">Cargando...</div>
+</div>
+
 <header class="header">
     <div class="logo">Nexa Bonus</div>
 
@@ -454,7 +494,6 @@ select {
 
     </section>
 
-
     <!-- DASHBOARD -->
     <section id="dashboard" class="dashboard">
 
@@ -470,8 +509,6 @@ select {
 
         </div>
 
-
-        <!-- BALANCE -->
         <div class="balance-card">
 
             <div class="balance-label">
@@ -488,8 +525,6 @@ select {
 
         </div>
 
-
-        <!-- INFORMATION -->
         <div class="info-grid">
 
             <div class="info-card">
@@ -501,7 +536,6 @@ select {
                 </strong>
 
             </div>
-
 
             <div class="info-card">
 
@@ -515,8 +549,6 @@ select {
 
         </div>
 
-
-        <!-- COUNTDOWN -->
         <div class="countdown-card">
 
             <div class="countdown-title">
@@ -529,8 +561,6 @@ select {
 
         </div>
 
-
-        <!-- WITHDRAWAL -->
         <div class="withdrawal-card">
 
             <h3>
@@ -563,7 +593,6 @@ select {
 
         </div>
 
-
         <button class="logout" onclick="logoutUser()">
             Cerrar sesión
         </button>
@@ -576,12 +605,7 @@ select {
 
 </div>
 
-
 <script>
-
-/* =========================
-   COUNTRY / CURRENCY DATA
-========================= */
 
 const countryData = {
 
@@ -635,11 +659,6 @@ const countryData = {
 
 };
 
-
-/* =========================
-   BONUS VALUES
-========================= */
-
 const bonuses = [
     300,
     700,
@@ -650,11 +669,6 @@ const bonuses = [
     7000
 ];
 
-
-/* =========================
-   STORAGE
-========================= */
-
 function getUsers() {
 
     return JSON.parse(
@@ -662,7 +676,6 @@ function getUsers() {
     );
 
 }
-
 
 function saveUsers(users) {
 
@@ -673,11 +686,6 @@ function saveUsers(users) {
 
 }
 
-
-/* =========================
-   ERROR
-========================= */
-
 function showError(message) {
 
     const box = document.getElementById("errorBox");
@@ -687,7 +695,6 @@ function showError(message) {
 
 }
 
-
 function hideError() {
 
     const box = document.getElementById("errorBox");
@@ -695,11 +702,6 @@ function hideError() {
     box.style.display = "none";
 
 }
-
-
-/* =========================
-   LOGIN / REGISTER TABS
-========================= */
 
 function showLogin() {
 
@@ -719,7 +721,6 @@ function showLogin() {
 
 }
 
-
 function showRegister() {
 
     document.getElementById("loginForm")
@@ -735,6 +736,28 @@ function showRegister() {
         .classList.add("active");
 
     hideError();
+
+}
+
+
+/* =========================
+   LOADING
+========================= */
+
+function showLoading(text) {
+
+    document.getElementById("loadingText")
+        .innerText = text;
+
+    document.getElementById("loadingScreen")
+        .style.display = "flex";
+
+}
+
+function hideLoading() {
+
+    document.getElementById("loadingScreen")
+        .style.display = "none";
 
 }
 
@@ -764,7 +787,6 @@ function registerUser() {
         document.getElementById("registerCountry")
         .value;
 
-
     if (!name || !email || !password || !country) {
 
         showError(
@@ -774,9 +796,7 @@ function registerUser() {
         return;
     }
 
-
     const users = getUsers();
-
 
     if (users[email]) {
 
@@ -787,18 +807,12 @@ function registerUser() {
         return;
     }
 
-
-    /* Random bonus */
-
     const bonus =
         bonuses[
             Math.floor(
                 Math.random() * bonuses.length
             )
         ];
-
-
-    /* 15 hours 41 minutes 55 seconds */
 
     const duration =
         (
@@ -807,10 +821,8 @@ function registerUser() {
             55
         ) * 1000;
 
-
     const expiresAt =
         Date.now() + duration;
-
 
     users[email] = {
 
@@ -830,17 +842,22 @@ function registerUser() {
 
     };
 
-
     saveUsers(users);
-
 
     localStorage.setItem(
         "nexaCurrentUser",
         email
     );
 
+    showLoading("Creando cuenta...");
 
-    openDashboard(users[email]);
+    setTimeout(function() {
+
+        hideLoading();
+
+        openDashboard(users[email]);
+
+    }, 3000);
 
 }
 
@@ -862,9 +879,7 @@ function loginUser() {
         document.getElementById("loginPassword")
         .value;
 
-
     const users = getUsers();
-
 
     if (!users[email]) {
 
@@ -875,7 +890,6 @@ function loginUser() {
         return;
     }
 
-
     if (users[email].password !== password) {
 
         showError(
@@ -885,14 +899,20 @@ function loginUser() {
         return;
     }
 
-
     localStorage.setItem(
         "nexaCurrentUser",
         email
     );
 
+    showLoading("Iniciando sesión...");
 
-    openDashboard(users[email]);
+    setTimeout(function() {
+
+        hideLoading();
+
+        openDashboard(users[email]);
+
+    }, 3000);
 
 }
 
@@ -909,21 +929,16 @@ function openDashboard(user) {
     document.getElementById("dashboard")
         .style.display = "block";
 
-
     document.getElementById("userName")
         .innerText = user.name;
-
 
     document.getElementById("countryDisplay")
         .innerText = user.country;
 
-
     const data =
         countryData[user.country];
 
-
     if (!data) return;
-
 
     document.getElementById("currencyDisplay")
         .innerText =
@@ -932,31 +947,17 @@ function openDashboard(user) {
         data.symbol +
         ")";
 
-
-    /*
-       Bonus is stored in USD.
-       Convert to local currency using
-       the configured rate.
-    */
-
     const localValue =
         user.bonus * data.rate;
-
 
     document.getElementById("bonusAmount")
         .innerText =
         data.symbol +
         formatNumber(localValue);
 
-
     startCountdown(user);
 
 }
-
-
-/* =========================
-   NUMBER FORMAT
-========================= */
 
 function formatNumber(number) {
 
@@ -969,13 +970,7 @@ function formatNumber(number) {
 
 }
 
-
-/* =========================
-   COUNTDOWN
-========================= */
-
 let countdownTimer = null;
-
 
 function startCountdown(user) {
 
@@ -985,14 +980,12 @@ function startCountdown(user) {
 
     }
 
-
     function updateCountdown() {
 
         const now = Date.now();
 
         let remaining =
             user.expiresAt - now;
-
 
         if (remaining <= 0) {
 
@@ -1004,28 +997,23 @@ function startCountdown(user) {
             return;
         }
 
-
         const totalSeconds =
             Math.floor(
                 remaining / 1000
             );
-
 
         const hours =
             Math.floor(
                 totalSeconds / 3600
             );
 
-
         const minutes =
             Math.floor(
                 (totalSeconds % 3600) / 60
             );
 
-
         const seconds =
             totalSeconds % 60;
-
 
         document.getElementById("countdown")
             .innerText =
@@ -1037,7 +1025,6 @@ function startCountdown(user) {
 
     }
 
-
     updateCountdown();
 
     countdownTimer =
@@ -1048,11 +1035,6 @@ function startCountdown(user) {
 
 }
 
-
-/* =========================
-   WITHDRAWAL
-========================= */
-
 function withdrawNotice() {
 
     alert(
@@ -1060,11 +1042,6 @@ function withdrawNotice() {
     );
 
 }
-
-
-/* =========================
-   LOGOUT
-========================= */
 
 function logoutUser() {
 
@@ -1078,29 +1055,21 @@ function logoutUser() {
 
     }
 
-
     document.getElementById("dashboard")
         .style.display = "none";
 
     document.getElementById("authSection")
         .style.display = "block";
 
-
     showLogin();
 
 }
-
-
-/* =========================
-   LANGUAGE
-========================= */
 
 function changeLanguage() {
 
     const language =
         document.getElementById("languageSelect")
         .value;
-
 
     if (language === "en") {
 
@@ -1122,11 +1091,6 @@ function changeLanguage() {
 
 }
 
-
-/* =========================
-   AUTO LOGIN
-========================= */
-
 window.addEventListener(
     "DOMContentLoaded",
     function() {
@@ -1136,13 +1100,10 @@ window.addEventListener(
                 "nexaCurrentUser"
             );
 
-
         if (!currentUser) return;
-
 
         const users =
             getUsers();
-
 
         if (!users[currentUser]) {
 
@@ -1152,7 +1113,6 @@ window.addEventListener(
 
             return;
         }
-
 
         openDashboard(
             users[currentUser]
