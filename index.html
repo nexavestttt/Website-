@@ -1,308 +1,333 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Nexa Bonus</title>
 
 <style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-body{
-    font-family:Arial,Helvetica,sans-serif;
-    background:#f4f6f9;
-    color:#111827;
+body {
+    background: #f5f7fa;
+    color: #172033;
 }
 
-button,input,select{
-    font:inherit;
+button,
+input,
+select {
+    font: inherit;
 }
 
-.hidden{
-    display:none!important;
+.header {
+    height: 64px;
+    background: #ffffff;
+    border-bottom: 1px solid #e7eaf0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 22px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
 }
 
-/* HEADER */
-.header{
-    height:65px;
-    background:#ffffff;
-    border-bottom:1px solid #e5e7eb;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 22px;
+.logo {
+    font-size: 21px;
+    font-weight: 800;
+    color: #0b5cff;
 }
 
-.logo{
-    font-size:21px;
-    font-weight:800;
+.lang-select {
+    border: 1px solid #dce1e8;
+    border-radius: 8px;
+    padding: 8px 10px;
+    background: white;
 }
 
-.demo-label{
-    font-size:10px;
-    background:#fef3c7;
-    color:#92400e;
-    padding:4px 7px;
-    border-radius:10px;
-    margin-left:6px;
+.container {
+    width: 100%;
+    max-width: 480px;
+    margin: auto;
+    padding: 22px 16px 40px;
 }
 
-.logout{
-    border:0;
-    background:#eef2f7;
-    padding:8px 13px;
-    border-radius:8px;
-    cursor:pointer;
+.auth-card {
+    background: white;
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 5px 25px rgba(0,0,0,.06);
+    margin-top: 20px;
 }
 
-/* AUTH */
-.container{
-    max-width:1050px;
-    margin:auto;
-    padding:25px 16px;
+.auth-title {
+    font-size: 27px;
+    font-weight: 700;
+    margin-bottom: 7px;
 }
 
-.auth{
-    max-width:430px;
-    margin:45px auto;
-    background:white;
-    padding:25px;
-    border-radius:18px;
-    border:1px solid #e5e7eb;
+.auth-subtitle {
+    color: #687386;
+    font-size: 14px;
+    margin-bottom: 24px;
 }
 
-.auth h1{
-    margin-bottom:8px;
+.tabs {
+    display: flex;
+    background: #f0f3f7;
+    border-radius: 10px;
+    padding: 4px;
+    margin-bottom: 22px;
 }
 
-.description{
-    color:#6b7280;
-    font-size:14px;
-    line-height:1.5;
+.tab {
+    width: 50%;
+    border: 0;
+    padding: 11px;
+    border-radius: 8px;
+    background: transparent;
+    cursor: pointer;
+    color: #667085;
+    font-weight: 600;
 }
 
-.tabs{
-    display:flex;
-    gap:8px;
-    margin:22px 0;
+.tab.active {
+    background: white;
+    color: #0b5cff;
+    box-shadow: 0 2px 7px rgba(0,0,0,.06);
 }
 
-.tabs button{
-    flex:1;
-    border:1px solid #ddd;
-    background:white;
-    padding:11px;
-    border-radius:9px;
-    cursor:pointer;
+.form-group {
+    margin-bottom: 16px;
 }
 
-.tabs button.active{
-    background:#111827;
-    color:white;
+.form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 7px;
 }
 
-label{
-    display:block;
-    font-size:13px;
-    font-weight:bold;
-    margin:14px 0 6px;
+.form-group input,
+.form-group select {
+    width: 100%;
+    border: 1px solid #dce1e8;
+    border-radius: 9px;
+    padding: 13px;
+    outline: none;
+    background: #fff;
 }
 
-input,select{
-    width:100%;
-    padding:13px;
-    border:1px solid #d1d5db;
-    border-radius:9px;
-    background:white;
-    outline:none;
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #0b5cff;
 }
 
-input:focus,select:focus{
-    border-color:#111827;
+.primary-btn {
+    width: 100%;
+    border: 0;
+    border-radius: 9px;
+    padding: 14px;
+    background: #0b5cff;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 5px;
 }
 
-.primary{
-    width:100%;
-    margin-top:19px;
-    padding:13px;
-    border:0;
-    border-radius:10px;
-    background:#111827;
-    color:white;
-    font-weight:bold;
-    cursor:pointer;
+.primary-btn:hover {
+    background: #064edc;
 }
 
-.error{
-    color:#b91c1c;
-    font-size:13px;
-    margin-top:10px;
+.error {
+    color: #d92d20;
+    background: #fff1f0;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 13px;
+    margin-bottom: 15px;
+    display: none;
 }
 
-.notice{
-    margin-top:16px;
-    padding:11px;
-    background:#fff8df;
-    border:1px solid #f1d477;
-    border-radius:9px;
-    color:#705600;
-    font-size:12px;
-    line-height:1.5;
+.dashboard {
+    display: none;
 }
 
-.switch{
-    text-align:center;
-    margin-top:14px;
-    font-size:13px;
-    color:#6b7280;
+.welcome {
+    margin: 18px 0;
 }
 
-.switch button{
-    border:0;
-    background:none;
-    font-weight:bold;
-    cursor:pointer;
+.welcome h2 {
+    font-size: 25px;
+    margin-bottom: 5px;
 }
 
-/* DASHBOARD */
-.dashboard-grid{
-    display:grid;
-    grid-template-columns:1fr 250px;
-    gap:18px;
+.welcome p {
+    color: #697586;
+    font-size: 14px;
 }
 
-.balance-card{
-    background:#111827;
-    color:white;
-    border-radius:20px;
-    padding:25px;
+.balance-card {
+    background: linear-gradient(135deg, #0b5cff, #1747b8);
+    color: white;
+    border-radius: 18px;
+    padding: 23px;
+    margin-top: 20px;
+    box-shadow: 0 8px 25px rgba(11,92,255,.18);
 }
 
-.balance-label{
-    color:#9ca3af;
-    font-size:13px;
+.balance-label {
+    font-size: 13px;
+    opacity: .85;
+    margin-bottom: 8px;
 }
 
-.balance{
-    font-size:38px;
-    font-weight:800;
-    margin-top:10px;
+.balance {
+    font-size: 38px;
+    font-weight: 800;
+    margin-bottom: 12px;
 }
 
-.usd{
-    color:#9ca3af;
-    font-size:13px;
-    margin-top:5px;
+.balance-note {
+    font-size: 12px;
+    opacity: .8;
 }
 
-.timer{
-    font-size:29px;
-    font-weight:bold;
-    margin-top:25px;
-    letter-spacing:1px;
+.info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 15px;
 }
 
-.timer-status{
-    color:#a7f3d0;
-    font-size:12px;
-    margin-top:6px;
+.info-card {
+    background: white;
+    border-radius: 14px;
+    padding: 17px;
+    box-shadow: 0 3px 14px rgba(0,0,0,.04);
 }
 
-.cards{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:12px;
-    margin-top:15px;
+.info-card span {
+    display: block;
+    color: #778196;
+    font-size: 12px;
+    margin-bottom: 7px;
 }
 
-.small-card{
-    background:white;
-    border:1px solid #e5e7eb;
-    border-radius:14px;
-    padding:16px;
+.info-card strong {
+    font-size: 15px;
 }
 
-.small-card span{
-    color:#6b7280;
-    font-size:12px;
+.countdown-card {
+    background: white;
+    border-radius: 14px;
+    padding: 18px;
+    margin-top: 15px;
+    box-shadow: 0 3px 14px rgba(0,0,0,.04);
 }
 
-.small-card strong{
-    display:block;
-    margin-top:7px;
+.countdown-title {
+    color: #687386;
+    font-size: 13px;
+    margin-bottom: 7px;
 }
 
-.panel{
-    background:white;
-    border:1px solid #e5e7eb;
-    border-radius:16px;
-    padding:20px;
-    margin-top:15px;
+.countdown {
+    font-size: 29px;
+    font-weight: 800;
+    letter-spacing: 1px;
 }
 
-.panel h2{
-    font-size:18px;
-    margin-bottom:8px;
+.withdrawal-card {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    margin-top: 15px;
+    box-shadow: 0 3px 14px rgba(0,0,0,.04);
 }
 
-.panel p{
-    color:#6b7280;
-    font-size:13px;
-    line-height:1.5;
+.withdrawal-card h3 {
+    font-size: 19px;
+    margin-bottom: 16px;
 }
 
-.withdraw{
-    width:100%;
-    margin-top:15px;
-    border:0;
-    background:#111827;
-    color:white;
-    padding:12px;
-    border-radius:9px;
-    cursor:pointer;
+.fee-box {
+    background: #fff8e6;
+    border: 1px solid #f3d58a;
+    border-radius: 10px;
+    padding: 14px;
+    margin-bottom: 14px;
 }
 
-/* SIDE MENU */
-.side-menu{
-    display:flex;
-    flex-direction:column;
-    gap:7px;
+.fee-label {
+    color: #745b17;
+    font-size: 13px;
+    margin-bottom: 5px;
 }
 
-.side-menu button{
-    text-align:left;
-    padding:10px 12px;
-    background:white;
-    border:1px solid #e5e7eb;
-    border-radius:9px;
-    color:#4b5563;
-    font-size:12px;
-    cursor:pointer;
+.fee-amount {
+    font-size: 25px;
+    font-weight: 800;
+    color: #172033;
 }
 
-/* MOBILE */
-@media(max-width:750px){
+.withdraw-text {
+    font-size: 14px;
+    line-height: 1.55;
+    color: #505b6d;
+    margin-bottom: 17px;
+}
 
-    .dashboard-grid{
-        grid-template-columns:1fr;
+.withdraw-btn {
+    width: 100%;
+    border: 0;
+    padding: 13px;
+    border-radius: 9px;
+    background: #eef1f5;
+    color: #929baa;
+    font-weight: 700;
+    cursor: not-allowed;
+}
+
+.logout {
+    width: 100%;
+    margin-top: 20px;
+    background: white;
+    border: 1px solid #dce1e8;
+    padding: 13px;
+    border-radius: 9px;
+    cursor: pointer;
+    color: #344054;
+    font-weight: 600;
+}
+
+.footer {
+    text-align: center;
+    color: #98a2b3;
+    font-size: 11px;
+    margin-top: 28px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+@media (max-width: 400px) {
+    .container {
+        padding: 16px 12px 30px;
     }
 
-    .cards{
-        grid-template-columns:1fr;
+    .auth-card {
+        padding: 20px;
     }
 
-    .side-menu{
-        display:grid;
-        grid-template-columns:1fr 1fr;
-    }
-
-    .balance{
-        font-size:31px;
+    .balance {
+        font-size: 33px;
     }
 }
 </style>
@@ -311,1121 +336,830 @@ input:focus,select:focus{
 <body>
 
 <header class="header">
+    <div class="logo">Nexa Bonus</div>
 
-    <div class="logo">
-        Nexa Bonus
-        <span class="demo-label">SIMULATION</span>
-    </div>
-
-    <button id="logoutButton" class="logout hidden">
-        Log out
-    </button>
-
+    <select id="languageSelect" class="lang-select" onchange="changeLanguage()">
+        <option value="es">Español</option>
+        <option value="en">English</option>
+    </select>
 </header>
-
 
 <div class="container">
 
-<!-- ================= REGISTER / LOGIN ================= -->
+    <!-- AUTH SECTION -->
+    <section id="authSection" class="auth-card">
 
-<section id="authScreen" class="auth">
+        <div class="tabs">
+            <button id="loginTab" class="tab active" onclick="showLogin()">
+                Iniciar sesión
+            </button>
 
-    <h1>Welcome</h1>
-
-    <p class="description">
-        Create an account or log in to access your bonus dashboard.
-    </p>
-
-
-    <div class="tabs">
-
-        <button
-            id="registerTab"
-            class="active"
-            type="button">
-            Register
-        </button>
-
-        <button
-            id="loginTab"
-            type="button">
-            Login
-        </button>
-
-    </div>
-
-
-    <!-- REGISTER -->
-
-    <form id="registerForm">
-
-        <label>Full Name</label>
-
-        <input
-            id="registerName"
-            type="text"
-            placeholder="Full name"
-            required>
-
-
-        <label>Email</label>
-
-        <input
-            id="registerEmail"
-            type="email"
-            placeholder="Email address"
-            required>
-
-
-        <label>Password</label>
-
-        <input
-            id="registerPassword"
-            type="password"
-            placeholder="Minimum 6 characters"
-            minlength="6"
-            required>
-
-
-        <label>Country</label>
-
-        <select id="country" required>
-
-            <option value="">
-                Select your country
-            </option>
-
-            <option value="PE">
-                🇵🇪 Peru
-            </option>
-
-            <option value="EC">
-                🇪🇨 Ecuador
-            </option>
-
-            <option value="MX">
-                🇲🇽 Mexico
-            </option>
-
-            <option value="SV">
-                🇸🇻 El Salvador
-            </option>
-
-            <option value="BR">
-                🇧🇷 Brazil
-            </option>
-
-            <option value="CO">
-                🇨🇴 Colombia
-            </option>
-
-            <option value="VE">
-                🇻🇪 Venezuela
-            </option>
-
-            <option value="GT">
-                🇬🇹 Guatemala
-            </option>
-
-        </select>
-
-
-        <button
-            class="primary"
-            type="submit">
-
-            Create Account
-
-        </button>
-
-
-        <div
-            id="registerError"
-            class="error">
+            <button id="registerTab" class="tab" onclick="showRegister()">
+                Registrarse
+            </button>
         </div>
 
-    </form>
+        <div id="errorBox" class="error"></div>
 
+        <!-- LOGIN -->
+        <div id="loginForm">
 
-    <!-- LOGIN -->
+            <h1 class="auth-title">Bienvenido</h1>
 
-    <form
-        id="loginForm"
-        class="hidden">
+            <p class="auth-subtitle">
+                Inicia sesión para acceder a tu cuenta.
+            </p>
 
-        <label>Email</label>
+            <div class="form-group">
+                <label>Correo electrónico</label>
+                <input
+                    type="email"
+                    id="loginEmail"
+                    placeholder="tu@email.com"
+                >
+            </div>
 
-        <input
-            id="loginEmail"
-            type="email"
-            placeholder="Email address"
-            required>
+            <div class="form-group">
+                <label>Contraseña</label>
+                <input
+                    type="password"
+                    id="loginPassword"
+                    placeholder="Contraseña"
+                >
+            </div>
 
+            <button class="primary-btn" onclick="loginUser()">
+                Iniciar sesión
+            </button>
 
-        <label>Password</label>
-
-        <input
-            id="loginPassword"
-            type="password"
-            placeholder="Password"
-            required>
-
-
-        <button
-            class="primary"
-            type="submit">
-
-            Log In
-
-        </button>
-
-
-        <div
-            id="loginError"
-            class="error">
         </div>
 
-    </form>
+        <!-- REGISTER -->
+        <div id="registerForm" class="hidden">
+
+            <h1 class="auth-title">Crear cuenta</h1>
+
+            <p class="auth-subtitle">
+                Registra tus datos para crear tu cuenta.
+            </p>
+
+            <div class="form-group">
+                <label>Nombre completo</label>
+                <input
+                    type="text"
+                    id="registerName"
+                    placeholder="Nombre completo"
+                >
+            </div>
+
+            <div class="form-group">
+                <label>Correo electrónico</label>
+                <input
+                    type="email"
+                    id="registerEmail"
+                    placeholder="tu@email.com"
+                >
+            </div>
+
+            <div class="form-group">
+                <label>Contraseña</label>
+                <input
+                    type="password"
+                    id="registerPassword"
+                    placeholder="Crear contraseña"
+                >
+            </div>
+
+            <div class="form-group">
+                <label>País</label>
+
+                <select id="registerCountry">
+                    <option value="">Selecciona tu país</option>
+                    <option value="Peru">Perú</option>
+                    <option value="Ecuador">Ecuador</option>
+                    <option value="Mexico">México</option>
+                    <option value="El Salvador">El Salvador</option>
+                    <option value="Brazil">Brasil</option>
+                    <option value="Colombia">Colombia</option>
+                    <option value="Venezuela">Venezuela</option>
+                    <option value="Guatemala">Guatemala</option>
+                </select>
+            </div>
+
+            <button class="primary-btn" onclick="registerUser()">
+                Crear cuenta
+            </button>
+
+        </div>
+
+    </section>
 
 
-    <div class="notice">
+    <!-- DASHBOARD -->
+    <section id="dashboard" class="dashboard">
 
-        This website is a simulation. Displayed bonus balances
-        are not real funds and the withdrawal function does not
-        transfer money.
+        <div class="welcome">
 
-    </div>
+            <h2>
+                Hola, <span id="userName"></span>
+            </h2>
 
+            <p>
+                Tu cuenta de bonificación
+            </p>
 
-    <div class="switch">
-
-        <span id="switchText">
-            Already have an account?
-        </span>
-
-        <button
-            id="switchButton"
-            type="button">
-            Log in
-        </button>
-
-    </div>
-
-</section>
+        </div>
 
 
+        <!-- BALANCE -->
+        <div class="balance-card">
 
-<!-- ================= DASHBOARD ================= -->
+            <div class="balance-label">
+                Bonus disponible
+            </div>
 
-<section
-    id="dashboard"
-    class="hidden">
+            <div class="balance" id="bonusAmount">
+                $0
+            </div>
 
-    <div class="dashboard-grid">
+            <div class="balance-note">
+                SIMULACIÓN
+            </div>
 
-
-        <div>
-
-            <!-- BALANCE -->
-
-            <div class="balance-card">
-
-                <div class="balance-label">
-                    Available Bonus
-                </div>
+        </div>
 
 
-                <div
-                    id="localBalance"
-                    class="balance">
-                    $0
-                </div>
+        <!-- INFORMATION -->
+        <div class="info-grid">
 
+            <div class="info-card">
 
-                <div
-                    id="usdBalance"
-                    class="usd">
-                    ≈ $0 USD
-                </div>
+                <span>País</span>
 
-
-                <div
-                    id="timer"
-                    class="timer">
-                    15:41:55
-                </div>
-
-
-                <div
-                    id="timerStatus"
-                    class="timer-status">
-
-                    Bonus countdown active
-
-                </div>
+                <strong id="countryDisplay">
+                    -
+                </strong>
 
             </div>
 
 
-            <!-- ACCOUNT INFORMATION -->
+            <div class="info-card">
 
-            <div class="cards">
+                <span>Moneda</span>
 
-                <div class="small-card">
-
-                    <span>Country</span>
-
-                    <strong id="accountCountry">
-                        —
-                    </strong>
-
-                </div>
-
-
-                <div class="small-card">
-
-                    <span>Currency</span>
-
-                    <strong id="accountCurrency">
-                        —
-                    </strong>
-
-                </div>
-
-
-                <div class="small-card">
-
-                    <span>Status</span>
-
-                    <strong>
-                        Active
-                    </strong>
-
-                </div>
-
-            </div>
-
-
-            <!-- BONUS -->
-
-            <div class="panel">
-
-                <h2>
-                    Bonus Information
-                </h2>
-
-                <p>
-                    Your assigned simulation bonus remains
-                    attached to this account while the countdown
-                    is active.
-                </p>
-
-
-                <button
-                    id="withdrawButton"
-                    class="withdraw">
-
-                    Withdrawal
-
-                </button>
-
-
-                <div
-                    id="withdrawMessage"
-                    class="notice hidden">
-
-                    Simulation withdrawal is unavailable because
-                    this website does not hold or transfer real funds.
-
-                </div>
+                <strong id="currencyDisplay">
+                    -
+                </strong>
 
             </div>
 
         </div>
 
 
+        <!-- COUNTDOWN -->
+        <div class="countdown-card">
 
-        <!-- SIDE MENU -->
+            <div class="countdown-title">
+                Tiempo restante del bonus
+            </div>
 
-        <aside class="side-menu">
+            <div class="countdown" id="countdown">
+                15:41:55
+            </div>
 
-            <button>
-                Overview
+        </div>
+
+
+        <!-- WITHDRAWAL -->
+        <div class="withdrawal-card">
+
+            <h3>
+                Withdrawal
+            </h3>
+
+            <div class="fee-box">
+
+                <div class="fee-label">
+                    Bonus Fee
+                </div>
+
+                <div class="fee-amount">
+                    $45
+                </div>
+
+            </div>
+
+            <p class="withdraw-text">
+                Pay the fee before the withdrawal button and bank options is displayed for you.
+            </p>
+
+            <button
+                class="withdraw-btn"
+                onclick="withdrawNotice()"
+                disabled
+            >
+                Withdrawal
             </button>
 
-            <button>
-                Bonus
-            </button>
+        </div>
 
-            <button>
-                Transactions
-            </button>
 
-            <button>
-                Account Settings
-            </button>
+        <button class="logout" onclick="logoutUser()">
+            Cerrar sesión
+        </button>
 
-        </aside>
+        <div class="footer">
+            Nexa Bonus
+        </div>
 
-    </div>
-
-</section>
+    </section>
 
 </div>
 
 
 <script>
 
-/* =========================================================
-   CONFIGURATION
-   ========================================================= */
+/* =========================
+   COUNTRY / CURRENCY DATA
+========================= */
+
+const countryData = {
+
+    "Peru": {
+        currency: "PEN",
+        symbol: "S/",
+        rate: 3.50
+    },
+
+    "Ecuador": {
+        currency: "USD",
+        symbol: "$",
+        rate: 1
+    },
+
+    "Mexico": {
+        currency: "MXN",
+        symbol: "MX$",
+        rate: 19
+    },
+
+    "El Salvador": {
+        currency: "USD",
+        symbol: "$",
+        rate: 1
+    },
+
+    "Brazil": {
+        currency: "BRL",
+        symbol: "R$",
+        rate: 5.40
+    },
+
+    "Colombia": {
+        currency: "COP",
+        symbol: "$",
+        rate: 3900
+    },
+
+    "Venezuela": {
+        currency: "VES",
+        symbol: "Bs.",
+        rate: 130
+    },
+
+    "Guatemala": {
+        currency: "GTQ",
+        symbol: "Q",
+        rate: 7.70
+    }
+
+};
 
 
-/*
-   The bonus values are simulation values.
-*/
+/* =========================
+   BONUS VALUES
+========================= */
 
-const BONUS_VALUES = [
+const bonuses = [
     300,
-    600,
     700,
     800,
+    600,
     1300,
     3000,
     7000
 ];
 
 
-/*
-   Countdown:
-   15 hours
-   41 minutes
-   55 seconds
-*/
-
-const COUNTDOWN_SECONDS =
-    (15 * 60 * 60) +
-    (41 * 60) +
-    55;
-
-
-/*
-   Currency rates.
-
-   Change these numbers whenever you want.
-   Example:
-   1 USD = 3.50 PEN
-*/
-
-const COUNTRIES = {
-
-    PE:{
-        name:"Peru",
-        currency:"PEN",
-        symbol:"S/",
-        rate:3.50
-    },
-
-    EC:{
-        name:"Ecuador",
-        currency:"USD",
-        symbol:"$",
-        rate:1
-    },
-
-    MX:{
-        name:"Mexico",
-        currency:"MXN",
-        symbol:"MX$",
-        rate:19
-    },
-
-    SV:{
-        name:"El Salvador",
-        currency:"USD",
-        symbol:"$",
-        rate:1
-    },
-
-    BR:{
-        name:"Brazil",
-        currency:"BRL",
-        symbol:"R$",
-        rate:5.40
-    },
-
-    CO:{
-        name:"Colombia",
-        currency:"COP",
-        symbol:"$",
-        rate:3900
-    },
-
-    VE:{
-        name:"Venezuela",
-        currency:"VES",
-        symbol:"Bs.",
-        rate:130
-    },
-
-    GT:{
-        name:"Guatemala",
-        currency:"GTQ",
-        symbol:"Q",
-        rate:7.70
-    }
-
-};
-
-
-/* =========================================================
+/* =========================
    STORAGE
-   ========================================================= */
+========================= */
 
-const USERS_KEY =
-    "nexa_users";
-
-const SESSION_KEY =
-    "nexa_session";
-
-
-function getUsers(){
+function getUsers() {
 
     return JSON.parse(
-        localStorage.getItem(USERS_KEY) || "{}"
+        localStorage.getItem("nexaUsers") || "{}"
     );
 
 }
 
 
-function saveUsers(users){
+function saveUsers(users) {
 
     localStorage.setItem(
-        USERS_KEY,
+        "nexaUsers",
         JSON.stringify(users)
     );
 
 }
 
 
-/* =========================================================
-   ELEMENTS
-   ========================================================= */
+/* =========================
+   ERROR
+========================= */
 
-const authScreen =
-    document.getElementById("authScreen");
+function showError(message) {
 
-const dashboard =
-    document.getElementById("dashboard");
+    const box = document.getElementById("errorBox");
 
-const registerForm =
-    document.getElementById("registerForm");
-
-const loginForm =
-    document.getElementById("loginForm");
-
-const registerTab =
-    document.getElementById("registerTab");
-
-const loginTab =
-    document.getElementById("loginTab");
-
-const logoutButton =
-    document.getElementById("logoutButton");
-
-const switchButton =
-    document.getElementById("switchButton");
-
-const switchText =
-    document.getElementById("switchText");
-
-
-let timerInterval = null;
-
-
-/* =========================================================
-   AUTH SCREEN SWITCHING
-   ========================================================= */
-
-function showRegister(){
-
-    registerForm.classList.remove("hidden");
-
-    loginForm.classList.add("hidden");
-
-    registerTab.classList.add("active");
-
-    loginTab.classList.remove("active");
-
-    switchText.textContent =
-        "Already have an account?";
-
-    switchButton.textContent =
-        "Log in";
+    box.innerText = message;
+    box.style.display = "block";
 
 }
 
 
-function showLogin(){
+function hideError() {
 
-    registerForm.classList.add("hidden");
+    const box = document.getElementById("errorBox");
 
-    loginForm.classList.remove("hidden");
-
-    loginTab.classList.add("active");
-
-    registerTab.classList.remove("active");
-
-    switchText.textContent =
-        "Don't have an account?";
-
-    switchButton.textContent =
-        "Register";
+    box.style.display = "none";
 
 }
 
 
-registerTab.addEventListener(
-    "click",
-    showRegister
-);
+/* =========================
+   LOGIN / REGISTER TABS
+========================= */
 
+function showLogin() {
 
-loginTab.addEventListener(
-    "click",
-    showLogin
-);
+    document.getElementById("loginForm")
+        .classList.remove("hidden");
 
+    document.getElementById("registerForm")
+        .classList.add("hidden");
 
-switchButton.addEventListener(
-    "click",
-    function(){
+    document.getElementById("loginTab")
+        .classList.add("active");
 
-        if(
-            loginForm.classList.contains("hidden")
-        ){
+    document.getElementById("registerTab")
+        .classList.remove("active");
 
-            showLogin();
-
-        }else{
-
-            showRegister();
-
-        }
-
-    }
-);
-
-
-/* =========================================================
-   FORMAT MONEY
-   ========================================================= */
-
-function formatMoney(
-    value,
-    currency
-){
-
-    return new Intl.NumberFormat(
-        undefined,
-        {
-            minimumFractionDigits:
-                currency === "COP" ||
-                currency === "VES"
-                    ? 0
-                    : 2,
-
-            maximumFractionDigits:
-                currency === "COP" ||
-                currency === "VES"
-                    ? 0
-                    : 2
-        }
-    ).format(value);
+    hideError();
 
 }
 
 
-/* =========================================================
+function showRegister() {
+
+    document.getElementById("loginForm")
+        .classList.add("hidden");
+
+    document.getElementById("registerForm")
+        .classList.remove("hidden");
+
+    document.getElementById("loginTab")
+        .classList.remove("active");
+
+    document.getElementById("registerTab")
+        .classList.add("active");
+
+    hideError();
+
+}
+
+
+/* =========================
    REGISTER
-   ========================================================= */
+========================= */
 
-registerForm.addEventListener(
-    "submit",
-    function(event){
+function registerUser() {
 
-        event.preventDefault();
+    hideError();
 
+    const name =
+        document.getElementById("registerName")
+        .value.trim();
 
-        const name =
-            document
-            .getElementById("registerName")
-            .value
-            .trim();
+    const email =
+        document.getElementById("registerEmail")
+        .value.trim()
+        .toLowerCase();
 
-
-        const email =
-            document
-            .getElementById("registerEmail")
-            .value
-            .trim()
-            .toLowerCase();
-
-
-        const password =
-            document
-            .getElementById("registerPassword")
-            .value;
-
-
-        const country =
-            document
-            .getElementById("country")
-            .value;
-
-
-        const error =
-            document
-            .getElementById("registerError");
-
-
-        error.textContent = "";
-
-
-        if(
-            !name ||
-            !email ||
-            !password ||
-            !country
-        ){
-
-            error.textContent =
-                "Please complete all fields.";
-
-            return;
-
-        }
-
-
-        if(password.length < 6){
-
-            error.textContent =
-                "Password must contain at least 6 characters.";
-
-            return;
-
-        }
-
-
-        const users =
-            getUsers();
-
-
-        if(users[email]){
-
-            error.textContent =
-                "An account with this email already exists.";
-
-            return;
-
-        }
-
-
-        /*
-           Random bonus assignment.
-        */
-
-        const bonus =
-            BONUS_VALUES[
-                Math.floor(
-                    Math.random() *
-                    BONUS_VALUES.length
-                )
-            ];
-
-
-        /*
-           Store the exact expiration time.
-           This prevents the countdown from restarting.
-        */
-
-        const expiresAt =
-            Date.now() +
-            (COUNTDOWN_SECONDS * 1000);
-
-
-        users[email] = {
-
-            name:name,
-
-            email:email,
-
-            /*
-               Browser-only prototype.
-               Do NOT use plaintext passwords
-               for a production application.
-            */
-
-            password:password,
-
-            country:country,
-
-            bonusUSD:bonus,
-
-            createdAt:Date.now(),
-
-            expiresAt:expiresAt
-
-        };
-
-
-        saveUsers(users);
-
-
-        localStorage.setItem(
-            SESSION_KEY,
-            email
-        );
-
-
-        openDashboard(email);
-
-    }
-);
-
-
-/* =========================================================
-   LOGIN
-   ========================================================= */
-
-loginForm.addEventListener(
-    "submit",
-    function(event){
-
-        event.preventDefault();
-
-
-        const email =
-            document
-            .getElementById("loginEmail")
-            .value
-            .trim()
-            .toLowerCase();
-
-
-        const password =
-            document
-            .getElementById("loginPassword")
-            .value;
-
-
-        const error =
-            document
-            .getElementById("loginError");
-
-
-        error.textContent = "";
-
-
-        const users =
-            getUsers();
-
-
-        const user =
-            users[email];
-
-
-        if(
-            !user ||
-            user.password !== password
-        ){
-
-            error.textContent =
-                "Incorrect email or password.";
-
-            return;
-
-        }
-
-
-        localStorage.setItem(
-            SESSION_KEY,
-            email
-        );
-
-
-        openDashboard(email);
-
-    }
-);
-
-
-/* =========================================================
-   OPEN DASHBOARD
-   ========================================================= */
-
-function openDashboard(email){
-
-    const users =
-        getUsers();
-
-
-    const user =
-        users[email];
-
-
-    if(!user){
-
-        showLogin();
-
-        return;
-
-    }
-
+    const password =
+        document.getElementById("registerPassword")
+        .value;
 
     const country =
-        COUNTRIES[user.country];
+        document.getElementById("registerCountry")
+        .value;
 
 
-    authScreen.classList.add(
-        "hidden"
+    if (!name || !email || !password || !country) {
+
+        showError(
+            "Completa todos los campos."
+        );
+
+        return;
+    }
+
+
+    const users = getUsers();
+
+
+    if (users[email]) {
+
+        showError(
+            "Este correo ya está registrado."
+        );
+
+        return;
+    }
+
+
+    /* Random bonus */
+
+    const bonus =
+        bonuses[
+            Math.floor(
+                Math.random() * bonuses.length
+            )
+        ];
+
+
+    /* 15 hours 41 minutes 55 seconds */
+
+    const duration =
+        (
+            (15 * 60 * 60) +
+            (41 * 60) +
+            55
+        ) * 1000;
+
+
+    const expiresAt =
+        Date.now() + duration;
+
+
+    users[email] = {
+
+        name: name,
+
+        email: email,
+
+        password: password,
+
+        country: country,
+
+        bonus: bonus,
+
+        expiresAt: expiresAt,
+
+        createdAt: Date.now()
+
+    };
+
+
+    saveUsers(users);
+
+
+    localStorage.setItem(
+        "nexaCurrentUser",
+        email
     );
 
 
-    dashboard.classList.remove(
-        "hidden"
+    openDashboard(users[email]);
+
+}
+
+
+/* =========================
+   LOGIN
+========================= */
+
+function loginUser() {
+
+    hideError();
+
+    const email =
+        document.getElementById("loginEmail")
+        .value.trim()
+        .toLowerCase();
+
+    const password =
+        document.getElementById("loginPassword")
+        .value;
+
+
+    const users = getUsers();
+
+
+    if (!users[email]) {
+
+        showError(
+            "No existe una cuenta con este correo."
+        );
+
+        return;
+    }
+
+
+    if (users[email].password !== password) {
+
+        showError(
+            "Contraseña incorrecta."
+        );
+
+        return;
+    }
+
+
+    localStorage.setItem(
+        "nexaCurrentUser",
+        email
     );
 
 
-    logoutButton.classList.remove(
-        "hidden"
-    );
+    openDashboard(users[email]);
+
+}
+
+
+/* =========================
+   DASHBOARD
+========================= */
+
+function openDashboard(user) {
+
+    document.getElementById("authSection")
+        .style.display = "none";
+
+    document.getElementById("dashboard")
+        .style.display = "block";
+
+
+    document.getElementById("userName")
+        .innerText = user.name;
+
+
+    document.getElementById("countryDisplay")
+        .innerText = user.country;
+
+
+    const data =
+        countryData[user.country];
+
+
+    if (!data) return;
+
+
+    document.getElementById("currencyDisplay")
+        .innerText =
+        data.currency +
+        " (" +
+        data.symbol +
+        ")";
 
 
     /*
-       Calculate local currency.
+       Bonus is stored in USD.
+       Convert to local currency using
+       the configured rate.
     */
 
     const localValue =
-        user.bonusUSD *
-        country.rate;
+        user.bonus * data.rate;
 
 
-    document
-    .getElementById("localBalance")
-    .textContent =
-        country.symbol +
-        formatMoney(
-            localValue,
-            country.currency
-        );
+    document.getElementById("bonusAmount")
+        .innerText =
+        data.symbol +
+        formatNumber(localValue);
 
 
-    document
-    .getElementById("usdBalance")
-    .textContent =
-        "≈ $" +
-        formatMoney(
-            user.bonusUSD,
-            "USD"
-        ) +
-        " USD";
-
-
-    document
-    .getElementById("accountCountry")
-    .textContent =
-        country.name;
-
-
-    document
-    .getElementById("accountCurrency")
-    .textContent =
-        country.currency;
-
-
-    startTimer(user);
+    startCountdown(user);
 
 }
 
 
-/* =========================================================
-   TIMER
-   ========================================================= */
+/* =========================
+   NUMBER FORMAT
+========================= */
 
-function startTimer(user){
+function formatNumber(number) {
 
-    clearInterval(
-        timerInterval
-    );
+    return new Intl.NumberFormat(
+        "en-US",
+        {
+            maximumFractionDigits: 2
+        }
+    ).format(number);
+
+}
 
 
-    function updateTimer(){
+/* =========================
+   COUNTDOWN
+========================= */
 
-        const remaining =
-            Math.max(
-                0,
-                Math.floor(
-                    (
-                        user.expiresAt -
-                        Date.now()
-                    ) / 1000
-                )
+let countdownTimer = null;
+
+
+function startCountdown(user) {
+
+    if (countdownTimer) {
+
+        clearInterval(countdownTimer);
+
+    }
+
+
+    function updateCountdown() {
+
+        const now = Date.now();
+
+        let remaining =
+            user.expiresAt - now;
+
+
+        if (remaining <= 0) {
+
+            document.getElementById("countdown")
+                .innerText = "00:00:00";
+
+            clearInterval(countdownTimer);
+
+            return;
+        }
+
+
+        const totalSeconds =
+            Math.floor(
+                remaining / 1000
             );
 
 
         const hours =
             Math.floor(
-                remaining / 3600
+                totalSeconds / 3600
             );
 
 
         const minutes =
             Math.floor(
-                (remaining % 3600) / 60
+                (totalSeconds % 3600) / 60
             );
 
 
         const seconds =
-            remaining % 60;
+            totalSeconds % 60;
 
 
-        document
-        .getElementById("timer")
-        .textContent =
-
-            String(hours)
-            .padStart(2,"0")
-
-            + ":" +
-
-            String(minutes)
-            .padStart(2,"0")
-
-            + ":" +
-
-            String(seconds)
-            .padStart(2,"0");
-
-
-        if(remaining <= 0){
-
-            document
-            .getElementById("timerStatus")
-            .textContent =
-                "Bonus countdown ended";
-
-            clearInterval(
-                timerInterval
-            );
-
-        }else{
-
-            document
-            .getElementById("timerStatus")
-            .textContent =
-                "Bonus countdown active";
-
-        }
+        document.getElementById("countdown")
+            .innerText =
+            String(hours).padStart(2, "0") +
+            ":" +
+            String(minutes).padStart(2, "0") +
+            ":" +
+            String(seconds).padStart(2, "0");
 
     }
 
 
-    updateTimer();
+    updateCountdown();
 
-
-    timerInterval =
+    countdownTimer =
         setInterval(
-            updateTimer,
+            updateCountdown,
             1000
         );
 
 }
 
 
-/* =========================================================
-   LOGOUT
-   ========================================================= */
+/* =========================
+   WITHDRAWAL
+========================= */
 
-logoutButton.addEventListener(
-    "click",
-    function(){
+function withdrawNotice() {
 
-        clearInterval(
-            timerInterval
-        );
-
-
-        localStorage.removeItem(
-            SESSION_KEY
-        );
-
-
-        dashboard.classList.add(
-            "hidden"
-        );
-
-
-        logoutButton.classList.add(
-            "hidden"
-        );
-
-
-        authScreen.classList.remove(
-            "hidden"
-        );
-
-
-        showLogin();
-
-    }
-);
-
-
-/* =========================================================
-   WITHDRAWAL BUTTON
-   ========================================================= */
-
-document
-.getElementById("withdrawButton")
-.addEventListener(
-    "click",
-    function(){
-
-        document
-        .getElementById("withdrawMessage")
-        .classList.toggle(
-            "hidden"
-        );
-
-    }
-);
-
-
-/* =========================================================
-   AUTO LOGIN
-   ========================================================= */
-
-const savedSession =
-    localStorage.getItem(
-        SESSION_KEY
+    alert(
+        "Bonus Fee: $45"
     );
-
-
-if(
-    savedSession &&
-    getUsers()[savedSession]
-){
-
-    openDashboard(
-        savedSession
-    );
-
-}else{
-
-    showRegister();
 
 }
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+function logoutUser() {
+
+    localStorage.removeItem(
+        "nexaCurrentUser"
+    );
+
+    if (countdownTimer) {
+
+        clearInterval(countdownTimer);
+
+    }
+
+
+    document.getElementById("dashboard")
+        .style.display = "none";
+
+    document.getElementById("authSection")
+        .style.display = "block";
+
+
+    showLogin();
+
+}
+
+
+/* =========================
+   LANGUAGE
+========================= */
+
+function changeLanguage() {
+
+    const language =
+        document.getElementById("languageSelect")
+        .value;
+
+
+    if (language === "en") {
+
+        document.querySelector("#loginTab")
+            .innerText = "Login";
+
+        document.querySelector("#registerTab")
+            .innerText = "Register";
+
+    } else {
+
+        document.querySelector("#loginTab")
+            .innerText = "Iniciar sesión";
+
+        document.querySelector("#registerTab")
+            .innerText = "Registrarse";
+
+    }
+
+}
+
+
+/* =========================
+   AUTO LOGIN
+========================= */
+
+window.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        const currentUser =
+            localStorage.getItem(
+                "nexaCurrentUser"
+            );
+
+
+        if (!currentUser) return;
+
+
+        const users =
+            getUsers();
+
+
+        if (!users[currentUser]) {
+
+            localStorage.removeItem(
+                "nexaCurrentUser"
+            );
+
+            return;
+        }
+
+
+        openDashboard(
+            users[currentUser]
+        );
+
+    }
+);
 
 </script>
 
