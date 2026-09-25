@@ -1,405 +1,658 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nexa Bonus</title>
+<title>Nexavest</title>
 
 <style>
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: Arial, Helvetica, sans-serif;
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,Helvetica,sans-serif;
 }
 
-body {
-    background: #f5f7fa;
-    color: #172033;
+body{
+    background:#f5f7fa;
+    color:#172033;
 }
 
-button,
+button,input,select{
+    font:inherit;
+}
+
+.header{
+    height:64px;
+    background:#fff;
+    border-bottom:1px solid #e7eaf0;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 20px;
+    position:sticky;
+    top:0;
+    z-index:50;
+}
+
+.logo{
+    font-size:22px;
+    font-weight:800;
+    color:#0b5cff;
+}
+
+.lang{
+    border:1px solid #dce1e8;
+    border-radius:8px;
+    padding:8px 10px;
+    background:#fff;
+}
+
+.container{
+    width:100%;
+    max-width:480px;
+    margin:auto;
+    padding:20px 15px 40px;
+}
+
+.page{
+    display:none;
+}
+
+.page.active{
+    display:block;
+}
+
+.card{
+    background:#fff;
+    border-radius:16px;
+    padding:21px;
+    box-shadow:0 4px 20px rgba(0,0,0,.05);
+    margin-top:15px;
+}
+
+.auth-card{
+    margin-top:25px;
+}
+
+.tabs{
+    display:flex;
+    background:#f0f3f7;
+    border-radius:10px;
+    padding:4px;
+    margin-bottom:22px;
+}
+
+.tab{
+    width:50%;
+    border:0;
+    padding:11px;
+    border-radius:8px;
+    background:transparent;
+    cursor:pointer;
+    color:#667085;
+    font-weight:600;
+}
+
+.tab.active{
+    background:#fff;
+    color:#0b5cff;
+    box-shadow:0 2px 7px rgba(0,0,0,.06);
+}
+
+.auth-title{
+    font-size:27px;
+    margin-bottom:7px;
+}
+
+.subtitle{
+    color:#687386;
+    font-size:14px;
+    line-height:1.5;
+    margin-bottom:22px;
+}
+
+.form-group{
+    margin-bottom:15px;
+}
+
+.form-group label{
+    display:block;
+    font-size:13px;
+    font-weight:600;
+    margin-bottom:7px;
+}
+
 input,
-select {
-    font: inherit;
+select{
+    width:100%;
+    border:1px solid #dce1e8;
+    border-radius:9px;
+    padding:13px;
+    outline:none;
+    background:#fff;
 }
 
-.header {
-    height: 64px;
-    background: #ffffff;
-    border-bottom: 1px solid #e7eaf0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 22px;
-    position: sticky;
-    top: 0;
-    z-index: 10;
+input:focus,
+select:focus{
+    border-color:#0b5cff;
 }
 
-.logo {
-    font-size: 21px;
-    font-weight: 800;
-    color: #0b5cff;
+.primary-btn{
+    width:100%;
+    border:0;
+    border-radius:9px;
+    padding:14px;
+    background:#0b5cff;
+    color:#fff;
+    font-weight:700;
+    cursor:pointer;
 }
 
-.lang-select {
-    border: 1px solid #dce1e8;
-    border-radius: 8px;
-    padding: 8px 10px;
-    background: white;
+.primary-btn:disabled{
+    background:#b8c0cc;
+    cursor:not-allowed;
 }
 
-.container {
-    width: 100%;
-    max-width: 480px;
-    margin: auto;
-    padding: 22px 16px 40px;
+.secondary-btn{
+    width:100%;
+    border:1px solid #dce1e8;
+    border-radius:9px;
+    padding:13px;
+    background:#fff;
+    color:#344054;
+    font-weight:700;
+    cursor:pointer;
 }
 
-.auth-card {
-    background: white;
-    border-radius: 16px;
-    padding: 25px;
-    box-shadow: 0 5px 25px rgba(0,0,0,.06);
-    margin-top: 20px;
+.error{
+    display:none;
+    color:#d92d20;
+    background:#fff1f0;
+    padding:10px;
+    border-radius:8px;
+    font-size:13px;
+    margin-bottom:15px;
 }
 
-.auth-title {
-    font-size: 27px;
-    font-weight: 700;
-    margin-bottom: 7px;
+/* HOME */
+
+.welcome{
+    margin:12px 2px 18px;
 }
 
-.auth-subtitle {
-    color: #687386;
-    font-size: 14px;
-    margin-bottom: 24px;
+.welcome h2{
+    font-size:25px;
+    margin-bottom:5px;
 }
 
-.tabs {
-    display: flex;
-    background: #f0f3f7;
-    border-radius: 10px;
-    padding: 4px;
-    margin-bottom: 22px;
+.welcome p{
+    color:#697586;
+    font-size:14px;
 }
 
-.tab {
-    width: 50%;
-    border: 0;
-    padding: 11px;
-    border-radius: 8px;
-    background: transparent;
-    cursor: pointer;
-    color: #667085;
-    font-weight: 600;
+.balance-card{
+    background:linear-gradient(135deg,#0b5cff,#1747b8);
+    color:#fff;
+    border-radius:18px;
+    padding:23px;
+    box-shadow:0 8px 25px rgba(11,92,255,.18);
 }
 
-.tab.active {
-    background: white;
-    color: #0b5cff;
-    box-shadow: 0 2px 7px rgba(0,0,0,.06);
+.balance-label{
+    font-size:13px;
+    opacity:.85;
+    margin-bottom:8px;
 }
 
-.form-group {
-    margin-bottom: 16px;
+.balance{
+    font-size:37px;
+    font-weight:800;
+    margin-bottom:10px;
 }
 
-.form-group label {
-    display: block;
-    font-size: 13px;
-    font-weight: 600;
-    margin-bottom: 7px;
+.balance-note{
+    font-size:12px;
+    opacity:.8;
 }
 
-.form-group input,
-.form-group select {
-    width: 100%;
-    border: 1px solid #dce1e8;
-    border-radius: 9px;
-    padding: 13px;
-    outline: none;
-    background: #fff;
+.info-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    margin-top:14px;
 }
 
-.form-group input:focus,
-.form-group select:focus {
-    border-color: #0b5cff;
+.info-card{
+    background:#fff;
+    border-radius:13px;
+    padding:16px;
+    box-shadow:0 3px 14px rgba(0,0,0,.04);
 }
 
-.primary-btn {
-    width: 100%;
-    border: 0;
-    border-radius: 9px;
-    padding: 14px;
-    background: #0b5cff;
-    color: white;
-    font-weight: 700;
-    cursor: pointer;
-    margin-top: 5px;
+.info-card span{
+    display:block;
+    color:#778196;
+    font-size:12px;
+    margin-bottom:7px;
 }
 
-.primary-btn:hover {
-    background: #064edc;
+.info-card strong{
+    font-size:14px;
 }
 
-.primary-btn:disabled {
-    opacity: .65;
-    cursor: wait;
+.countdown-card{
+    background:#fff;
+    border-radius:14px;
+    padding:18px;
+    margin-top:14px;
+    box-shadow:0 3px 14px rgba(0,0,0,.04);
 }
 
-.error {
-    color: #d92d20;
-    background: #fff1f0;
-    padding: 10px;
-    border-radius: 8px;
-    font-size: 13px;
-    margin-bottom: 15px;
-    display: none;
+.countdown-title{
+    color:#687386;
+    font-size:13px;
+    margin-bottom:7px;
 }
 
-.dashboard {
-    display: none;
+.countdown{
+    font-size:29px;
+    font-weight:800;
 }
 
-.welcome {
-    margin: 18px 0;
+.menu-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    margin-top:15px;
 }
 
-.welcome h2 {
-    font-size: 25px;
-    margin-bottom: 5px;
+.menu-btn{
+    border:0;
+    border-radius:13px;
+    padding:18px 12px;
+    background:#fff;
+    box-shadow:0 3px 14px rgba(0,0,0,.05);
+    cursor:pointer;
+    text-align:left;
 }
 
-.welcome p {
-    color: #697586;
-    font-size: 14px;
+.menu-btn .icon{
+    font-size:24px;
+    margin-bottom:9px;
 }
 
-.balance-card {
-    background: linear-gradient(135deg, #0b5cff, #1747b8);
-    color: white;
-    border-radius: 18px;
-    padding: 23px;
-    margin-top: 20px;
-    box-shadow: 0 8px 25px rgba(11,92,255,.18);
+.menu-btn strong{
+    display:block;
+    font-size:14px;
+    margin-bottom:4px;
 }
 
-.balance-label {
-    font-size: 13px;
-    opacity: .85;
-    margin-bottom: 8px;
+.menu-btn span{
+    color:#778196;
+    font-size:11px;
 }
 
-.balance {
-    font-size: 38px;
-    font-weight: 800;
-    margin-bottom: 12px;
+.logout{
+    width:100%;
+    margin-top:20px;
+    background:#fff;
+    border:1px solid #dce1e8;
+    padding:13px;
+    border-radius:9px;
+    cursor:pointer;
+    color:#344054;
+    font-weight:600;
 }
 
-.balance-note {
-    font-size: 12px;
-    opacity: .8;
+/* INNER PAGES */
+
+.page-title{
+    margin:10px 2px 5px;
+    font-size:25px;
 }
 
-.info-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-top: 15px;
+.page-subtitle{
+    margin:0 2px 18px;
+    color:#697586;
+    font-size:14px;
 }
 
-.info-card {
-    background: white;
-    border-radius: 14px;
-    padding: 17px;
-    box-shadow: 0 3px 14px rgba(0,0,0,.04);
+.back-btn{
+    border:0;
+    background:transparent;
+    color:#0b5cff;
+    font-weight:700;
+    cursor:pointer;
+    padding:5px 0;
+    margin-bottom:8px;
 }
 
-.info-card span {
-    display: block;
-    color: #778196;
-    font-size: 12px;
-    margin-bottom: 7px;
+/* MINER */
+
+.miner-status{
+    display:inline-block;
+    padding:6px 10px;
+    border-radius:20px;
+    background:#f2f4f7;
+    color:#667085;
+    font-size:11px;
+    font-weight:700;
+    margin-bottom:15px;
 }
 
-.info-card strong {
-    font-size: 15px;
+.miner-status.active{
+    background:#ecfdf3;
+    color:#067647;
 }
 
-.countdown-card {
-    background: white;
-    border-radius: 14px;
-    padding: 18px;
-    margin-top: 15px;
-    box-shadow: 0 3px 14px rgba(0,0,0,.04);
+.miner-status.finished{
+    background:#f2f4f7;
+    color:#475467;
 }
 
-.countdown-title {
-    color: #687386;
-    font-size: 13px;
-    margin-bottom: 7px;
+.stat-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
 }
 
-.countdown {
-    font-size: 29px;
-    font-weight: 800;
-    letter-spacing: 1px;
+.stat{
+    background:#f8fafc;
+    border:1px solid #eaecf0;
+    border-radius:10px;
+    padding:14px;
 }
 
-.withdrawal-card {
-    background: white;
-    border-radius: 15px;
-    padding: 20px;
-    margin-top: 15px;
-    box-shadow: 0 3px 14px rgba(0,0,0,.04);
+.stat span{
+    display:block;
+    color:#667085;
+    font-size:11px;
+    margin-bottom:5px;
 }
 
-.withdrawal-card h3 {
-    font-size: 19px;
-    margin-bottom: 16px;
+.stat strong{
+    font-size:18px;
 }
 
-.fee-box {
-    background: #fff8e6;
-    border: 1px solid #f3d58a;
-    border-radius: 10px;
-    padding: 14px;
-    margin-bottom: 16px;
+.miner-clock{
+    text-align:center;
+    background:#111827;
+    color:#fff;
+    border-radius:12px;
+    padding:17px;
+    margin:15px 0;
 }
 
-.fee-label {
-    color: #745b17;
-    font-size: 13px;
-    margin-bottom: 5px;
+.miner-clock small{
+    display:block;
+    opacity:.7;
+    margin-bottom:5px;
 }
 
-.fee-amount {
-    font-size: 25px;
-    font-weight: 800;
-    color: #172033;
+.miner-time{
+    font-size:28px;
+    font-weight:800;
+    letter-spacing:1px;
 }
 
-.withdraw-text {
-    font-size: 14px;
-    line-height: 1.55;
-    color: #505b6d;
-    margin-bottom: 17px;
+.progress-label{
+    display:flex;
+    justify-content:space-between;
+    font-size:12px;
+    color:#667085;
+    margin-bottom:7px;
 }
 
-.withdraw-btn {
-    width: 100%;
-    border: 0;
-    padding: 13px;
-    border-radius: 9px;
-    background: #0b5cff;
-    color: white;
-    font-weight: 700;
-    cursor: pointer;
+.progress{
+    height:9px;
+    background:#eaecf0;
+    border-radius:20px;
+    overflow:hidden;
 }
 
-.withdraw-btn:hover {
-    background: #064edc;
+.progress-fill{
+    width:0;
+    height:100%;
+    background:#0b5cff;
+    transition:width .4s ease;
 }
 
-.withdraw-form {
-    display: none;
-    margin-top: 18px;
-    padding-top: 18px;
-    border-top: 1px solid #e7eaf0;
+.upload{
+    margin-top:18px;
+    border:1.5px dashed #cfd5df;
+    border-radius:12px;
+    padding:20px;
+    text-align:center;
+    background:#fafbfc;
 }
 
-.withdraw-form.show {
-    display: block;
+.upload-icon{
+    font-size:28px;
+    margin-bottom:7px;
 }
 
-.withdraw-summary {
-    background: #f5f7fa;
-    border-radius: 10px;
-    padding: 13px;
-    margin-bottom: 16px;
+.upload strong{
+    display:block;
+    font-size:14px;
+    margin-bottom:5px;
 }
 
-.withdraw-summary div {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-    margin-bottom: 7px;
-    font-size: 13px;
+.upload p{
+    color:#667085;
+    font-size:12px;
+    margin-bottom:13px;
 }
 
-.withdraw-summary div:last-child {
-    margin-bottom: 0;
+.file-name{
+    color:#067647;
+    font-size:12px;
+    margin-top:8px;
+    font-weight:600;
 }
 
-.withdraw-summary span {
-    color: #687386;
+.miner-message{
+    text-align:center;
+    color:#667085;
+    font-size:12px;
+    line-height:1.5;
+    margin-top:10px;
 }
 
-.withdraw-summary strong {
-    color: #172033;
-    text-align: right;
+/* WITHDRAWAL */
+
+.fee-box{
+    background:#fff8e6;
+    border:1px solid #f3d58a;
+    border-radius:10px;
+    padding:14px;
+    margin-bottom:16px;
 }
 
-.submit-withdraw {
-    width: 100%;
-    border: 0;
-    border-radius: 9px;
-    padding: 14px;
-    background: #0b5cff;
-    color: white;
-    font-weight: 700;
-    cursor: pointer;
+.fee-label{
+    color:#745b17;
+    font-size:13px;
+    margin-bottom:5px;
 }
 
-.withdraw-message {
-    display: none;
-    margin-top: 12px;
-    padding: 11px;
-    border-radius: 8px;
-    background: #eef7ee;
-    color: #27702c;
-    font-size: 13px;
+.fee{
+    font-size:25px;
+    font-weight:800;
 }
 
-.logout {
-    width: 100%;
-    margin-top: 20px;
-    background: white;
-    border: 1px solid #dce1e8;
-    padding: 13px;
-    border-radius: 9px;
-    cursor: pointer;
-    color: #344054;
-    font-weight: 600;
+.withdraw-info{
+    background:#f8fafc;
+    border-radius:10px;
+    padding:13px;
+    font-size:13px;
+    color:#505b6d;
+    line-height:1.5;
+    margin-bottom:17px;
 }
 
-.footer {
-    text-align: center;
-    color: #98a2b3;
-    font-size: 11px;
-    margin-top: 28px;
+.account-types{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
 }
 
-.hidden {
-    display: none !important;
+.account-type{
+    border:1px solid #dce1e8;
+    border-radius:9px;
+    padding:12px;
+    text-align:center;
+    cursor:pointer;
+    font-size:13px;
+    font-weight:600;
 }
 
-@media (max-width: 400px) {
+.account-type input{
+    display:none;
+}
 
-    .container {
-        padding: 16px 12px 30px;
+.account-type:has(input:checked){
+    border-color:#0b5cff;
+    color:#0b5cff;
+    background:#f5f8ff;
+}
+
+.withdraw-btn{
+    width:100%;
+    border:0;
+    padding:14px;
+    border-radius:9px;
+    background:#0b5cff;
+    color:#fff;
+    font-weight:700;
+    cursor:pointer;
+}
+
+/* LOADING */
+
+.loading-screen{
+    position:fixed;
+    inset:0;
+    background:rgba(255,255,255,.97);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    z-index:200;
+}
+
+.loading-screen.show{
+    display:flex;
+}
+
+.loader{
+    width:43px;
+    height:43px;
+    border:4px solid #e5e7eb;
+    border-top-color:#0b5cff;
+    border-radius:50%;
+    animation:spin .8s linear infinite;
+    margin-bottom:13px;
+}
+
+.loading-text{
+    font-size:13px;
+    color:#667085;
+    font-weight:600;
+}
+
+@keyframes spin{
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+/* POPUP */
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(16,24,40,.55);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    z-index:300;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-box{
+    width:100%;
+    max-width:360px;
+    background:#fff;
+    border-radius:18px;
+    padding:27px 22px;
+    text-align:center;
+    box-shadow:0 15px 50px rgba(0,0,0,.2);
+}
+
+.success-icon{
+    width:62px;
+    height:62px;
+    border-radius:50%;
+    background:#ecfdf3;
+    color:#12b76a;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin:0 auto 15px;
+    font-size:30px;
+    font-weight:800;
+}
+
+.modal-box h3{
+    font-size:21px;
+    margin-bottom:8px;
+}
+
+.modal-box p{
+    color:#667085;
+    font-size:13px;
+    line-height:1.55;
+    margin-bottom:20px;
+}
+
+.modal-btn{
+    width:100%;
+    border:0;
+    border-radius:9px;
+    padding:13px;
+    background:#0b5cff;
+    color:#fff;
+    font-weight:700;
+    cursor:pointer;
+}
+
+.footer{
+    text-align:center;
+    color:#98a2b3;
+    font-size:11px;
+    margin-top:28px;
+}
+
+.hidden{
+    display:none!important;
+}
+
+@media(max-width:400px){
+    .container{
+        padding:16px 12px 30px;
     }
 
-    .auth-card {
-        padding: 20px;
+    .balance{
+        font-size:33px;
     }
 
-    .balance {
-        font-size: 33px;
+    .miner-time{
+        font-size:25px;
     }
-
 }
 </style>
 </head>
@@ -408,270 +661,255 @@ select {
 
 <header class="header">
 
-    <div class="logo">
-        Nexa Bonus
-    </div>
+    <div class="logo">Nexavest</div>
 
-    <select
-        id="languageSelect"
-        class="lang-select"
-        onchange="changeLanguage()"
-    >
-        <option value="es">Español</option>
+    <select id="languageSelect"
+            class="lang"
+            onchange="changeLanguage()">
         <option value="en">English</option>
-        <option value="sw">Kiswahili</option>
+        <option value="es">Español</option>
     </select>
 
 </header>
 
+
+<!-- LOADING -->
+
+<div id="loadingScreen" class="loading-screen">
+
+    <div class="loader"></div>
+
+    <div class="loading-text">
+        Loading Nexavest...
+    </div>
+
+</div>
+
+
 <div class="container">
 
-<section id="authSection" class="auth-card">
 
-    <div class="tabs">
+<!-- =========================
+     AUTH PAGE
+========================= -->
 
-        <button
-            id="loginTab"
-            class="tab active"
-            onclick="showLogin()"
-        >
-            Iniciar sesión
-        </button>
+<section id="authPage" class="page active">
 
-        <button
-            id="registerTab"
-            class="tab"
-            onclick="showRegister()"
-        >
-            Registrarse
-        </button>
+    <div class="card auth-card">
 
-    </div>
+        <div class="tabs">
 
-    <div id="errorBox" class="error"></div>
+            <button id="loginTab"
+                    class="tab active"
+                    onclick="showLogin()">
+                Login
+            </button>
 
-    <!-- LOGIN -->
-
-    <div id="loginForm">
-
-        <h1 id="loginTitle" class="auth-title">
-            Bienvenido
-        </h1>
-
-        <p id="loginSubtitle" class="auth-subtitle">
-            Inicia sesión para acceder a tu cuenta.
-        </p>
-
-        <div class="form-group">
-
-            <label id="loginEmailLabel">
-                Correo electrónico
-            </label>
-
-            <input
-                type="email"
-                id="loginEmail"
-                placeholder="tu@email.com"
-            >
+            <button id="registerTab"
+                    class="tab"
+                    onclick="showRegister()">
+                Register
+            </button>
 
         </div>
 
-        <div class="form-group">
-
-            <label id="loginPasswordLabel">
-                Contraseña
-            </label>
-
-            <input
-                type="password"
-                id="loginPassword"
-                placeholder="Contraseña"
-            >
-
-        </div>
-
-        <button
-            class="primary-btn"
-            id="loginButton"
-            onclick="loginUser()"
-        >
-            Iniciar sesión
-        </button>
-
-    </div>
+        <div id="errorBox" class="error"></div>
 
 
-    <!-- REGISTER -->
+        <!-- LOGIN -->
 
-    <div id="registerForm" class="hidden">
+        <div id="loginForm">
 
-        <h1 id="registerTitle" class="auth-title">
-            Crear cuenta
-        </h1>
+            <h1 class="auth-title">
+                Welcome
+            </h1>
 
-        <p id="registerSubtitle" class="auth-subtitle">
-            Registra tus datos para crear tu cuenta.
-        </p>
+            <p class="subtitle">
+                Sign in to access your Nexavest account.
+            </p>
 
-        <div class="form-group">
+            <div class="form-group">
 
-            <label id="nameLabel">
-                Nombre completo
-            </label>
+                <label>
+                    Email address
+                </label>
 
-            <input
-                type="text"
-                id="registerName"
-                placeholder="Nombre completo"
-            >
+                <input
+                    type="email"
+                    id="loginEmail"
+                    placeholder="you@email.com"
+                >
 
-        </div>
+            </div>
 
-        <div class="form-group">
+            <div class="form-group">
 
-            <label id="emailLabel">
-                Correo electrónico
-            </label>
+                <label>
+                    Password
+                </label>
 
-            <input
-                type="email"
-                id="registerEmail"
-                placeholder="tu@email.com"
-            >
+                <input
+                    type="password"
+                    id="loginPassword"
+                    placeholder="Password"
+                >
+
+            </div>
+
+            <button class="primary-btn"
+                    onclick="loginUser()">
+
+                Login
+
+            </button>
 
         </div>
 
-        <div class="form-group">
 
-            <label id="passwordLabel">
-                Contraseña
-            </label>
+        <!-- REGISTER -->
 
-            <input
-                type="password"
-                id="registerPassword"
-                placeholder="Crear contraseña"
-            >
+        <div id="registerForm" class="hidden">
+
+            <h1 class="auth-title">
+                Create Account
+            </h1>
+
+            <p class="subtitle">
+                Register your details to create your Nexavest account.
+            </p>
+
+            <div class="form-group">
+
+                <label>
+                    Full name
+                </label>
+
+                <input
+                    type="text"
+                    id="registerName"
+                    placeholder="Full name"
+                >
+
+            </div>
+
+            <div class="form-group">
+
+                <label>
+                    Email address
+                </label>
+
+                <input
+                    type="email"
+                    id="registerEmail"
+                    placeholder="you@email.com"
+                >
+
+            </div>
+
+            <div class="form-group">
+
+                <label>
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="registerPassword"
+                    placeholder="Create password"
+                >
+
+            </div>
+
+            <div class="form-group">
+
+                <label>
+                    Country
+                </label>
+
+                <select id="registerCountry">
+
+                    <option value="">
+                        Select your country
+                    </option>
+
+                    <option value="Peru">Perú</option>
+                    <option value="Ecuador">Ecuador</option>
+                    <option value="Mexico">México</option>
+                    <option value="El Salvador">El Salvador</option>
+                    <option value="Brazil">Brasil</option>
+                    <option value="Colombia">Colombia</option>
+                    <option value="Venezuela">Venezuela</option>
+                    <option value="Guatemala">Guatemala</option>
+
+                    <option value="Nigeria">Nigeria</option>
+                    <option value="South Africa">South Africa</option>
+                    <option value="Kenya">Kenya</option>
+                    <option value="Ghana">Ghana</option>
+                    <option value="Tanzania">Tanzania</option>
+                    <option value="Uganda">Uganda</option>
+                    <option value="Rwanda">Rwanda</option>
+
+                </select>
+
+            </div>
+
+            <button class="primary-btn"
+                    onclick="registerUser()">
+
+                Create Account
+
+            </button>
 
         </div>
-
-        <div class="form-group">
-
-            <label id="countryLabel">
-                País
-            </label>
-
-            <select id="registerCountry">
-
-                <option value="">
-                    Selecciona tu país
-                </option>
-
-                <!-- SPANISH COUNTRIES -->
-
-                <option value="Argentina">Argentina</option>
-                <option value="Bolivia">Bolivia</option>
-                <option value="Chile">Chile</option>
-                <option value="Colombia">Colombia</option>
-                <option value="Costa Rica">Costa Rica</option>
-                <option value="Cuba">Cuba</option>
-                <option value="Dominican Republic">
-                    República Dominicana
-                </option>
-                <option value="Ecuador">Ecuador</option>
-                <option value="El Salvador">El Salvador</option>
-                <option value="Equatorial Guinea">
-                    Guinea Ecuatorial
-                </option>
-                <option value="Guatemala">Guatemala</option>
-                <option value="Honduras">Honduras</option>
-                <option value="Mexico">México</option>
-                <option value="Nicaragua">Nicaragua</option>
-                <option value="Panama">Panamá</option>
-                <option value="Paraguay">Paraguay</option>
-                <option value="Peru">Perú</option>
-                <option value="Spain">España</option>
-                <option value="Uruguay">Uruguay</option>
-                <option value="Venezuela">Venezuela</option>
-
-                <!-- AFRICA -->
-
-                <option value="Nigeria">Nigeria</option>
-                <option value="South Africa">South Africa</option>
-                <option value="Ghana">Ghana</option>
-                <option value="Kenya">Kenya</option>
-                <option value="Tanzania">Tanzania</option>
-                <option value="Uganda">Uganda</option>
-                <option value="Rwanda">Rwanda</option>
-
-            </select>
-
-        </div>
-
-        <button
-            class="primary-btn"
-            id="registerButton"
-            onclick="registerUser()"
-        >
-            Crear cuenta
-        </button>
 
     </div>
 
 </section>
 
 
-<!-- DASHBOARD -->
+<!-- =========================
+     HOME PAGE
+========================= -->
 
-<section id="dashboard" class="dashboard">
+<section id="homePage" class="page">
 
     <div class="welcome">
 
         <h2>
-            <span id="welcomeText">Hola</span>,
-            <span id="userName"></span>
+            Welcome, <span id="userName"></span>
         </h2>
 
-        <p id="dashboardSubtitle">
-            Tu cuenta de bonificación
+        <p>
+            Your Nexavest account
         </p>
 
     </div>
 
 
-    <!-- BALANCE -->
-
     <div class="balance-card">
 
-        <div
-            class="balance-label"
-            id="bonusAvailable"
-        >
-            Bonus disponible
+        <div class="balance-label">
+            Bonus Available
         </div>
 
-        <div
-            class="balance"
-            id="bonusAmount"
-        >
-            $0
+        <div id="bonusAmount"
+             class="balance">
+            $0.00
         </div>
 
         <div class="balance-note">
-            Nexa Bonus
+            Available balance
         </div>
 
     </div>
 
 
-    <!-- INFORMATION -->
-
     <div class="info-grid">
 
         <div class="info-card">
 
-            <span id="countryInfoLabel">
-                País
+            <span>
+                Country
             </span>
 
             <strong id="countryDisplay">
@@ -682,8 +920,8 @@ select {
 
         <div class="info-card">
 
-            <span id="currencyInfoLabel">
-                Moneda
+            <span>
+                Currency
             </span>
 
             <strong id="currencyDisplay">
@@ -695,248 +933,351 @@ select {
     </div>
 
 
-    <!-- COUNTDOWN -->
-
     <div class="countdown-card">
 
-        <div
-            class="countdown-title"
-            id="countdownTitle"
-        >
-            Tiempo restante del bonus
+        <div class="countdown-title">
+            Bonus time remaining
         </div>
 
-        <div
-            class="countdown"
-            id="countdown"
-        >
+        <div id="countdown"
+             class="countdown">
             15:41:55
         </div>
 
     </div>
 
 
-    <!-- WITHDRAWAL -->
+    <div class="menu-grid">
 
-    <div class="withdrawal-card">
+        <button class="menu-btn"
+                onclick="navigateTo('minerPage')">
 
-        <h3 id="withdrawalTitle">
-            Retiro
-        </h3>
-
-        <div class="fee-box">
-
-            <div
-                class="fee-label"
-                id="feeLabel"
-            >
-                Withdrawal Fee
+            <div class="icon">
+                ₿
             </div>
 
-            <div class="fee-amount">
-                $150
+            <strong>
+                BTC Miner
+            </strong>
+
+            <span>
+                Open mining section
+            </span>
+
+        </button>
+
+
+        <button class="menu-btn"
+                onclick="navigateTo('withdrawPage')">
+
+            <div class="icon">
+                ⇩
+            </div>
+
+            <strong>
+                Withdrawal
+            </strong>
+
+            <span>
+                Withdrawal options
+            </span>
+
+        </button>
+
+    </div>
+
+
+    <button class="logout"
+            onclick="logoutUser()">
+
+        Logout
+
+    </button>
+
+
+    <div class="footer">
+        Nexavest
+    </div>
+
+</section>
+
+
+<!-- =========================
+     MINER PAGE
+========================= -->
+
+<section id="minerPage" class="page">
+
+    <button class="back-btn"
+            onclick="navigateTo('homePage')">
+
+        ← Back to Account
+
+    </button>
+
+    <h1 class="page-title">
+        BTC Profit Miner
+    </h1>
+
+    <p class="page-subtitle">
+        Manage your mining session.
+    </p>
+
+
+    <div class="card">
+
+        <span id="minerStatus"
+              class="miner-status">
+            Inactive
+        </span>
+
+
+        <div class="stat-grid">
+
+            <div class="stat">
+
+                <span>
+                    Starting Amount
+                </span>
+
+                <strong>
+                    $25.00
+                </strong>
+
+            </div>
+
+            <div class="stat">
+
+                <span>
+                    Target
+                </span>
+
+                <strong>
+                    $250.00
+                </strong>
+
             </div>
 
         </div>
 
-        <p
-            class="withdraw-text"
-            id="withdrawText"
-        >
-            Selecciona tu banco y completa los datos de tu cuenta para solicitar un retiro.
-        </p>
 
-        <button
-            class="withdraw-btn"
-            id="withdrawButton"
-            onclick="openWithdrawalForm()"
-        >
-            Withdrawal
-        </button>
+        <div class="miner-clock">
 
+            <small>
+                Mining time remaining
+            </small>
 
-        <!-- WITHDRAWAL FORM -->
-
-        <div
-            id="withdrawForm"
-            class="withdraw-form"
-        >
-
-            <div class="form-group">
-
-                <label id="bankLabel">
-                    Bank
-                </label>
-
-                <select id="bankSelect">
-
-                    <option value="">
-                        Select your bank
-                    </option>
-
-                </select>
-
+            <div id="minerTime"
+                 class="miner-time">
+                48:00:00
             </div>
 
+        </div>
 
-            <div class="form-group">
 
-                <label id="accountHolderLabel">
-                    Account holder name
-                </label>
+        <div class="progress-label">
 
-                <input
-                    type="text"
-                    id="accountHolder"
-                    placeholder="Full name"
-                >
+            <span>
+                Mining progress
+            </span>
 
+            <span id="minerPercent">
+                0%
+            </span>
+
+        </div>
+
+        <div class="progress">
+
+            <div id="minerProgress"
+                 class="progress-fill">
             </div>
 
+        </div>
 
-            <div class="form-group">
 
-                <label id="accountNumberLabel">
-                    Account number
-                </label>
+        <div class="upload">
 
-                <input
-                    type="text"
-                    id="accountNumber"
-                    placeholder="Account number"
-                    inputmode="numeric"
-                >
-
+            <div class="upload-icon">
+                ↑
             </div>
 
+            <strong>
+                Upload Payment Proof
+            </strong>
 
-            <div class="form-group">
+            <p>
+                Upload an image before the miner can be activated.
+            </p>
 
-                <label id="accountTypeLabel">
-                    Account type
-                </label>
-
-                <select id="accountType">
-
-                    <option value="">
-                        Select account type
-                    </option>
-
-                    <option value="Savings">
-                        Savings
-                    </option>
-
-                    <option value="Current">
-                        Current
-                    </option>
-
-                </select>
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label id="currencyWithdrawLabel">
-                    Currency
-                </label>
-
-                <select id="withdrawCurrency">
-
-                    <option value="">
-                        Select currency
-                    </option>
-
-                </select>
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label id="amountLabel">
-                    Withdrawal amount
-                </label>
-
-                <input
-                    type="number"
-                    id="withdrawAmount"
-                    placeholder="0.00"
-                    min="0"
-                >
-
-            </div>
-
-
-            <div class="withdraw-summary">
-
-                <div>
-
-                    <span id="summaryCountry">
-                        Country
-                    </span>
-
-                    <strong id="summaryCountryValue">
-                        -
-                    </strong>
-
-                </div>
-
-                <div>
-
-                    <span id="summaryBank">
-                        Bank
-                    </span>
-
-                    <strong id="summaryBankValue">
-                        -
-                    </strong>
-
-                </div>
-
-                <div>
-
-                    <span id="summaryFee">
-                        Withdrawal Fee
-                    </span>
-
-                    <strong>
-                        $150
-                    </strong>
-
-                </div>
-
-            </div>
-
-
-            <button
-                class="submit-withdraw"
-                id="submitWithdrawButton"
-                onclick="submitWithdrawal()"
+            <input
+                type="file"
+                id="proofFile"
+                accept="image/*"
+                onchange="proofSelected()"
             >
-                Submit Withdrawal
+
+            <div id="fileName"
+                 class="file-name">
+            </div>
+
+        </div>
+
+
+        <div style="margin-top:15px">
+
+            <button id="minerStartButton"
+                    class="primary-btn"
+                    onclick="startMiner()"
+                    disabled>
+
+                Upload proof to continue
+
             </button>
 
-            <div
-                id="withdrawMessage"
-                class="withdraw-message"
-            ></div>
+        </div>
+
+
+        <div id="minerMessage"
+             class="miner-message">
+
+            The miner remains inactive until the required proof has been uploaded.
 
         </div>
 
     </div>
 
+</section>
 
-    <button
-        class="logout"
-        id="logoutButton"
-        onclick="logoutUser()"
-    >
-        Cerrar sesión
+
+<!-- =========================
+     WITHDRAWAL PAGE
+========================= -->
+
+<section id="withdrawPage" class="page">
+
+    <button class="back-btn"
+            onclick="navigateTo('homePage')">
+
+        ← Back to Account
+
     </button>
 
-    <div class="footer">
-        Nexa Bonus
+    <h1 class="page-title">
+        Withdrawal
+    </h1>
+
+    <p class="page-subtitle">
+        Complete your withdrawal information.
+    </p>
+
+
+    <div class="card">
+
+        <div class="fee-box">
+
+            <div class="fee-label">
+                Withdrawal Fee
+            </div>
+
+            <div class="fee">
+                $150
+            </div>
+
+        </div>
+
+
+        <div class="withdraw-info">
+            Select your bank and account details below before submitting your withdrawal request.
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Bank
+            </label>
+
+            <select id="bankSelect">
+            </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Account Type
+            </label>
+
+            <div class="account-types">
+
+                <label class="account-type">
+
+                    <input
+                        type="radio"
+                        name="accountType"
+                        value="Savings"
+                    >
+
+                    Savings
+
+                </label>
+
+                <label class="account-type">
+
+                    <input
+                        type="radio"
+                        name="accountType"
+                        value="Current"
+                    >
+
+                    Current
+
+                </label>
+
+            </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Account Number
+            </label>
+
+            <input
+                id="accountNumber"
+                type="text"
+                placeholder="Enter account number"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Account Holder Name
+            </label>
+
+            <input
+                id="accountHolder"
+                type="text"
+                placeholder="Account holder name"
+            >
+
+        </div>
+
+
+        <button class="withdraw-btn"
+                onclick="submitWithdrawal()">
+
+            Withdrawal
+
+        </button>
+
     </div>
 
 </section>
@@ -944,441 +1285,262 @@ select {
 </div>
 
 
+<!-- =========================
+     WITHDRAWAL MODAL
+========================= -->
+
+<div id="withdrawModal"
+     class="modal">
+
+    <div class="modal-box">
+
+        <div class="success-icon">
+            ✓
+        </div>
+
+        <h3>
+            Withdrawal Submitted
+        </h3>
+
+        <p>
+            Your withdrawal request has been submitted successfully.
+            You should receive your withdrawal within 1 hour.
+        </p>
+
+        <button class="modal-btn"
+                onclick="closeWithdrawalModal()">
+
+            Done
+
+        </button>
+
+    </div>
+
+</div>
+
+
 <script>
 
-/* =====================================================
+/* =========================
    COUNTRY DATA
-===================================================== */
+========================= */
 
 const countryData = {
 
-    /* ================= SPANISH ================= */
-
-    "Argentina": {
-        currency: "ARS",
-        symbol: "$",
-        rate: 1450,
-        language: "es",
-        banks: [
-            "Banco de la Nación Argentina",
-            "Banco Galicia",
-            "BBVA Argentina",
-            "Banco Santander Argentina",
-            "Banco Macro",
-            "Banco Provincia"
+    "Peru":{
+        currency:"PEN",
+        symbol:"S/",
+        rate:3.50,
+        language:"es",
+        banks:[
+            "BCP",
+            "Interbank",
+            "BBVA Perú",
+            "Scotiabank Perú"
         ]
     },
 
-    "Bolivia": {
-        currency: "BOB",
-        symbol: "Bs.",
-        rate: 6.96,
-        language: "es",
-        banks: [
-            "Banco Nacional de Bolivia",
-            "Banco Mercantil Santa Cruz",
-            "Banco Bisa",
-            "Banco Unión",
-            "Banco Económico",
-            "Banco Ganadero"
-        ]
-    },
-
-    "Chile": {
-        currency: "CLP",
-        symbol: "$",
-        rate: 950,
-        language: "es",
-        banks: [
-            "Banco de Chile",
-            "BancoEstado",
-            "Banco Santander Chile",
-            "Banco de Crédito e Inversiones",
-            "Scotiabank Chile",
-            "Banco BICE"
-        ]
-    },
-
-    "Colombia": {
-        currency: "COP",
-        symbol: "$",
-        rate: 3900,
-        language: "es",
-        banks: [
-            "Bancolombia",
-            "Banco de Bogotá",
-            "Davivienda",
-            "BBVA Colombia",
-            "Banco de Occidente",
-            "Banco Popular",
-            "Scotiabank Colpatria"
-        ]
-    },
-
-    "Costa Rica": {
-        currency: "CRC",
-        symbol: "₡",
-        rate: 510,
-        language: "es",
-        banks: [
-            "Banco Nacional de Costa Rica",
-            "Banco de Costa Rica",
-            "BAC Credomatic",
-            "Banco Popular",
-            "Scotiabank Costa Rica"
-        ]
-    },
-
-    "Cuba": {
-        currency: "CUP",
-        symbol: "$",
-        rate: 24,
-        language: "es",
-        banks: [
-            "Banco Metropolitano",
-            "Banco Popular de Ahorro",
-            "Banco de Crédito y Comercio",
-            "Banco Financiero Internacional"
-        ]
-    },
-
-    "Dominican Republic": {
-        currency: "DOP",
-        symbol: "RD$",
-        rate: 63,
-        language: "es",
-        banks: [
-            "Banco Popular Dominicano",
-            "Banco de Reservas",
-            "BHD",
-            "Scotiabank República Dominicana",
-            "Banco Santa Cruz",
-            "Banco Promerica"
-        ]
-    },
-
-    "Ecuador": {
-        currency: "USD",
-        symbol: "$",
-        rate: 1,
-        language: "es",
-        banks: [
+    "Ecuador":{
+        currency:"USD",
+        symbol:"$",
+        rate:1,
+        language:"es",
+        banks:[
             "Banco Pichincha",
-            "Banco del Pacífico",
             "Banco Guayaquil",
             "Produbanco",
-            "Banco Internacional",
-            "Banco Bolivariano"
+            "Banco del Pacífico"
         ]
     },
 
-    "El Salvador": {
-        currency: "USD",
-        symbol: "$",
-        rate: 1,
-        language: "es",
-        banks: [
-            "Banco Agrícola",
-            "Banco Cuscatlán",
-            "Banco Davivienda Salvadoreño",
-            "Banco Promerica",
-            "Banco Azul",
-            "Banco Atlántida"
-        ]
-    },
-
-    "Equatorial Guinea": {
-        currency: "XAF",
-        symbol: "FCFA",
-        rate: 600,
-        language: "es",
-        banks: [
-            "BGFIBank Guinea Ecuatorial",
-            "Banco Nacional de Guinea Ecuatorial",
-            "Ecobank Guinea Ecuatorial",
-            "CBG Bank"
-        ]
-    },
-
-    "Guatemala": {
-        currency: "GTQ",
-        symbol: "Q",
-        rate: 7.70,
-        language: "es",
-        banks: [
-            "Banco Industrial",
-            "Banrural",
-            "Banco G&T Continental",
-            "Banco Agromercantil",
-            "Banco Promerica",
-            "BAC Guatemala"
-        ]
-    },
-
-    "Honduras": {
-        currency: "HNL",
-        symbol: "L",
-        rate: 25,
-        language: "es",
-        banks: [
-            "Banco Atlántida",
-            "Ficohsa",
-            "Banco de Occidente",
-            "BAC Honduras",
-            "Banpaís",
-            "Banco Promerica"
-        ]
-    },
-
-    "Mexico": {
-        currency: "MXN",
-        symbol: "MX$",
-        rate: 19,
-        language: "es",
-        banks: [
+    "Mexico":{
+        currency:"MXN",
+        symbol:"MX$",
+        rate:19,
+        language:"es",
+        banks:[
             "BBVA México",
             "Banorte",
             "Santander México",
-            "Citibanamex",
             "HSBC México",
-            "Scotiabank México",
-            "Banco Azteca"
+            "Citibanamex"
         ]
     },
 
-    "Nicaragua": {
-        currency: "NIO",
-        symbol: "C$",
-        rate: 36.8,
-        language: "es",
-        banks: [
-            "Banco de América Central",
-            "Banpro",
-            "Banco Lafise",
-            "Banco de Finanzas",
-            "Banco Avanz"
+    "El Salvador":{
+        currency:"USD",
+        symbol:"$",
+        rate:1,
+        language:"es",
+        banks:[
+            "Banco Agrícola",
+            "Banco Cuscatlán",
+            "Banco Davivienda",
+            "BAC Credomatic"
         ]
     },
 
-    "Panama": {
-        currency: "PAB",
-        symbol: "B/.",
-        rate: 1,
-        language: "es",
-        banks: [
-            "Banco General",
-            "Banistmo",
-            "BAC Panamá",
-            "Global Bank",
-            "Multibank",
-            "Caja de Ahorros"
+    "Brazil":{
+        currency:"BRL",
+        symbol:"R$",
+        rate:5.40,
+        language:"en",
+        banks:[
+            "Banco do Brasil",
+            "Itaú",
+            "Bradesco",
+            "Santander Brasil",
+            "Caixa Econômica Federal"
         ]
     },
 
-    "Paraguay": {
-        currency: "PYG",
-        symbol: "₲",
-        rate: 7800,
-        language: "es",
-        banks: [
-            "Banco Nacional de Fomento",
-            "Banco Continental",
-            "Banco Itaú Paraguay",
-            "Banco GNB Paraguay",
-            "Banco Atlas",
-            "Sudameris Bank"
+    "Colombia":{
+        currency:"COP",
+        symbol:"$",
+        rate:3900,
+        language:"es",
+        banks:[
+            "Bancolombia",
+            "Banco de Bogotá",
+            "Davivienda",
+            "BBVA Colombia"
         ]
     },
 
-    "Peru": {
-        currency: "PEN",
-        symbol: "S/",
-        rate: 3.50,
-        language: "es",
-        banks: [
-            "Banco de Crédito del Perú",
-            "BBVA Perú",
-            "Interbank",
-            "Scotiabank Perú",
-            "Banco de la Nación",
-            "Banco Pichincha Perú",
-            "BanBif"
-        ]
-    },
-
-    "Spain": {
-        currency: "EUR",
-        symbol: "€",
-        rate: 0.85,
-        language: "es",
-        banks: [
-            "Banco Santander",
-            "BBVA",
-            "CaixaBank",
-            "Banco Sabadell",
-            "Bankinter",
-            "Unicaja Banco"
-        ]
-    },
-
-    "Uruguay": {
-        currency: "UYU",
-        symbol: "$U",
-        rate: 40,
-        language: "es",
-        banks: [
-            "Banco República",
-            "Banco Itaú Uruguay",
-            "Santander Uruguay",
-            "BBVA Uruguay",
-            "Scotiabank Uruguay",
-            "HSBC Uruguay"
-        ]
-    },
-
-    "Venezuela": {
-        currency: "VES",
-        symbol: "Bs.",
-        rate: 130,
-        language: "es",
-        banks: [
+    "Venezuela":{
+        currency:"VES",
+        symbol:"Bs.",
+        rate:130,
+        language:"es",
+        banks:[
             "Banco de Venezuela",
             "Banesco",
-            "Banco Mercantil",
-            "BBVA Provincial",
-            "Banco Nacional de Crédito",
-            "Banco del Tesoro",
-            "Banco Exterior"
+            "Mercantil",
+            "Provincial"
         ]
     },
 
+    "Guatemala":{
+        currency:"GTQ",
+        symbol:"Q",
+        rate:7.70,
+        language:"es",
+        banks:[
+            "Banco Industrial",
+            "Banrural",
+            "BAC Guatemala",
+            "G&T Continental"
+        ]
+    },
 
-    /* ================= AFRICA ================= */
-
-    "Nigeria": {
-        currency: "NGN",
-        symbol: "₦",
-        rate: 1500,
-        language: "en",
-        banks: [
+    "Nigeria":{
+        currency:"NGN",
+        symbol:"₦",
+        rate:1500,
+        language:"en",
+        banks:[
             "Access Bank",
-            "Guaranty Trust Bank",
+            "GTBank",
             "Zenith Bank",
-            "First Bank of Nigeria",
-            "United Bank for Africa",
+            "UBA",
+            "FirstBank",
             "Fidelity Bank",
-            "First City Monument Bank",
-            "Sterling Bank",
-            "Union Bank",
-            "Wema Bank",
-            "Stanbic IBTC Bank"
+            "Union Bank"
         ]
     },
 
-    "South Africa": {
-        currency: "ZAR",
-        symbol: "R",
-        rate: 17.5,
-        language: "en",
-        banks: [
-            "Standard Bank",
-            "First National Bank",
-            "Absa Bank",
-            "Nedbank",
+    "South Africa":{
+        currency:"ZAR",
+        symbol:"R",
+        rate:17.50,
+        language:"en",
+        banks:[
             "Capitec Bank",
-            "Investec Bank",
-            "African Bank"
+            "Standard Bank",
+            "FNB",
+            "Absa",
+            "Nedbank"
         ]
     },
 
-    "Ghana": {
-        currency: "GHS",
-        symbol: "GH₵",
-        rate: 12.5,
-        language: "en",
-        banks: [
+    "Kenya":{
+        currency:"KES",
+        symbol:"KSh",
+        rate:129,
+        language:"en",
+        banks:[
+            "KCB Bank",
+            "Equity Bank",
+            "Co-operative Bank",
+            "Absa Kenya",
+            "NCBA"
+        ]
+    },
+
+    "Ghana":{
+        currency:"GHS",
+        symbol:"GH₵",
+        rate:12,
+        language:"en",
+        banks:[
             "GCB Bank",
             "Ecobank Ghana",
             "Absa Bank Ghana",
-            "Stanbic Bank Ghana",
             "Fidelity Bank Ghana",
-            "CalBank",
-            "Republic Bank Ghana"
+            "Stanbic Bank Ghana"
         ]
     },
 
-    "Kenya": {
-        currency: "KES",
-        symbol: "KSh",
-        rate: 129,
-        language: "sw",
-        banks: [
-            "KCB Bank Kenya",
-            "Equity Bank Kenya",
-            "Co-operative Bank of Kenya",
-            "Absa Bank Kenya",
-            "NCBA Bank Kenya",
-            "Stanbic Bank Kenya",
-            "I&M Bank Kenya"
-        ]
-    },
-
-    "Tanzania": {
-        currency: "TZS",
-        symbol: "TSh",
-        rate: 2500,
-        language: "sw",
-        banks: [
+    "Tanzania":{
+        currency:"TZS",
+        symbol:"TSh",
+        rate:2600,
+        language:"en",
+        banks:[
             "CRDB Bank",
             "NMB Bank",
-            "NBC Tanzania",
+            "NBC Bank",
             "Absa Bank Tanzania",
-            "Stanbic Bank Tanzania",
-            "Exim Bank Tanzania",
-            "DTB Tanzania"
+            "Stanbic Bank Tanzania"
         ]
     },
 
-    "Uganda": {
-        currency: "UGX",
-        symbol: "USh",
-        rate: 3600,
-        language: "sw",
-        banks: [
+    "Uganda":{
+        currency:"UGX",
+        symbol:"USh",
+        rate:3500,
+        language:"en",
+        banks:[
             "Stanbic Bank Uganda",
             "Centenary Bank",
             "Absa Bank Uganda",
             "Bank of Baroda Uganda",
-            "DFCU Bank",
-            "Equity Bank Uganda",
-            "Standard Chartered Uganda"
+            "DFCU Bank"
         ]
     },
 
-    "Rwanda": {
-        currency: "RWF",
-        symbol: "FRw",
-        rate: 1450,
-        language: "sw",
-        banks: [
+    "Rwanda":{
+        currency:"RWF",
+        symbol:"FRw",
+        rate:1450,
+        language:"en",
+        banks:[
             "Bank of Kigali",
             "I&M Bank Rwanda",
-            "Equity Bank Rwanda",
-            "KCB Bank Rwanda",
-            "Cogebanque",
             "Access Bank Rwanda",
-            "Ecobank Rwanda"
+            "Equity Bank Rwanda",
+            "GT Bank Rwanda"
         ]
     }
 
 };
 
 
-/* =====================================================
-   BONUS VALUES
-===================================================== */
+/* =========================
+   BONUS
+========================= */
 
-const bonuses = [
+const bonuses=[
     300,
     700,
     800,
@@ -1389,629 +1551,68 @@ const bonuses = [
 ];
 
 
-/* =====================================================
-   LANGUAGE DATA
-===================================================== */
-
-const languageData = {
-
-    es: {
-
-        login: "Iniciar sesión",
-        register: "Registrarse",
-
-        welcome: "Bienvenido",
-        loginSubtitle:
-            "Inicia sesión para acceder a tu cuenta.",
-
-        createAccount:
-            "Crear cuenta",
-
-        registerSubtitle:
-            "Registra tus datos para crear tu cuenta.",
-
-        name:
-            "Nombre completo",
-
-        email:
-            "Correo electrónico",
-
-        password:
-            "Contraseña",
-
-        country:
-            "País",
-
-        selectCountry:
-            "Selecciona tu país",
-
-        create:
-            "Crear cuenta",
-
-        hello:
-            "Hola",
-
-        dashboard:
-            "Tu cuenta de bonificación",
-
-        bonus:
-            "Bonus disponible",
-
-        countryInfo:
-            "País",
-
-        currency:
-            "Moneda",
-
-        countdown:
-            "Tiempo restante del bonus",
-
-        withdrawal:
-            "Retiro",
-
-        fee:
-            "Withdrawal Fee",
-
-        withdrawalText:
-            "Selecciona tu banco y completa los datos de tu cuenta para solicitar un retiro.",
-
-        withdrawalButton:
-            "Withdrawal",
-
-        bank:
-            "Banco",
-
-        selectBank:
-            "Selecciona tu banco",
-
-        holder:
-            "Nombre del titular",
-
-        holderPlaceholder:
-            "Nombre completo",
-
-        accountNumber:
-            "Número de cuenta",
-
-        accountNumberPlaceholder:
-            "Número de cuenta",
-
-        accountType:
-            "Tipo de cuenta",
-
-        selectAccountType:
-            "Selecciona el tipo de cuenta",
-
-        savings:
-            "Ahorros",
-
-        current:
-            "Corriente",
-
-        withdrawalCurrency:
-            "Moneda",
-
-        selectCurrency:
-            "Selecciona moneda",
-
-        amount:
-            "Monto del retiro",
-
-        summaryCountry:
-            "País",
-
-        summaryBank:
-            "Banco",
-
-        summaryFee:
-            "Withdrawal Fee",
-
-        submit:
-            "Solicitar retiro",
-
-        logout:
-            "Cerrar sesión",
-
-        submitted:
-            "Solicitud de retiro registrada."
-
-    },
-
-
-    en: {
-
-        login: "Login",
-        register: "Register",
-
-        welcome: "Welcome",
-        loginSubtitle:
-            "Sign in to access your account.",
-
-        createAccount:
-            "Create account",
-
-        registerSubtitle:
-            "Enter your details to create your account.",
-
-        name:
-            "Full name",
-
-        email:
-            "Email address",
-
-        password:
-            "Password",
-
-        country:
-            "Country",
-
-        selectCountry:
-            "Select your country",
-
-        create:
-            "Create account",
-
-        hello:
-            "Hello",
-
-        dashboard:
-            "Your bonus account",
-
-        bonus:
-            "Available bonus",
-
-        countryInfo:
-            "Country",
-
-        currency:
-            "Currency",
-
-        countdown:
-            "Bonus time remaining",
-
-        withdrawal:
-            "Withdrawal",
-
-        fee:
-            "Withdrawal Fee",
-
-        withdrawalText:
-            "Select your bank and complete your account details to submit a withdrawal request.",
-
-        withdrawalButton:
-            "Withdrawal",
-
-        bank:
-            "Bank",
-
-        selectBank:
-            "Select your bank",
-
-        holder:
-            "Account holder name",
-
-        holderPlaceholder:
-            "Full name",
-
-        accountNumber:
-            "Account number",
-
-        accountNumberPlaceholder:
-            "Account number",
-
-        accountType:
-            "Account type",
-
-        selectAccountType:
-            "Select account type",
-
-        savings:
-            "Savings",
-
-        current:
-            "Current",
-
-        withdrawalCurrency:
-            "Currency",
-
-        selectCurrency:
-            "Select currency",
-
-        amount:
-            "Withdrawal amount",
-
-        summaryCountry:
-            "Country",
-
-        summaryBank:
-            "Bank",
-
-        summaryFee:
-            "Withdrawal Fee",
-
-        submit:
-            "Submit Withdrawal",
-
-        logout:
-            "Logout",
-
-        submitted:
-            "Withdrawal request submitted."
-
-    },
-
-
-    sw: {
-
-        login: "Ingia",
-        register: "Jisajili",
-
-        welcome: "Karibu",
-        loginSubtitle:
-            "Ingia ili kufikia akaunti yako.",
-
-        createAccount:
-            "Fungua akaunti",
-
-        registerSubtitle:
-            "Weka taarifa zako ili kufungua akaunti.",
-
-        name:
-            "Jina kamili",
-
-        email:
-            "Barua pepe",
-
-        password:
-            "Nenosiri",
-
-        country:
-            "Nchi",
-
-        selectCountry:
-            "Chagua nchi yako",
-
-        create:
-            "Fungua akaunti",
-
-        hello:
-            "Habari",
-
-        dashboard:
-            "Akaunti yako ya bonasi",
-
-        bonus:
-            "Bonasi inayopatikana",
-
-        countryInfo:
-            "Nchi",
-
-        currency:
-            "Sarafu",
-
-        countdown:
-            "Muda uliobaki wa bonasi",
-
-        withdrawal:
-            "Kutoa fedha",
-
-        fee:
-            "Ada ya kutoa fedha",
-
-        withdrawalText:
-            "Chagua benki yako na ujaze taarifa za akaunti yako ili kutuma ombi la kutoa fedha.",
-
-        withdrawalButton:
-            "Kutoa fedha",
-
-        bank:
-            "Benki",
-
-        selectBank:
-            "Chagua benki yako",
-
-        holder:
-            "Jina la mwenye akaunti",
-
-        holderPlaceholder:
-            "Jina kamili",
-
-        accountNumber:
-            "Nambari ya akaunti",
-
-        accountNumberPlaceholder:
-            "Nambari ya akaunti",
-
-        accountType:
-            "Aina ya akaunti",
-
-        selectAccountType:
-            "Chagua aina ya akaunti",
-
-        savings:
-            "Akiba",
-
-        current:
-            "Current",
-
-        withdrawalCurrency:
-            "Sarafu",
-
-        selectCurrency:
-            "Chagua sarafu",
-
-        amount:
-            "Kiasi cha kutoa",
-
-        summaryCountry:
-            "Nchi",
-
-        summaryBank:
-            "Benki",
-
-        summaryFee:
-            "Ada ya kutoa fedha",
-
-        submit:
-            "Tuma ombi la kutoa",
-
-        logout:
-            "Ondoka",
-
-        submitted:
-            "Ombi la kutoa fedha limetumwa."
-
-    }
-
-};
-
-
-/* =====================================================
+/* =========================
    STORAGE
-===================================================== */
+========================= */
 
-function getUsers() {
+function getUsers(){
 
     return JSON.parse(
-        localStorage.getItem("nexaUsers") || "{}"
+        localStorage.getItem("nexavestUsers") || "{}"
     );
 
 }
 
-function saveUsers(users) {
+function saveUsers(users){
 
     localStorage.setItem(
-        "nexaUsers",
+        "nexavestUsers",
         JSON.stringify(users)
     );
 
 }
 
+function currentUser(){
 
-/* =====================================================
+    const email=
+        localStorage.getItem("nexavestCurrentUser");
+
+    if(!email) return null;
+
+    const users=getUsers();
+
+    return users[email] || null;
+
+}
+
+
+/* =========================
    ERROR
-===================================================== */
+========================= */
 
-function showError(message) {
+function showError(message){
 
-    const box =
+    const box=
         document.getElementById("errorBox");
 
-    box.innerText = message;
-
-    box.style.display = "block";
+    box.innerText=message;
+    box.style.display="block";
 
 }
 
-function hideError() {
+function hideError(){
 
-    const box =
-        document.getElementById("errorBox");
-
-    box.style.display = "none";
+    document.getElementById("errorBox")
+        .style.display="none";
 
 }
 
 
-/* =====================================================
-   LANGUAGE
-===================================================== */
-
-let currentLanguage = "es";
-
-
-function applyLanguage(language) {
-
-    if (!languageData[language]) {
-        language = "en";
-    }
-
-    currentLanguage = language;
-
-    const t =
-        languageData[language];
-
-    document.getElementById("languageSelect")
-        .value = language;
-
-    document.getElementById("loginTab")
-        .innerText = t.login;
-
-    document.getElementById("registerTab")
-        .innerText = t.register;
-
-    document.getElementById("loginTitle")
-        .innerText = t.welcome;
-
-    document.getElementById("loginSubtitle")
-        .innerText = t.loginSubtitle;
-
-    document.getElementById("registerTitle")
-        .innerText = t.createAccount;
-
-    document.getElementById("registerSubtitle")
-        .innerText = t.registerSubtitle;
-
-    document.getElementById("loginEmailLabel")
-        .innerText = t.email;
-
-    document.getElementById("loginPasswordLabel")
-        .innerText = t.password;
-
-    document.getElementById("loginButton")
-        .innerText = t.login;
-
-    document.getElementById("nameLabel")
-        .innerText = t.name;
-
-    document.getElementById("emailLabel")
-        .innerText = t.email;
-
-    document.getElementById("passwordLabel")
-        .innerText = t.password;
-
-    document.getElementById("countryLabel")
-        .innerText = t.country;
-
-    document.getElementById("registerButton")
-        .innerText = t.create;
-
-    document.getElementById("welcomeText")
-        .innerText = t.hello;
-
-    document.getElementById("dashboardSubtitle")
-        .innerText = t.dashboard;
-
-    document.getElementById("bonusAvailable")
-        .innerText = t.bonus;
-
-    document.getElementById("countryInfoLabel")
-        .innerText = t.countryInfo;
-
-    document.getElementById("currencyInfoLabel")
-        .innerText = t.currency;
-
-    document.getElementById("countdownTitle")
-        .innerText = t.countdown;
-
-    document.getElementById("withdrawalTitle")
-        .innerText = t.withdrawal;
-
-    document.getElementById("feeLabel")
-        .innerText = t.fee;
-
-    document.getElementById("withdrawText")
-        .innerText = t.withdrawalText;
-
-    document.getElementById("withdrawButton")
-        .innerText = t.withdrawalButton;
-
-    document.getElementById("bankLabel")
-        .innerText = t.bank;
-
-    document.getElementById("accountHolderLabel")
-        .innerText = t.holder;
-
-    document.getElementById("accountNumberLabel")
-        .innerText = t.accountNumber;
-
-    document.getElementById("accountTypeLabel")
-        .innerText = t.accountType;
-
-    document.getElementById("currencyWithdrawLabel")
-        .innerText = t.withdrawalCurrency;
-
-    document.getElementById("amountLabel")
-        .innerText = t.amount;
-
-    document.getElementById("summaryCountry")
-        .innerText = t.summaryCountry;
-
-    document.getElementById("summaryBank")
-        .innerText = t.summaryBank;
-
-    document.getElementById("summaryFee")
-        .innerText = t.summaryFee;
-
-    document.getElementById("submitWithdrawButton")
-        .innerText = t.submit;
-
-    document.getElementById("logoutButton")
-        .innerText = t.logout;
-
-    document.getElementById("registerCountry")
-        .options[0]
-        .innerText = t.selectCountry;
-
-    document.getElementById("bankSelect")
-        .options[0]
-        .innerText = t.selectBank;
-
-    document.getElementById("accountHolder")
-        .placeholder = t.holderPlaceholder;
-
-    document.getElementById("accountNumber")
-        .placeholder = t.accountNumberPlaceholder;
-
-    document.getElementById("withdrawCurrency")
-        .options[0]
-        .innerText = t.selectCurrency;
-
-    document.getElementById("accountType")
-        .options[0]
-        .innerText = t.selectAccountType;
-
-    document.getElementById("accountType")
-        .options[1]
-        .innerText = t.savings;
-
-    document.getElementById("accountType")
-        .options[2]
-        .innerText = t.current;
-
-}
-
-
-/* =====================================================
-   LANGUAGE CHANGE
-===================================================== */
-
-function changeLanguage() {
-
-    const language =
-        document.getElementById("languageSelect")
-        .value;
-
-    applyLanguage(language);
-
-}
-
-
-/* =====================================================
-   AUTO COUNTRY LANGUAGE
-===================================================== */
-
-function detectCountryLanguage(country) {
-
-    const data =
-        countryData[country];
-
-    if (!data) {
-
-        return "en";
-
-    }
-
-    return data.language || "en";
-
-}
-
-
-/* =====================================================
-   TABS
-===================================================== */
-
-function showLogin() {
+/* =========================
+   LOGIN / REGISTER
+========================= */
+
+function showLogin(){
 
     document.getElementById("loginForm")
         .classList.remove("hidden");
@@ -2030,7 +1631,7 @@ function showLogin() {
 }
 
 
-function showRegister() {
+function showRegister(){
 
     document.getElementById("loginForm")
         .classList.add("hidden");
@@ -2049,609 +1650,892 @@ function showRegister() {
 }
 
 
-/* =====================================================
+/* =========================
+   2 SECOND LOADING
+========================= */
+
+function showLoading(callback){
+
+    const screen=
+        document.getElementById("loadingScreen");
+
+    screen.classList.add("show");
+
+    setTimeout(function(){
+
+        screen.classList.remove("show");
+
+        callback();
+
+    },2000);
+
+}
+
+
+/* =========================
+   NAVIGATION
+========================= */
+
+function navigateTo(pageId){
+
+    showLoading(function(){
+
+        document.querySelectorAll(".page")
+            .forEach(function(page){
+
+                page.classList.remove("active");
+
+            });
+
+        document.getElementById(pageId)
+            .classList.add("active");
+
+        const user=currentUser();
+
+        if(user){
+
+            if(pageId==="homePage"){
+                updateHome(user);
+            }
+
+            if(pageId==="minerPage"){
+                setupMiner(user);
+            }
+
+            if(pageId==="withdrawPage"){
+                setupBanks(user.country);
+            }
+
+        }
+
+        window.scrollTo({
+            top:0,
+            behavior:"instant"
+        });
+
+    });
+
+}
+
+
+/* =========================
    REGISTER
-===================================================== */
+========================= */
 
-function registerUser() {
+function registerUser(){
 
     hideError();
 
-    const name =
+    const name=
         document.getElementById("registerName")
         .value.trim();
 
-    const email =
+    const email=
         document.getElementById("registerEmail")
         .value.trim()
         .toLowerCase();
 
-    const password =
+    const password=
         document.getElementById("registerPassword")
         .value;
 
-    const country =
+    const country=
         document.getElementById("registerCountry")
         .value;
 
-    if (
-        !name ||
-        !email ||
-        !password ||
-        !country
-    ) {
+    if(!name || !email || !password || !country){
 
-        showError(
-            currentLanguage === "es"
-                ? "Completa todos los campos."
-                : currentLanguage === "sw"
-                    ? "Jaza sehemu zote."
-                    : "Please complete all fields."
-        );
+        showError("Please complete all fields.");
 
         return;
     }
 
-    const users = getUsers();
+    const users=getUsers();
 
-    if (users[email]) {
+    if(users[email]){
 
-        showError(
-            currentLanguage === "es"
-                ? "Este correo ya está registrado."
-                : currentLanguage === "sw"
-                    ? "Barua pepe hii tayari imesajiliwa."
-                    : "This email is already registered."
-        );
+        showError("This email is already registered.");
 
         return;
     }
 
-    const bonus =
+    const bonus=
         bonuses[
             Math.floor(
-                Math.random() * bonuses.length
+                Math.random()*bonuses.length
             )
         ];
 
-    const duration =
+    const duration=
         (
-            (15 * 60 * 60) +
-            (41 * 60) +
+            15*60*60+
+            41*60+
             55
-        ) * 1000;
+        )*1000;
 
-    const expiresAt =
-        Date.now() + duration;
+    const miner={
+        started:false,
+        finished:false,
+        proofSelected:false,
+        startTime:null,
+        endTime:null
+    };
 
-    users[email] = {
+    users[email]={
 
-        name: name,
-
-        email: email,
-
-        password: password,
-
-        country: country,
-
-        bonus: bonus,
-
-        expiresAt: expiresAt,
-
-        createdAt: Date.now()
+        name:name,
+        email:email,
+        password:password,
+        country:country,
+        bonus:bonus,
+        expiresAt:Date.now()+duration,
+        createdAt:Date.now(),
+        miner:miner
 
     };
 
     saveUsers(users);
 
     localStorage.setItem(
-        "nexaCurrentUser",
+        "nexavestCurrentUser",
         email
     );
 
-    /*
-       Automatically switch the interface
-       according to the selected country.
-    */
+    showLoading(function(){
 
-    applyLanguage(
-        detectCountryLanguage(country)
-    );
+        openHome(users[email]);
 
-    openDashboard(
-        users[email]
-    );
+    });
 
 }
 
 
-/* =====================================================
+/* =========================
    LOGIN
-===================================================== */
+========================= */
 
-function loginUser() {
+function loginUser(){
 
     hideError();
 
-    const email =
+    const email=
         document.getElementById("loginEmail")
         .value.trim()
         .toLowerCase();
 
-    const password =
+    const password=
         document.getElementById("loginPassword")
         .value;
 
-    const users = getUsers();
+    const users=getUsers();
 
-    if (!users[email]) {
+    if(!users[email]){
 
         showError(
-            currentLanguage === "es"
-                ? "No existe una cuenta con este correo."
-                : currentLanguage === "sw"
-                    ? "Hakuna akaunti yenye barua pepe hii."
-                    : "No account exists with this email."
+            "No account exists with this email."
         );
 
         return;
     }
 
-    if (
-        users[email].password !== password
-    ) {
+    if(users[email].password!==password){
 
         showError(
-            currentLanguage === "es"
-                ? "Contraseña incorrecta."
-                : currentLanguage === "sw"
-                    ? "Nenosiri si sahihi."
-                    : "Incorrect password."
+            "Incorrect password."
         );
 
         return;
     }
 
     localStorage.setItem(
-        "nexaCurrentUser",
+        "nexavestCurrentUser",
         email
     );
 
-    /*
-       Detect language from the user's
-       registered country every time they log in.
-    */
+    showLoading(function(){
 
-    applyLanguage(
-        detectCountryLanguage(
-            users[email].country
-        )
-    );
+        openHome(users[email]);
 
-    openDashboard(
-        users[email]
-    );
+    });
 
 }
 
 
-/* =====================================================
-   DASHBOARD
-===================================================== */
+/* =========================
+   HOME
+========================= */
 
-function openDashboard(user) {
+function openHome(user){
 
-    document.getElementById("authSection")
-        .style.display = "none";
+    document.getElementById("authPage")
+        .classList.remove("active");
 
-    document.getElementById("dashboard")
-        .style.display = "block";
+    document.getElementById("minerPage")
+        .classList.remove("active");
+
+    document.getElementById("withdrawPage")
+        .classList.remove("active");
+
+    document.getElementById("homePage")
+        .classList.add("active");
+
+    updateHome(user);
+
+}
+
+
+function updateHome(user){
 
     document.getElementById("userName")
-        .innerText = user.name;
+        .innerText=user.name;
 
     document.getElementById("countryDisplay")
-        .innerText = user.country;
+        .innerText=user.country;
 
-    const data =
+    const data=
         countryData[user.country];
 
-    if (!data) return;
+    if(!data) return;
 
     document.getElementById("currencyDisplay")
-        .innerText =
-        data.currency +
-        " (" +
-        data.symbol +
+        .innerText=
+        data.currency+
+        " ("+
+        data.symbol+
         ")";
 
-    const localValue =
-        user.bonus * data.rate;
+    updateBonus(user);
 
-    document.getElementById("bonusAmount")
-        .innerText =
-        data.symbol +
-        formatNumber(localValue);
+    updateBonusCountdown(user);
 
-    prepareWithdrawal(user);
+    setupBanks(user.country);
 
-    startCountdown(user);
+    autoLanguage(user.country);
 
 }
 
 
-/* =====================================================
-   NUMBER FORMAT
-===================================================== */
+/* =========================
+   BONUS
+========================= */
 
-function formatNumber(number) {
+function updateBonus(user){
+
+    if(Date.now()>=user.expiresAt){
+
+        user.bonus=0;
+
+        const users=getUsers();
+
+        users[user.email]=user;
+
+        saveUsers(users);
+
+        document.getElementById("bonusAmount")
+            .innerText="$0.00";
+
+        return;
+    }
+
+    const data=
+        countryData[user.country];
+
+    const value=
+        user.bonus*data.rate;
+
+    document.getElementById("bonusAmount")
+        .innerText=
+        data.symbol+
+        formatNumber(value);
+
+}
+
+
+function formatNumber(value){
 
     return new Intl.NumberFormat(
         "en-US",
         {
-            maximumFractionDigits: 2
+            maximumFractionDigits:2
         }
-    ).format(number);
+    ).format(value);
 
 }
 
 
-/* =====================================================
-   COUNTDOWN
-===================================================== */
+/* =========================
+   BONUS COUNTDOWN
+========================= */
 
-let countdownTimer = null;
+let bonusTimer=null;
 
-function startCountdown(user) {
+function updateBonusCountdown(user){
 
-    if (countdownTimer) {
-
-        clearInterval(countdownTimer);
-
+    if(bonusTimer){
+        clearInterval(bonusTimer);
     }
 
-    function updateCountdown() {
+    function tick(){
 
-        const now =
-            Date.now();
+        const remaining=
+            user.expiresAt-Date.now();
 
-        let remaining =
-            user.expiresAt - now;
-
-        if (remaining <= 0) {
+        if(remaining<=0){
 
             document.getElementById("countdown")
-                .innerText = "00:00:00";
+                .innerText="00:00:00";
 
-            clearInterval(
-                countdownTimer
-            );
+            user.bonus=0;
+
+            const users=getUsers();
+
+            users[user.email]=user;
+
+            saveUsers(users);
+
+            document.getElementById("bonusAmount")
+                .innerText="$0.00";
+
+            clearInterval(bonusTimer);
 
             return;
         }
 
-        const totalSeconds =
+        const seconds=
+            Math.floor(remaining/1000);
+
+        const h=
+            Math.floor(seconds/3600);
+
+        const m=
             Math.floor(
-                remaining / 1000
+                (seconds%3600)/60
             );
 
-        const hours =
-            Math.floor(
-                totalSeconds / 3600
-            );
-
-        const minutes =
-            Math.floor(
-                (totalSeconds % 3600) / 60
-            );
-
-        const seconds =
-            totalSeconds % 60;
+        const s=
+            seconds%60;
 
         document.getElementById("countdown")
-            .innerText =
-            String(hours).padStart(2, "0") +
-            ":" +
-            String(minutes).padStart(2, "0") +
-            ":" +
-            String(seconds).padStart(2, "0");
+            .innerText=
+            String(h).padStart(2,"0")+
+            ":"+
+            String(m).padStart(2,"0")+
+            ":"+
+            String(s).padStart(2,"0");
+
+        updateBonus(user);
 
     }
 
-    updateCountdown();
+    tick();
 
-    countdownTimer =
-        setInterval(
-            updateCountdown,
-            1000
-        );
+    bonusTimer=
+        setInterval(tick,1000);
 
 }
 
 
-/* =====================================================
-   WITHDRAWAL PREPARATION
-===================================================== */
+/* =========================
+   BANKS
+========================= */
 
-function prepareWithdrawal(user) {
+function setupBanks(country){
 
-    const data =
-        countryData[user.country];
+    const data=
+        countryData[country];
 
-    if (!data) return;
-
-    const bankSelect =
+    const select=
         document.getElementById("bankSelect");
 
-    bankSelect.innerHTML = "";
+    select.innerHTML="";
 
-    const language =
-        currentLanguage;
+    if(!data) return;
 
-    const firstOption =
-        document.createElement("option");
+    data.banks.forEach(function(bank){
 
-    firstOption.value = "";
+        const option=
+            document.createElement("option");
 
-    firstOption.innerText =
-        language === "es"
-            ? "Selecciona tu banco"
-            : language === "sw"
-                ? "Chagua benki yako"
-                : "Select your bank";
+        option.value=bank;
+        option.innerText=bank;
 
-    bankSelect.appendChild(
-        firstOption
-    );
+        select.appendChild(option);
 
-    data.banks.forEach(
-        function(bank) {
-
-            const option =
-                document.createElement("option");
-
-            option.value = bank;
-
-            option.innerText = bank;
-
-            bankSelect.appendChild(
-                option
-            );
-
-        }
-    );
-
-
-    const currencySelect =
-        document.getElementById(
-            "withdrawCurrency"
-        );
-
-    currencySelect.innerHTML = "";
-
-    const currencyOption =
-        document.createElement("option");
-
-    currencyOption.value =
-        data.currency;
-
-    currencyOption.innerText =
-        data.currency +
-        " (" +
-        data.symbol +
-        ")";
-
-    currencySelect.appendChild(
-        currencyOption
-    );
-
-
-    document.getElementById(
-        "summaryCountryValue"
-    ).innerText =
-        user.country;
+    });
 
 }
 
 
-/* =====================================================
-   OPEN WITHDRAWAL FORM
-===================================================== */
+/* =========================
+   MINER
+========================= */
 
-function openWithdrawalForm() {
+const MINER_DURATION=
+    48*60*60*1000;
 
-    const form =
-        document.getElementById(
-            "withdrawForm"
-        );
+let minerTimer=null;
 
-    form.classList.toggle("show");
+
+function proofSelected(){
+
+    const input=
+        document.getElementById("proofFile");
+
+    const button=
+        document.getElementById("minerStartButton");
+
+    const name=
+        document.getElementById("fileName");
+
+    if(!input.files.length){
+
+        button.disabled=true;
+
+        button.innerText=
+            "Upload proof to continue";
+
+        name.innerText="";
+
+        return;
+    }
+
+    const file=input.files[0];
+
+    if(!file.type.startsWith("image/")){
+
+        input.value="";
+
+        button.disabled=true;
+
+        name.innerText=
+            "Please select an image.";
+
+        return;
+    }
+
+    name.innerText=
+        "Selected: "+file.name;
+
+    button.disabled=false;
+
+    button.innerText=
+        "Start Miner";
 
 }
 
 
-/* =====================================================
-   BANK SUMMARY
-===================================================== */
+function startMiner(){
 
-document.addEventListener(
-    "change",
-    function(event) {
+    const input=
+        document.getElementById("proofFile");
 
-        if (
-            event.target.id ===
-            "bankSelect"
-        ) {
+    if(!input.files.length) return;
 
-            document.getElementById(
-                "summaryBankValue"
-            ).innerText =
-                event.target.value ||
-                "-";
+    const user=currentUser();
 
-        }
+    if(!user) return;
+
+    if(!user.miner){
+
+        user.miner={
+            started:false,
+            finished:false,
+            proofSelected:false,
+            startTime:null,
+            endTime:null
+        };
 
     }
-);
+
+    if(user.miner.started) return;
+
+    user.miner.proofSelected=true;
+    user.miner.started=true;
+    user.miner.finished=false;
+    user.miner.startTime=Date.now();
+    user.miner.endTime=
+        Date.now()+MINER_DURATION;
+
+    const users=getUsers();
+
+    users[user.email]=user;
+
+    saveUsers(users);
+
+    setupMiner(user);
+
+}
 
 
-/* =====================================================
-   SUBMIT WITHDRAWAL
-===================================================== */
+function setupMiner(user){
 
-function submitWithdrawal() {
+    if(!user.miner){
 
-    const bank =
-        document.getElementById(
-            "bankSelect"
-        ).value;
+        user.miner={
+            started:false,
+            finished:false,
+            proofSelected:false,
+            startTime:null,
+            endTime:null
+        };
 
-    const holder =
-        document.getElementById(
-            "accountHolder"
-        ).value.trim();
+    }
 
-    const accountNumber =
-        document.getElementById(
-            "accountNumber"
-        ).value.trim();
+    const status=
+        document.getElementById("minerStatus");
 
-    const accountType =
-        document.getElementById(
-            "accountType"
-        ).value;
+    const button=
+        document.getElementById("minerStartButton");
 
-    const currency =
-        document.getElementById(
-            "withdrawCurrency"
-        ).value;
+    const message=
+        document.getElementById("minerMessage");
 
-    const amount =
-        document.getElementById(
-            "withdrawAmount"
-        ).value;
+    if(user.miner.finished){
 
-    if (
+        status.innerText="Finished";
+        status.className=
+            "miner-status finished";
+
+        button.disabled=true;
+        button.innerText=
+            "Mining Completed";
+
+        message.innerText=
+            "The 48-hour mining period has ended.";
+
+        updateMinerDisplay(user);
+
+        return;
+    }
+
+    if(user.miner.started){
+
+        status.innerText="Mining";
+        status.className=
+            "miner-status active";
+
+        button.disabled=true;
+        button.innerText=
+            "Miner Active";
+
+        message.innerText=
+            "Mining is currently active.";
+
+        updateMinerDisplay(user);
+
+        startMinerTimer();
+
+        return;
+    }
+
+    status.innerText="Inactive";
+    status.className=
+        "miner-status";
+
+    button.disabled=
+        !user.miner.proofSelected;
+
+    button.innerText=
+        user.miner.proofSelected
+        ? "Start Miner"
+        : "Upload proof to continue";
+
+    updateMinerDisplay(user);
+
+}
+
+
+function startMinerTimer(){
+
+    if(minerTimer){
+        clearInterval(minerTimer);
+    }
+
+    function tick(){
+
+        const user=currentUser();
+
+        if(!user || !user.miner.started){
+            return;
+        }
+
+        const remaining=
+            user.miner.endTime-Date.now();
+
+        if(remaining<=0){
+
+            user.miner.finished=true;
+            user.miner.started=false;
+
+            const users=getUsers();
+
+            users[user.email]=user;
+
+            saveUsers(users);
+
+            clearInterval(minerTimer);
+
+            setupMiner(user);
+
+            return;
+        }
+
+        updateMinerDisplay(user);
+
+    }
+
+    tick();
+
+    minerTimer=
+        setInterval(tick,1000);
+
+}
+
+
+function updateMinerDisplay(user){
+
+    const time=
+        document.getElementById("minerTime");
+
+    const progress=
+        document.getElementById("minerProgress");
+
+    const percent=
+        document.getElementById("minerPercent");
+
+    if(!user.miner.started){
+
+        if(user.miner.finished){
+
+            time.innerText="00:00:00";
+            progress.style.width="100%";
+            percent.innerText="100%";
+
+        }else{
+
+            time.innerText="48:00:00";
+            progress.style.width="0%";
+            percent.innerText="0%";
+
+        }
+
+        return;
+    }
+
+    const remaining=
+        Math.max(
+            0,
+            user.miner.endTime-Date.now()
+        );
+
+    const elapsed=
+        MINER_DURATION-remaining;
+
+    let p=
+        elapsed/MINER_DURATION*100;
+
+    p=Math.max(0,Math.min(100,p));
+
+    const seconds=
+        Math.floor(remaining/1000);
+
+    const h=
+        Math.floor(seconds/3600);
+
+    const m=
+        Math.floor(
+            (seconds%3600)/60
+        );
+
+    const s=
+        seconds%60;
+
+    time.innerText=
+        String(h).padStart(2,"0")+
+        ":"+
+        String(m).padStart(2,"0")+
+        ":"+
+        String(s).padStart(2,"0");
+
+    progress.style.width=p+"%";
+
+    percent.innerText=
+        Math.floor(p)+"%";
+
+}
+
+
+/* =========================
+   WITHDRAWAL
+========================= */
+
+function submitWithdrawal(){
+
+    const bank=
+        document.getElementById("bankSelect")
+        .value;
+
+    const accountNumber=
+        document.getElementById("accountNumber")
+        .value.trim();
+
+    const holder=
+        document.getElementById("accountHolder")
+        .value.trim();
+
+    const type=
+        document.querySelector(
+            'input[name="accountType"]:checked'
+        );
+
+    if(
         !bank ||
-        !holder ||
         !accountNumber ||
-        !accountType ||
-        !currency ||
-        !amount
-    ) {
+        !holder ||
+        !type
+    ){
 
-        showError(
-            currentLanguage === "es"
-                ? "Completa todos los datos de retiro."
-                : currentLanguage === "sw"
-                    ? "Jaza taarifa zote za kutoa fedha."
-                    : "Please complete all withdrawal details."
+        alert(
+            "Please complete all withdrawal information."
         );
 
         return;
     }
 
-    hideError();
+    showLoading(function(){
 
-    const message =
-        document.getElementById(
-            "withdrawMessage"
-        );
+        document.getElementById("withdrawModal")
+            .classList.add("show");
 
-    message.innerText =
-        languageData[
-            currentLanguage
-        ].submitted;
-
-    message.style.display =
-        "block";
+    });
 
 }
 
 
-/* =====================================================
-   LOGOUT
-===================================================== */
+function closeWithdrawalModal(){
 
-function logoutUser() {
+    document.getElementById("withdrawModal")
+        .classList.remove("show");
 
-    localStorage.removeItem(
-        "nexaCurrentUser"
-    );
+}
 
-    if (countdownTimer) {
 
-        clearInterval(
-            countdownTimer
+/* =========================
+   LANGUAGE
+========================= */
+
+function autoLanguage(country){
+
+    const data=
+        countryData[country];
+
+    if(!data) return;
+
+    const language=
+        document.getElementById(
+            "languageSelect"
         );
+
+    language.value=
+        data.language==="es"
+        ? "es"
+        : "en";
+
+}
+
+
+function changeLanguage(){
+
+    const language=
+        document.getElementById(
+            "languageSelect"
+        ).value;
+
+    if(language==="es"){
+
+        document.getElementById("loginTab")
+            .innerText="Iniciar sesión";
+
+        document.getElementById("registerTab")
+            .innerText="Registrarse";
+
+    }else{
+
+        document.getElementById("loginTab")
+            .innerText="Login";
+
+        document.getElementById("registerTab")
+            .innerText="Register";
 
     }
 
-    document.getElementById("dashboard")
-        .style.display = "none";
+}
 
-    document.getElementById("authSection")
-        .style.display = "block";
 
-    document.getElementById("withdrawForm")
-        .classList.remove("show");
+/* =========================
+   LOGOUT
+========================= */
 
-    showLogin();
+function logoutUser(){
+
+    localStorage.removeItem(
+        "nexavestCurrentUser"
+    );
+
+    if(bonusTimer){
+        clearInterval(bonusTimer);
+    }
+
+    if(minerTimer){
+        clearInterval(minerTimer);
+    }
+
+    showLoading(function(){
+
+        document.querySelectorAll(".page")
+            .forEach(function(page){
+
+                page.classList.remove("active");
+
+            });
+
+        document.getElementById("authPage")
+            .classList.add("active");
+
+        showLogin();
+
+    });
 
 }
 
 
-/* =====================================================
+/* =========================
    AUTO LOGIN
-===================================================== */
+========================= */
 
 window.addEventListener(
     "DOMContentLoaded",
-    function() {
+    function(){
 
-        const currentUser =
+        const email=
             localStorage.getItem(
-                "nexaCurrentUser"
+                "nexavestCurrentUser"
             );
 
-        if (!currentUser) {
+        if(!email) return;
 
-            applyLanguage("es");
+        const users=getUsers();
 
-            return;
-
-        }
-
-        const users =
-            getUsers();
-
-        if (!users[currentUser]) {
+        if(!users[email]){
 
             localStorage.removeItem(
-                "nexaCurrentUser"
+                "nexavestCurrentUser"
             );
 
-            applyLanguage("es");
-
             return;
-
         }
 
-        const user =
-            users[currentUser];
-
-        /*
-           Automatically detect language
-           from the registered country.
-        */
-
-        applyLanguage(
-            detectCountryLanguage(
-                user.country
-            )
-        );
-
-        openDashboard(user);
+        openHome(users[email]);
 
     }
 );
