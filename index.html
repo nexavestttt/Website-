@@ -1336,6 +1336,13 @@ td{
       <span id="mobileHistory">History</span>
     </button>
 
+    <!-- ADDED: MOBILE SETTINGS -->
+    <button data-page="settings">
+      ⚙️
+      <br>
+      <span id="mobileSettings">Settings</span>
+    </button>
+
   </nav>
 
 </div>
@@ -1403,11 +1410,6 @@ let withdrawalInterval = null;
 
 /* =========================================================
    CURRENCIES
-   =========================================================
-
-   Internal amounts remain in USD.
-   These rates are display conversion rates only.
-   Change them whenever you want to use updated rates.
    ========================================================= */
 
 const countryCurrency = {
@@ -2199,21 +2201,18 @@ document
 const translations = {
 
   en:{
-
     dashboard:"Dashboard",
     miner:"BTC Miner",
     bonus:"Bonus",
     withdrawal:"Withdrawal",
     history:"History",
     settings:"Settings",
-
     welcome:"Welcome back to NexaVest",
     manageMining:"Manage your mining cycle",
     registrationBonus:"Your registration bonus",
     withdrawAvailable:"Withdraw your available balance",
     transactionHistory:"View your transaction history",
     accountPreferences:"Manage your account preferences",
-
     authRegisterSubtitle:"Create your account to continue",
     authLoginSubtitle:"Login to your NexaVest account",
     fullName:"Full Name",
@@ -2229,7 +2228,6 @@ const translations = {
     register:"Register",
     alreadyAccount:"Already have an account?",
     noAccount:"Don't have an account?",
-
     accountBalance:"Account Balance",
     bonusBalance:"Bonus Balance",
     miningEarnings:"Mining Earnings",
@@ -2239,7 +2237,6 @@ const translations = {
     miningStatus:"Mining Status",
     notRunning:"Not Running",
     miningActive:"Mining Active",
-
     btcMiner:"BTC Miner",
     start48:"Start a 48-hour mining cycle",
     minerWarning:"Once mining starts, the selected amount, uploaded proof and Start Mining button remain locked for the full 48-hour mining cycle.",
@@ -2252,11 +2249,9 @@ const translations = {
     minimumMining:"Minimum $25",
     miningLocked:"Mining is active. Your mining settings are locked until the 48-hour cycle is complete.",
     proof:"Proof:",
-
     bonusSubtitle:"Your registration bonus",
     nextBonus:"Next bonus refresh",
     withdrawBonus:"Withdraw Bonus",
-
     enterWithdrawal:"Enter your withdrawal details",
     withdrawalSource:"Withdrawal Source",
     minerAccount:"Miner / Account Balance",
@@ -2272,7 +2267,6 @@ const translations = {
     withdrawalFee:"Withdrawal Fee",
     netAmount:"Net Amount",
     submitWithdrawal:"Submit Withdrawal",
-
     noTransactions:"No transactions yet.",
     id:"ID",
     date:"Date",
@@ -2282,16 +2276,13 @@ const translations = {
     status:"Status",
     action:"Action",
     view:"View",
-
     settingsSubtitle:"Select your preferred language",
     logout:"Logout",
-
     transactionRecord:"Transaction Record",
     close:"Close",
     type:"Type",
     source:"Source",
     approved:"Approved",
-
     completeRegistration:"Please complete all registration fields.",
     incorrectLogin:"Incorrect email or password.",
     accountCreated:"Account created successfully.",
@@ -2306,21 +2297,18 @@ const translations = {
   },
 
   es:{
-
     dashboard:"Panel",
     miner:"Minero BTC",
     bonus:"Bono",
     withdrawal:"Retiro",
     history:"Historial",
     settings:"Configuración",
-
     welcome:"Bienvenido de nuevo a NexaVest",
     manageMining:"Administra tu ciclo de minería",
     registrationBonus:"Tu bono de registro",
     withdrawAvailable:"Retira tu saldo disponible",
     transactionHistory:"Consulta tu historial de transacciones",
     accountPreferences:"Administra las preferencias de tu cuenta",
-
     authRegisterSubtitle:"Crea tu cuenta para continuar",
     authLoginSubtitle:"Inicia sesión en tu cuenta NexaVest",
     fullName:"Nombre completo",
@@ -2336,7 +2324,6 @@ const translations = {
     register:"Registrarse",
     alreadyAccount:"¿Ya tienes una cuenta?",
     noAccount:"¿No tienes una cuenta?",
-
     accountBalance:"Saldo de la cuenta",
     bonusBalance:"Saldo del bono",
     miningEarnings:"Ganancias de minería",
@@ -2346,7 +2333,6 @@ const translations = {
     miningStatus:"Estado de minería",
     notRunning:"No activo",
     miningActive:"Minería activa",
-
     btcMiner:"Minero BTC",
     start48:"Inicia un ciclo de minería de 48 horas",
     minerWarning:"Una vez iniciada la minería, el monto seleccionado, la prueba cargada y el botón de inicio permanecerán bloqueados durante las 48 horas.",
@@ -2359,11 +2345,9 @@ const translations = {
     minimumMining:"Mínimo $25",
     miningLocked:"La minería está activa. La configuración está bloqueada hasta completar el ciclo de 48 horas.",
     proof:"Comprobante:",
-
     bonusSubtitle:"Tu bono de registro",
     nextBonus:"Próxima actualización del bono",
     withdrawBonus:"Retirar bono",
-
     enterWithdrawal:"Ingresa los datos de retiro",
     withdrawalSource:"Fuente del retiro",
     minerAccount:"Minero / Saldo de cuenta",
@@ -2379,7 +2363,6 @@ const translations = {
     withdrawalFee:"Comisión de retiro",
     netAmount:"Monto neto",
     submitWithdrawal:"Enviar retiro",
-
     noTransactions:"No hay transacciones todavía.",
     id:"ID",
     date:"Fecha",
@@ -2389,16 +2372,13 @@ const translations = {
     status:"Estado",
     action:"Acción",
     view:"Ver",
-
     settingsSubtitle:"Selecciona tu idioma preferido",
     logout:"Cerrar sesión",
-
     transactionRecord:"Registro de transacción",
     close:"Cerrar",
     type:"Tipo",
     source:"Fuente",
     approved:"Aprobado",
-
     completeRegistration:"Completa todos los campos de registro.",
     incorrectLogin:"Correo o contraseña incorrectos.",
     accountCreated:"Cuenta creada correctamente.",
@@ -2413,21 +2393,18 @@ const translations = {
   },
 
   pt:{
-
     dashboard:"Painel",
     miner:"Minerador BTC",
     bonus:"Bônus",
     withdrawal:"Saque",
     history:"Histórico",
     settings:"Configurações",
-
     welcome:"Bem-vindo de volta à NexaVest",
     manageMining:"Gerencie seu ciclo de mineração",
     registrationBonus:"Seu bônus de registro",
     withdrawAvailable:"Saque seu saldo disponível",
     transactionHistory:"Veja seu histórico de transações",
     accountPreferences:"Gerencie as preferências da sua conta",
-
     authRegisterSubtitle:"Crie sua conta para continuar",
     authLoginSubtitle:"Entre na sua conta NexaVest",
     fullName:"Nome completo",
@@ -2443,7 +2420,6 @@ const translations = {
     register:"Registrar",
     alreadyAccount:"Já possui uma conta?",
     noAccount:"Não possui uma conta?",
-
     accountBalance:"Saldo da conta",
     bonusBalance:"Saldo do bônus",
     miningEarnings:"Ganhos de mineração",
@@ -2453,7 +2429,6 @@ const translations = {
     miningStatus:"Status da mineração",
     notRunning:"Não ativo",
     miningActive:"Mineração ativa",
-
     btcMiner:"Minerador BTC",
     start48:"Inicie um ciclo de mineração de 48 horas",
     minerWarning:"Depois que a mineração começar, o valor selecionado, a prova enviada e o botão de início ficarão bloqueados durante as 48 horas.",
@@ -2466,11 +2441,9 @@ const translations = {
     minimumMining:"Mínimo $25",
     miningLocked:"A mineração está ativa. As configurações estão bloqueadas até o fim do ciclo de 48 horas.",
     proof:"Comprovante:",
-
     bonusSubtitle:"Seu bônus de registro",
     nextBonus:"Próxima atualização do bônus",
     withdrawBonus:"Sacar bônus",
-
     enterWithdrawal:"Insira os dados do saque",
     withdrawalSource:"Origem do saque",
     minerAccount:"Minerador / Saldo da conta",
@@ -2486,7 +2459,6 @@ const translations = {
     withdrawalFee:"Taxa de saque",
     netAmount:"Valor líquido",
     submitWithdrawal:"Enviar saque",
-
     noTransactions:"Nenhuma transação ainda.",
     id:"ID",
     date:"Data",
@@ -2496,16 +2468,13 @@ const translations = {
     status:"Status",
     action:"Ação",
     view:"Ver",
-
     settingsSubtitle:"Selecione seu idioma preferido",
     logout:"Sair",
-
     transactionRecord:"Registro da transação",
     close:"Fechar",
     type:"Tipo",
     source:"Origem",
     approved:"Aprovado",
-
     completeRegistration:"Preencha todos os campos de registro.",
     incorrectLogin:"E-mail ou senha incorretos.",
     accountCreated:"Conta criada com sucesso.",
@@ -2520,21 +2489,18 @@ const translations = {
   },
 
   fr:{
-
     dashboard:"Tableau de bord",
     miner:"Mineur BTC",
     bonus:"Bonus",
     withdrawal:"Retrait",
     history:"Historique",
     settings:"Paramètres",
-
     welcome:"Bon retour sur NexaVest",
     manageMining:"Gérez votre cycle de minage",
     registrationBonus:"Votre bonus d'inscription",
     withdrawAvailable:"Retirez votre solde disponible",
     transactionHistory:"Consultez votre historique de transactions",
     accountPreferences:"Gérez les préférences de votre compte",
-
     authRegisterSubtitle:"Créez votre compte pour continuer",
     authLoginSubtitle:"Connectez-vous à votre compte NexaVest",
     fullName:"Nom complet",
@@ -2550,7 +2516,6 @@ const translations = {
     register:"S'inscrire",
     alreadyAccount:"Vous avez déjà un compte ?",
     noAccount:"Vous n'avez pas de compte ?",
-
     accountBalance:"Solde du compte",
     bonusBalance:"Solde du bonus",
     miningEarnings:"Gains de minage",
@@ -2560,7 +2525,6 @@ const translations = {
     miningStatus:"État du minage",
     notRunning:"Inactif",
     miningActive:"Minage actif",
-
     btcMiner:"Mineur BTC",
     start48:"Démarrer un cycle de minage de 48 heures",
     minerWarning:"Une fois le minage commencé, le montant sélectionné, la preuve téléchargée et le bouton de démarrage resteront verrouillés pendant les 48 heures.",
@@ -2573,11 +2537,9 @@ const translations = {
     minimumMining:"Minimum $25",
     miningLocked:"Le minage est actif. Les paramètres sont verrouillés jusqu'à la fin du cycle de 48 heures.",
     proof:"Preuve :",
-
     bonusSubtitle:"Votre bonus d'inscription",
     nextBonus:"Prochaine actualisation du bonus",
     withdrawBonus:"Retirer le bonus",
-
     enterWithdrawal:"Saisissez vos informations de retrait",
     withdrawalSource:"Source du retrait",
     minerAccount:"Mineur / Solde du compte",
@@ -2593,7 +2555,6 @@ const translations = {
     withdrawalFee:"Frais de retrait",
     netAmount:"Montant net",
     submitWithdrawal:"Envoyer le retrait",
-
     noTransactions:"Aucune transaction pour le moment.",
     id:"ID",
     date:"Date",
@@ -2603,16 +2564,13 @@ const translations = {
     status:"Statut",
     action:"Action",
     view:"Voir",
-
     settingsSubtitle:"Sélectionnez votre langue préférée",
     logout:"Déconnexion",
-
     transactionRecord:"Enregistrement de transaction",
     close:"Fermer",
     type:"Type",
     source:"Source",
     approved:"Approuvé",
-
     completeRegistration:"Veuillez remplir tous les champs d'inscription.",
     incorrectLogin:"E-mail ou mot de passe incorrect.",
     accountCreated:"Compte créé avec succès.",
@@ -2713,6 +2671,9 @@ function applyLanguage(lang){
   setText("mobileBonus","bonus");
   setText("mobileWithdraw","withdrawal");
   setText("mobileHistory","history");
+
+  /* ADDED: MOBILE SETTINGS TRANSLATION */
+  setText("mobileSettings","settings");
 
   setText("labelFullName","fullName");
   setText("labelEmail","email");
