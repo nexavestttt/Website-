@@ -6,53 +6,326 @@
 <title>Nexavest</title>
 
 <style>
+:root{
+    --bg:#07111f;
+    --panel:#0d1a2b;
+    --panel2:#111f32;
+    --border:rgba(255,255,255,.08);
+    --text:#f5f7fb;
+    --muted:#91a0b5;
+    --green:#27d17f;
+    --green2:#19a866;
+    --blue:#4d8dff;
+    --yellow:#f5c451;
+    --red:#ff5f68;
+    --shadow:0 18px 50px rgba(0,0,0,.28);
+}
+
 *{
     box-sizing:border-box;
     margin:0;
     padding:0;
-    font-family:Arial,Helvetica,sans-serif;
 }
 
 body{
-    background:#f5f7fa;
-    color:#172033;
+    font-family:Inter,Arial,sans-serif;
+    background:
+        radial-gradient(circle at top right,rgba(45,104,255,.12),transparent 30%),
+        radial-gradient(circle at bottom left,rgba(39,209,127,.08),transparent 28%),
+        var(--bg);
+    color:var(--text);
+    min-height:100vh;
 }
 
 button,input,select{
     font:inherit;
 }
 
-.header{
-    height:64px;
-    background:#fff;
-    border-bottom:1px solid #e7eaf0;
+button{
+    cursor:pointer;
+}
+
+.hidden{
+    display:none!important;
+}
+
+/* =========================
+   LOADING
+========================= */
+
+#loadingScreen{
+    position:fixed;
+    inset:0;
+    background:rgba(4,10,18,.96);
+    z-index:9999;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.loaderBox{
+    text-align:center;
+}
+
+.spinner{
+    width:46px;
+    height:46px;
+    border:3px solid rgba(255,255,255,.12);
+    border-top-color:var(--green);
+    border-radius:50%;
+    animation:spin 1s linear infinite;
+    margin:auto auto 18px;
+}
+
+@keyframes spin{
+    to{transform:rotate(360deg)}
+}
+
+.loaderBox p{
+    color:var(--muted);
+    font-size:14px;
+}
+
+/* =========================
+   AUTH
+========================= */
+
+.authPage{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+}
+
+.authWrapper{
+    width:100%;
+    max-width:430px;
+}
+
+.brand{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.brandLogo{
+    font-size:32px;
+    font-weight:900;
+    letter-spacing:-1.5px;
+}
+
+.brandLogo span{
+    color:var(--green);
+}
+
+.brand p{
+    color:var(--muted);
+    margin-top:7px;
+    font-size:14px;
+}
+
+.authCard{
+    background:rgba(13,26,43,.94);
+    border:1px solid var(--border);
+    border-radius:24px;
+    padding:28px;
+    box-shadow:var(--shadow);
+    backdrop-filter:blur(15px);
+}
+
+.tabs{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    background:#081321;
+    border-radius:12px;
+    padding:4px;
+    margin-bottom:25px;
+}
+
+.tab{
+    border:0;
+    background:transparent;
+    color:var(--muted);
+    padding:12px;
+    border-radius:9px;
+    font-weight:700;
+}
+
+.tab.active{
+    background:var(--panel2);
+    color:white;
+}
+
+.formGroup{
+    margin-bottom:16px;
+}
+
+.formGroup label{
+    display:block;
+    font-size:13px;
+    color:#b6c1d1;
+    margin-bottom:7px;
+}
+
+.formGroup input,
+.formGroup select{
+    width:100%;
+    border:1px solid var(--border);
+    background:#081321;
+    color:white;
+    padding:13px 14px;
+    border-radius:11px;
+    outline:none;
+}
+
+.formGroup input:focus,
+.formGroup select:focus{
+    border-color:rgba(39,209,127,.6);
+}
+
+.primaryBtn{
+    width:100%;
+    border:0;
+    background:linear-gradient(135deg,var(--green),var(--green2));
+    color:#03140c;
+    font-weight:900;
+    padding:14px;
+    border-radius:11px;
+    margin-top:5px;
+}
+
+.secondaryBtn{
+    border:1px solid var(--border);
+    background:var(--panel2);
+    color:white;
+    padding:12px 15px;
+    border-radius:10px;
+    font-weight:700;
+}
+
+/* =========================
+   APP
+========================= */
+
+.app{
+    min-height:100vh;
+}
+
+.topbar{
+    height:72px;
+    border-bottom:1px solid var(--border);
+    background:rgba(7,17,31,.88);
+    backdrop-filter:blur(18px);
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+.topbarInner{
+    max-width:1400px;
+    margin:auto;
+    height:100%;
+    padding:0 22px;
     display:flex;
     align-items:center;
     justify-content:space-between;
-    padding:0 20px;
-    position:sticky;
-    top:0;
-    z-index:50;
 }
 
 .logo{
-    font-size:22px;
+    font-size:24px;
+    font-weight:900;
+    letter-spacing:-1px;
+}
+
+.logo span{
+    color:var(--green);
+}
+
+.topActions{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.iconBtn{
+    width:40px;
+    height:40px;
+    border:1px solid var(--border);
+    background:var(--panel);
+    color:white;
+    border-radius:10px;
+}
+
+.profile{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding-left:8px;
+}
+
+.avatar{
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(135deg,var(--green),var(--blue));
+    color:#06111d;
+    font-weight:900;
+}
+
+.profileName{
+    font-size:13px;
     font-weight:800;
-    color:#0b5cff;
 }
 
-.lang{
-    border:1px solid #dce1e8;
-    border-radius:8px;
-    padding:8px 10px;
-    background:#fff;
-}
+/* =========================
+   LAYOUT
+========================= */
 
-.container{
-    width:100%;
-    max-width:480px;
+.layout{
+    max-width:1400px;
     margin:auto;
-    padding:20px 15px 40px;
+    display:grid;
+    grid-template-columns:230px 1fr;
+    min-height:calc(100vh - 72px);
+}
+
+.sidebar{
+    border-right:1px solid var(--border);
+    padding:22px 14px;
+}
+
+.navLabel{
+    color:#64748b;
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:1.5px;
+    padding:10px 12px;
+}
+
+.navItem{
+    width:100%;
+    border:0;
+    background:transparent;
+    color:#92a1b5;
+    padding:13px 12px;
+    border-radius:10px;
+    text-align:left;
+    margin-bottom:3px;
+    font-weight:700;
+}
+
+.navItem:hover,
+.navItem.active{
+    color:white;
+    background:var(--panel);
+}
+
+.main{
+    padding:28px;
+    min-width:0;
 }
 
 .page{
@@ -63,595 +336,509 @@ button,input,select{
     display:block;
 }
 
-.card{
-    background:#fff;
-    border-radius:16px;
-    padding:21px;
-    box-shadow:0 4px 20px rgba(0,0,0,.05);
-    margin-top:15px;
-}
-
-.auth-card{
-    margin-top:25px;
-}
-
-.tabs{
-    display:flex;
-    background:#f0f3f7;
-    border-radius:10px;
-    padding:4px;
-    margin-bottom:22px;
-}
-
-.tab{
-    width:50%;
-    border:0;
-    padding:11px;
-    border-radius:8px;
-    background:transparent;
-    cursor:pointer;
-    color:#667085;
-    font-weight:600;
-}
-
-.tab.active{
-    background:#fff;
-    color:#0b5cff;
-    box-shadow:0 2px 7px rgba(0,0,0,.06);
-}
-
-.auth-title{
-    font-size:27px;
-    margin-bottom:7px;
-}
-
-.subtitle{
-    color:#687386;
-    font-size:14px;
-    line-height:1.5;
-    margin-bottom:22px;
-}
-
-.form-group{
-    margin-bottom:15px;
-}
-
-.form-group label{
-    display:block;
-    font-size:13px;
-    font-weight:600;
-    margin-bottom:7px;
-}
-
-input,
-select{
-    width:100%;
-    border:1px solid #dce1e8;
-    border-radius:9px;
-    padding:13px;
-    outline:none;
-    background:#fff;
-}
-
-input:focus,
-select:focus{
-    border-color:#0b5cff;
-}
-
-.primary-btn{
-    width:100%;
-    border:0;
-    border-radius:9px;
-    padding:14px;
-    background:#0b5cff;
-    color:#fff;
-    font-weight:700;
-    cursor:pointer;
-}
-
-.primary-btn:disabled{
-    background:#b8c0cc;
-    cursor:not-allowed;
-}
-
-.secondary-btn{
-    width:100%;
-    border:1px solid #dce1e8;
-    border-radius:9px;
-    padding:13px;
-    background:#fff;
-    color:#344054;
-    font-weight:700;
-    cursor:pointer;
-}
-
-.error{
-    display:none;
-    color:#d92d20;
-    background:#fff1f0;
-    padding:10px;
-    border-radius:8px;
-    font-size:13px;
-    margin-bottom:15px;
-}
-
-/* HOME */
-
-.welcome{
-    margin:12px 2px 18px;
-}
-
-.welcome h2{
-    font-size:25px;
-    margin-bottom:5px;
-}
-
-.welcome p{
-    color:#697586;
-    font-size:14px;
-}
-
-.balance-card{
-    background:linear-gradient(135deg,#0b5cff,#1747b8);
-    color:#fff;
-    border-radius:18px;
-    padding:23px;
-    box-shadow:0 8px 25px rgba(11,92,255,.18);
-}
-
-.balance-label{
-    font-size:13px;
-    opacity:.85;
-    margin-bottom:8px;
-}
-
-.balance{
-    font-size:37px;
-    font-weight:800;
-    margin-bottom:10px;
-}
-
-.balance-note{
-    font-size:12px;
-    opacity:.8;
-}
-
-.info-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:12px;
-    margin-top:14px;
-}
-
-.info-card{
-    background:#fff;
-    border-radius:13px;
-    padding:16px;
-    box-shadow:0 3px 14px rgba(0,0,0,.04);
-}
-
-.info-card span{
-    display:block;
-    color:#778196;
-    font-size:12px;
-    margin-bottom:7px;
-}
-
-.info-card strong{
-    font-size:14px;
-}
-
-.countdown-card{
-    background:#fff;
-    border-radius:14px;
-    padding:18px;
-    margin-top:14px;
-    box-shadow:0 3px 14px rgba(0,0,0,.04);
-}
-
-.countdown-title{
-    color:#687386;
-    font-size:13px;
-    margin-bottom:7px;
-}
-
-.countdown{
-    font-size:29px;
-    font-weight:800;
-}
-
-.menu-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:12px;
-    margin-top:15px;
-}
-
-.menu-btn{
-    border:0;
-    border-radius:13px;
-    padding:18px 12px;
-    background:#fff;
-    box-shadow:0 3px 14px rgba(0,0,0,.05);
-    cursor:pointer;
-    text-align:left;
-}
-
-.menu-btn .icon{
-    font-size:24px;
-    margin-bottom:9px;
-}
-
-.menu-btn strong{
-    display:block;
-    font-size:14px;
-    margin-bottom:4px;
-}
-
-.menu-btn span{
-    color:#778196;
-    font-size:11px;
-}
-
-.logout{
-    width:100%;
-    margin-top:20px;
-    background:#fff;
-    border:1px solid #dce1e8;
-    padding:13px;
-    border-radius:9px;
-    cursor:pointer;
-    color:#344054;
-    font-weight:600;
-}
-
-/* INNER PAGES */
-
-.page-title{
-    margin:10px 2px 5px;
-    font-size:25px;
-}
-
-.page-subtitle{
-    margin:0 2px 18px;
-    color:#697586;
-    font-size:14px;
-}
-
-.back-btn{
-    border:0;
-    background:transparent;
-    color:#0b5cff;
-    font-weight:700;
-    cursor:pointer;
-    padding:5px 0;
-    margin-bottom:8px;
-}
-
-/* MINER */
-
-.miner-status{
-    display:inline-block;
-    padding:6px 10px;
-    border-radius:20px;
-    background:#f2f4f7;
-    color:#667085;
-    font-size:11px;
-    font-weight:700;
-    margin-bottom:15px;
-}
-
-.miner-status.active{
-    background:#ecfdf3;
-    color:#067647;
-}
-
-.miner-status.finished{
-    background:#f2f4f7;
-    color:#475467;
-}
-
-.stat-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-}
-
-.stat{
-    background:#f8fafc;
-    border:1px solid #eaecf0;
-    border-radius:10px;
-    padding:14px;
-}
-
-.stat span{
-    display:block;
-    color:#667085;
-    font-size:11px;
-    margin-bottom:5px;
-}
-
-.stat strong{
-    font-size:18px;
-}
-
-.miner-clock{
-    text-align:center;
-    background:#111827;
-    color:#fff;
-    border-radius:12px;
-    padding:17px;
-    margin:15px 0;
-}
-
-.miner-clock small{
-    display:block;
-    opacity:.7;
-    margin-bottom:5px;
-}
-
-.miner-time{
-    font-size:28px;
-    font-weight:800;
-    letter-spacing:1px;
-}
-
-.progress-label{
+.pageHeader{
     display:flex;
     justify-content:space-between;
+    align-items:flex-end;
+    margin-bottom:25px;
+    gap:20px;
+}
+
+.pageHeader h1{
+    font-size:28px;
+    letter-spacing:-.8px;
+}
+
+.pageHeader p{
+    color:var(--muted);
+    margin-top:5px;
+    font-size:14px;
+}
+
+/* =========================
+   DASHBOARD
+========================= */
+
+.statsGrid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.statCard{
+    background:linear-gradient(145deg,var(--panel),#0a1626);
+    border:1px solid var(--border);
+    border-radius:17px;
+    padding:20px;
+}
+
+.statTop{
+    display:flex;
+    justify-content:space-between;
+    color:var(--muted);
     font-size:12px;
-    color:#667085;
-    margin-bottom:7px;
+}
+
+.statValue{
+    font-size:25px;
+    font-weight:900;
+    margin-top:12px;
+}
+
+.statSub{
+    color:#718198;
+    font-size:11px;
+    margin-top:5px;
+}
+
+.greenText{
+    color:var(--green);
+}
+
+.blueText{
+    color:var(--blue);
+}
+
+.yellowText{
+    color:var(--yellow);
+}
+
+.dashboardGrid{
+    display:grid;
+    grid-template-columns:1.4fr .8fr;
+    gap:18px;
+    margin-top:18px;
+}
+
+.card{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:22px;
+}
+
+.cardTitle{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:18px;
+}
+
+.cardTitle h3{
+    font-size:15px;
+}
+
+.cardTitle span{
+    font-size:11px;
+    color:var(--muted);
+}
+
+.miningHero{
+    position:relative;
+    overflow:hidden;
+}
+
+.miningHero:after{
+    content:"";
+    position:absolute;
+    width:220px;
+    height:220px;
+    right:-90px;
+    top:-100px;
+    border-radius:50%;
+    background:rgba(39,209,127,.08);
+}
+
+.miningStatus{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    color:var(--green);
+    font-size:12px;
+    font-weight:800;
+}
+
+.statusDot{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:var(--green);
+    box-shadow:0 0 12px var(--green);
+}
+
+.bigBtc{
+    font-size:38px;
+    font-weight:900;
+    margin:25px 0 3px;
+    letter-spacing:-1px;
+}
+
+.bigUsd{
+    color:var(--muted);
+    font-size:14px;
 }
 
 .progress{
     height:9px;
-    background:#eaecf0;
+    background:#06101d;
     border-radius:20px;
     overflow:hidden;
+    margin-top:22px;
 }
 
-.progress-fill{
-    width:0;
+.progressBar{
     height:100%;
-    background:#0b5cff;
+    width:0%;
+    background:linear-gradient(90deg,var(--green),#75f0b0);
+    border-radius:20px;
     transition:width .4s ease;
 }
 
-.upload{
-    margin-top:18px;
-    border:1.5px dashed #cfd5df;
-    border-radius:12px;
-    padding:20px;
-    text-align:center;
-    background:#fafbfc;
-}
-
-.upload-icon{
-    font-size:28px;
-    margin-bottom:7px;
-}
-
-.upload strong{
-    display:block;
-    font-size:14px;
-    margin-bottom:5px;
-}
-
-.upload p{
-    color:#667085;
-    font-size:12px;
-    margin-bottom:13px;
-}
-
-.file-name{
-    color:#067647;
-    font-size:12px;
+.progressInfo{
+    display:flex;
+    justify-content:space-between;
     margin-top:8px;
+    font-size:11px;
+    color:var(--muted);
+}
+
+/* =========================
+   METRICS
+========================= */
+
+.metricList{
+    display:grid;
+    gap:12px;
+}
+
+.metric{
+    display:flex;
+    justify-content:space-between;
+    padding:12px 0;
+    border-bottom:1px solid var(--border);
+}
+
+.metric:last-child{
+    border-bottom:0;
+}
+
+.metric span:first-child{
+    color:var(--muted);
+    font-size:12px;
+}
+
+.metric span:last-child{
+    font-weight:800;
+    font-size:13px;
+}
+
+/* =========================
+   MINER
+========================= */
+
+.minerSetup{
+    display:grid;
+    grid-template-columns:1fr .7fr;
+    gap:18px;
+}
+
+.amountInput{
+    position:relative;
+}
+
+.amountInput span{
+    position:absolute;
+    left:14px;
+    top:13px;
+    font-weight:900;
+    color:var(--green);
+}
+
+.amountInput input{
+    padding-left:35px;
+}
+
+.targetBox{
+    margin-top:15px;
+    padding:16px;
+    border:1px solid rgba(39,209,127,.15);
+    background:rgba(39,209,127,.04);
+    border-radius:13px;
+}
+
+.targetBox small{
+    color:var(--muted);
+}
+
+.targetAmount{
+    font-size:27px;
+    font-weight:900;
+    margin-top:5px;
+}
+
+.proofArea{
+    border:1px dashed #35465d;
+    padding:22px;
+    border-radius:14px;
+    text-align:center;
+    background:#091524;
+}
+
+.proofArea input{
+    display:none;
+}
+
+.uploadBtn{
+    display:inline-block;
+    padding:11px 18px;
+    border-radius:10px;
+    background:var(--panel2);
+    border:1px solid var(--border);
+    font-weight:800;
+    font-size:13px;
+    cursor:pointer;
+}
+
+.proofStatus{
+    margin-top:12px;
+    font-size:12px;
+    color:var(--muted);
+}
+
+.minerControls{
+    display:flex;
+    gap:10px;
+    margin-top:15px;
+}
+
+.minerControls button{
+    flex:1;
+}
+
+.minerDashboard{
+    margin-top:18px;
+}
+
+.metricCards{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+}
+
+.miniMetric{
+    background:#091524;
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:15px;
+}
+
+.miniMetric small{
+    color:var(--muted);
+    display:block;
+}
+
+.miniMetric strong{
+    display:block;
+    font-size:19px;
+    margin-top:7px;
+}
+
+.workerTable{
+    width:100%;
+    border-collapse:collapse;
+}
+
+.workerTable th,
+.workerTable td{
+    text-align:left;
+    padding:13px 8px;
+    border-bottom:1px solid var(--border);
+    font-size:12px;
+}
+
+.workerTable th{
+    color:var(--muted);
     font-weight:600;
 }
 
-.miner-message{
-    text-align:center;
-    color:#667085;
-    font-size:12px;
-    line-height:1.5;
-    margin-top:10px;
+.online{
+    color:var(--green);
 }
 
-/* WITHDRAWAL */
-
-.fee-box{
-    background:#fff8e6;
-    border:1px solid #f3d58a;
-    border-radius:10px;
-    padding:14px;
-    margin-bottom:16px;
+.warning{
+    color:var(--yellow);
 }
 
-.fee-label{
-    color:#745b17;
-    font-size:13px;
-    margin-bottom:5px;
+/* =========================
+   WITHDRAW
+========================= */
+
+.withdrawGrid{
+    display:grid;
+    grid-template-columns:1fr .8fr;
+    gap:18px;
 }
 
-.fee{
-    font-size:25px;
-    font-weight:800;
+.withdrawSummary{
+    background:linear-gradient(145deg,#0f2136,#0b1728);
 }
 
-.withdraw-info{
-    background:#f8fafc;
-    border-radius:10px;
-    padding:13px;
-    font-size:13px;
-    color:#505b6d;
-    line-height:1.5;
-    margin-bottom:17px;
+.balanceBig{
+    font-size:38px;
+    font-weight:900;
+    margin:10px 0;
 }
 
-.account-types{
+.formGrid{
     display:grid;
     grid-template-columns:1fr 1fr;
-    gap:10px;
+    gap:14px;
 }
 
-.account-type{
-    border:1px solid #dce1e8;
-    border-radius:9px;
-    padding:12px;
-    text-align:center;
-    cursor:pointer;
-    font-size:13px;
-    font-weight:600;
-}
-
-.account-type input{
-    display:none;
-}
-
-.account-type:has(input:checked){
-    border-color:#0b5cff;
-    color:#0b5cff;
-    background:#f5f8ff;
-}
-
-.withdraw-btn{
-    width:100%;
-    border:0;
-    padding:14px;
-    border-radius:9px;
-    background:#0b5cff;
-    color:#fff;
-    font-weight:700;
-    cursor:pointer;
-}
-
-/* LOADING */
-
-.loading-screen{
-    position:fixed;
-    inset:0;
-    background:rgba(255,255,255,.97);
-    display:none;
-    align-items:center;
-    justify-content:center;
-    flex-direction:column;
-    z-index:200;
-}
-
-.loading-screen.show{
-    display:flex;
-}
-
-.loader{
-    width:43px;
-    height:43px;
-    border:4px solid #e5e7eb;
-    border-top-color:#0b5cff;
-    border-radius:50%;
-    animation:spin .8s linear infinite;
-    margin-bottom:13px;
-}
-
-.loading-text{
-    font-size:13px;
-    color:#667085;
-    font-weight:600;
-}
-
-@keyframes spin{
-    to{
-        transform:rotate(360deg);
-    }
-}
-
-/* POPUP */
+/* =========================
+   MODAL
+========================= */
 
 .modal{
     position:fixed;
     inset:0;
-    background:rgba(16,24,40,.55);
-    display:none;
+    background:rgba(0,0,0,.72);
+    z-index:3000;
+    display:flex;
     align-items:center;
     justify-content:center;
     padding:20px;
-    z-index:300;
 }
 
-.modal.show{
-    display:flex;
-}
-
-.modal-box{
+.modalBox{
     width:100%;
-    max-width:360px;
-    background:#fff;
-    border-radius:18px;
-    padding:27px 22px;
+    max-width:420px;
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:28px;
     text-align:center;
-    box-shadow:0 15px 50px rgba(0,0,0,.2);
+    box-shadow:var(--shadow);
 }
 
-.success-icon{
-    width:62px;
-    height:62px;
+.successIcon{
+    width:58px;
+    height:58px;
     border-radius:50%;
-    background:#ecfdf3;
-    color:#12b76a;
+    margin:auto auto 15px;
     display:flex;
     align-items:center;
     justify-content:center;
-    margin:0 auto 15px;
-    font-size:30px;
-    font-weight:800;
+    background:rgba(39,209,127,.12);
+    color:var(--green);
+    font-size:25px;
 }
 
-.modal-box h3{
-    font-size:21px;
-    margin-bottom:8px;
+.modalBox h2{
+    margin-bottom:9px;
 }
 
-.modal-box p{
-    color:#667085;
+.modalBox p{
+    color:var(--muted);
+    line-height:1.6;
     font-size:13px;
-    line-height:1.55;
-    margin-bottom:20px;
 }
 
-.modal-btn{
-    width:100%;
-    border:0;
-    border-radius:9px;
-    padding:13px;
-    background:#0b5cff;
-    color:#fff;
-    font-weight:700;
-    cursor:pointer;
+.modalBox button{
+    margin-top:20px;
 }
 
-.footer{
-    text-align:center;
-    color:#98a2b3;
-    font-size:11px;
-    margin-top:28px;
+/* =========================
+   MOBILE
+========================= */
+
+.mobileNav{
+    display:none;
 }
 
-.hidden{
-    display:none!important;
-}
-
-@media(max-width:400px){
-    .container{
-        padding:16px 12px 30px;
+@media(max-width:1050px){
+    .statsGrid{
+        grid-template-columns:repeat(2,1fr);
     }
 
-    .balance{
-        font-size:33px;
+    .dashboardGrid,
+    .withdrawGrid,
+    .minerSetup{
+        grid-template-columns:1fr;
     }
 
-    .miner-time{
-        font-size:25px;
+    .metricCards{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:760px){
+    .topbar{
+        height:64px;
+    }
+
+    .profileName{
+        display:none;
+    }
+
+    .layout{
+        display:block;
+    }
+
+    .sidebar{
+        display:none;
+    }
+
+    .main{
+        padding:18px 14px 85px;
+    }
+
+    .pageHeader h1{
+        font-size:23px;
+    }
+
+    .statsGrid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .statCard{
+        padding:15px;
+    }
+
+    .statValue{
+        font-size:20px;
+    }
+
+    .metricCards{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .formGrid{
+        grid-template-columns:1fr;
+    }
+
+    .mobileNav{
+        display:grid;
+        grid-template-columns:repeat(4,1fr);
+        position:fixed;
+        bottom:0;
+        left:0;
+        right:0;
+        background:rgba(7,17,31,.96);
+        border-top:1px solid var(--border);
+        z-index:200;
+    }
+
+    .mobileNav button{
+        background:transparent;
+        border:0;
+        color:#7f8da2;
+        padding:12px 4px;
+        font-size:10px;
+    }
+
+    .mobileNav button.active{
+        color:var(--green);
     }
 }
 </style>
@@ -659,659 +846,850 @@ select:focus{
 
 <body>
 
-<header class="header">
-
-    <div class="logo">Nexavest</div>
-
-    <select id="languageSelect"
-            class="lang"
-            onchange="changeLanguage()">
-        <option value="en">English</option>
-        <option value="es">Español</option>
-    </select>
-
-</header>
-
-
 <!-- LOADING -->
-
-<div id="loadingScreen" class="loading-screen">
-
-    <div class="loader"></div>
-
-    <div class="loading-text">
-        Loading Nexavest...
+<div id="loadingScreen">
+    <div class="loaderBox">
+        <div class="spinner"></div>
+        <p>Loading Nexavest...</p>
     </div>
-
 </div>
 
+<!-- AUTH -->
+<section id="authPage" class="authPage hidden">
 
-<div class="container">
+    <div class="authWrapper">
 
-
-<!-- =========================
-     AUTH PAGE
-========================= -->
-
-<section id="authPage" class="page active">
-
-    <div class="card auth-card">
-
-        <div class="tabs">
-
-            <button id="loginTab"
-                    class="tab active"
-                    onclick="showLogin()">
-                Login
-            </button>
-
-            <button id="registerTab"
-                    class="tab"
-                    onclick="showRegister()">
-                Register
-            </button>
-
+        <div class="brand">
+            <div class="brandLogo">Nexa<span>vest</span></div>
+            <p>Digital asset management dashboard</p>
         </div>
 
-        <div id="errorBox" class="error"></div>
+        <div class="authCard">
 
-
-        <!-- LOGIN -->
-
-        <div id="loginForm">
-
-            <h1 class="auth-title">
-                Welcome
-            </h1>
-
-            <p class="subtitle">
-                Sign in to access your Nexavest account.
-            </p>
-
-            <div class="form-group">
-
-                <label>
-                    Email address
-                </label>
-
-                <input
-                    type="email"
-                    id="loginEmail"
-                    placeholder="you@email.com"
-                >
-
+            <div class="tabs">
+                <button class="tab active" id="loginTab">Login</button>
+                <button class="tab" id="registerTab">Register</button>
             </div>
 
-            <div class="form-group">
+            <!-- LOGIN -->
+            <form id="loginForm">
 
-                <label>
-                    Password
-                </label>
+                <div class="formGroup">
+                    <label>Email</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
 
-                <input
-                    type="password"
-                    id="loginPassword"
-                    placeholder="Password"
-                >
+                <div class="formGroup">
+                    <label>Password</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
 
-            </div>
+                <button class="primaryBtn" type="submit">
+                    Login
+                </button>
 
-            <button class="primary-btn"
-                    onclick="loginUser()">
+            </form>
 
-                Login
+            <!-- REGISTER -->
+            <form id="registerForm" class="hidden">
 
-            </button>
+                <div class="formGroup">
+                    <label>Full Name</label>
+                    <input type="text" id="registerName" required>
+                </div>
+
+                <div class="formGroup">
+                    <label>Email</label>
+                    <input type="email" id="registerEmail" required>
+                </div>
+
+                <div class="formGroup">
+                    <label>Password</label>
+                    <input type="password" id="registerPassword" minlength="6" required>
+                </div>
+
+                <div class="formGroup">
+                    <label>Country</label>
+                    <select id="registerCountry" required></select>
+                </div>
+
+                <button class="primaryBtn" type="submit">
+                    Create Account
+                </button>
+
+            </form>
 
         </div>
-
-
-        <!-- REGISTER -->
-
-        <div id="registerForm" class="hidden">
-
-            <h1 class="auth-title">
-                Create Account
-            </h1>
-
-            <p class="subtitle">
-                Register your details to create your Nexavest account.
-            </p>
-
-            <div class="form-group">
-
-                <label>
-                    Full name
-                </label>
-
-                <input
-                    type="text"
-                    id="registerName"
-                    placeholder="Full name"
-                >
-
-            </div>
-
-            <div class="form-group">
-
-                <label>
-                    Email address
-                </label>
-
-                <input
-                    type="email"
-                    id="registerEmail"
-                    placeholder="you@email.com"
-                >
-
-            </div>
-
-            <div class="form-group">
-
-                <label>
-                    Password
-                </label>
-
-                <input
-                    type="password"
-                    id="registerPassword"
-                    placeholder="Create password"
-                >
-
-            </div>
-
-            <div class="form-group">
-
-                <label>
-                    Country
-                </label>
-
-                <select id="registerCountry">
-
-                    <option value="">
-                        Select your country
-                    </option>
-
-                    <option value="Peru">Perú</option>
-                    <option value="Ecuador">Ecuador</option>
-                    <option value="Mexico">México</option>
-                    <option value="El Salvador">El Salvador</option>
-                    <option value="Brazil">Brasil</option>
-                    <option value="Colombia">Colombia</option>
-                    <option value="Venezuela">Venezuela</option>
-                    <option value="Guatemala">Guatemala</option>
-
-                    <option value="Nigeria">Nigeria</option>
-                    <option value="South Africa">South Africa</option>
-                    <option value="Kenya">Kenya</option>
-                    <option value="Ghana">Ghana</option>
-                    <option value="Tanzania">Tanzania</option>
-                    <option value="Uganda">Uganda</option>
-                    <option value="Rwanda">Rwanda</option>
-
-                </select>
-
-            </div>
-
-            <button class="primary-btn"
-                    onclick="registerUser()">
-
-                Create Account
-
-            </button>
-
-        </div>
-
     </div>
-
 </section>
 
 
-<!-- =========================
-     HOME PAGE
-========================= -->
+<!-- APP -->
+<section id="app" class="app hidden">
 
-<section id="homePage" class="page">
+    <header class="topbar">
+        <div class="topbarInner">
 
-    <div class="welcome">
-
-        <h2>
-            Welcome, <span id="userName"></span>
-        </h2>
-
-        <p>
-            Your Nexavest account
-        </p>
-
-    </div>
-
-
-    <div class="balance-card">
-
-        <div class="balance-label">
-            Bonus Available
-        </div>
-
-        <div id="bonusAmount"
-             class="balance">
-            $0.00
-        </div>
-
-        <div class="balance-note">
-            Available balance
-        </div>
-
-    </div>
-
-
-    <div class="info-grid">
-
-        <div class="info-card">
-
-            <span>
-                Country
-            </span>
-
-            <strong id="countryDisplay">
-                -
-            </strong>
-
-        </div>
-
-        <div class="info-card">
-
-            <span>
-                Currency
-            </span>
-
-            <strong id="currencyDisplay">
-                -
-            </strong>
-
-        </div>
-
-    </div>
-
-
-    <div class="countdown-card">
-
-        <div class="countdown-title">
-            Bonus time remaining
-        </div>
-
-        <div id="countdown"
-             class="countdown">
-            15:41:55
-        </div>
-
-    </div>
-
-
-    <div class="menu-grid">
-
-        <button class="menu-btn"
-                onclick="navigateTo('minerPage')">
-
-            <div class="icon">
-                ₿
+            <div class="logo">
+                Nexa<span>vest</span>
             </div>
 
-            <strong>
+            <div class="topActions">
+
+                <button class="iconBtn">◉</button>
+
+                <div class="profile">
+                    <div class="avatar" id="avatar">N</div>
+                    <div class="profileName" id="profileName">
+                        User
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </header>
+
+
+    <div class="layout">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+
+            <div class="navLabel">Workspace</div>
+
+            <button class="navItem active" data-page="dashboardPage">
+                Dashboard
+            </button>
+
+            <button class="navItem" data-page="minerPage">
                 BTC Miner
-            </strong>
-
-            <span>
-                Open mining section
-            </span>
-
-        </button>
-
-
-        <button class="menu-btn"
-                onclick="navigateTo('withdrawPage')">
-
-            <div class="icon">
-                ⇩
-            </div>
-
-            <strong>
-                Withdrawal
-            </strong>
-
-            <span>
-                Withdrawal options
-            </span>
-
-        </button>
-
-    </div>
-
-
-    <button class="logout"
-            onclick="logoutUser()">
-
-        Logout
-
-    </button>
-
-
-    <div class="footer">
-        Nexavest
-    </div>
-
-</section>
-
-
-<!-- =========================
-     MINER PAGE
-========================= -->
-
-<section id="minerPage" class="page">
-
-    <button class="back-btn"
-            onclick="navigateTo('homePage')">
-
-        ← Back to Account
-
-    </button>
-
-    <h1 class="page-title">
-        BTC Profit Miner
-    </h1>
-
-    <p class="page-subtitle">
-        Manage your mining session.
-    </p>
-
-
-    <div class="card">
-
-        <span id="minerStatus"
-              class="miner-status">
-            Inactive
-        </span>
-
-
-        <div class="stat-grid">
-
-            <div class="stat">
-
-                <span>
-                    Starting Amount
-                </span>
-
-                <strong>
-                    $25.00
-                </strong>
-
-            </div>
-
-            <div class="stat">
-
-                <span>
-                    Target
-                </span>
-
-                <strong>
-                    $250.00
-                </strong>
-
-            </div>
-
-        </div>
-
-
-        <div class="miner-clock">
-
-            <small>
-                Mining time remaining
-            </small>
-
-            <div id="minerTime"
-                 class="miner-time">
-                48:00:00
-            </div>
-
-        </div>
-
-
-        <div class="progress-label">
-
-            <span>
-                Mining progress
-            </span>
-
-            <span id="minerPercent">
-                0%
-            </span>
-
-        </div>
-
-        <div class="progress">
-
-            <div id="minerProgress"
-                 class="progress-fill">
-            </div>
-
-        </div>
-
-
-        <div class="upload">
-
-            <div class="upload-icon">
-                ↑
-            </div>
-
-            <strong>
-                Upload Payment Proof
-            </strong>
-
-            <p>
-                Upload an image before the miner can be activated.
-            </p>
-
-            <input
-                type="file"
-                id="proofFile"
-                accept="image/*"
-                onchange="proofSelected()"
-            >
-
-            <div id="fileName"
-                 class="file-name">
-            </div>
-
-        </div>
-
-
-        <div style="margin-top:15px">
-
-            <button id="minerStartButton"
-                    class="primary-btn"
-                    onclick="startMiner()"
-                    disabled>
-
-                Upload proof to continue
-
             </button>
 
-        </div>
+            <button class="navItem" data-page="withdrawPage">
+                Withdrawal
+            </button>
+
+            <div class="navLabel">Account</div>
+
+            <button class="navItem" id="logoutBtn">
+                Logout
+            </button>
+
+        </aside>
 
 
-        <div id="minerMessage"
-             class="miner-message">
+        <main class="main">
 
-            The miner remains inactive until the required proof has been uploaded.
+            <!-- DASHBOARD -->
+            <section id="dashboardPage" class="page active">
 
-        </div>
+                <div class="pageHeader">
+                    <div>
+                        <h1>Dashboard</h1>
+                        <p>Overview of your Nexavest account.</p>
+                    </div>
+
+                    <button class="secondaryBtn"
+                            onclick="navigateTo('minerPage')">
+                        Open Miner
+                    </button>
+                </div>
+
+
+                <div class="statsGrid">
+
+                    <div class="statCard">
+                        <div class="statTop">
+                            <span>Account Balance</span>
+                            <span>USD</span>
+                        </div>
+                        <div class="statValue" id="dashboardBalance">
+                            $0.00
+                        </div>
+                        <div class="statSub">
+                            Available balance
+                        </div>
+                    </div>
+
+                    <div class="statCard">
+                        <div class="statTop">
+                            <span>Mining Status</span>
+                            <span class="greenText">●</span>
+                        </div>
+                        <div class="statValue greenText"
+                             id="dashboardMinerStatus">
+                            Ready
+                        </div>
+                        <div class="statSub">
+                            BTC miner
+                        </div>
+                    </div>
+
+                    <div class="statCard">
+                        <div class="statTop">
+                            <span>BTC Price</span>
+                            <span>Live</span>
+                        </div>
+                        <div class="statValue blueText"
+                             id="dashboardBtcPrice">
+                            $0
+                        </div>
+                        <div class="statSub">
+                            Market reference
+                        </div>
+                    </div>
+
+                    <div class="statCard">
+                        <div class="statTop">
+                            <span>Uptime</span>
+                            <span>24h</span>
+                        </div>
+                        <div class="statValue"
+                             id="dashboardUptime">
+                            100%
+                        </div>
+                        <div class="statSub">
+                            Miner availability
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="dashboardGrid">
+
+                    <div class="card miningHero">
+
+                        <div class="cardTitle">
+                            <h3>Mining Overview</h3>
+
+                            <div class="miningStatus">
+                                <span class="statusDot"></span>
+                                <span id="heroStatus">
+                                    Miner ready
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="bigBtc" id="heroBtc">
+                            0.00000000 BTC
+                        </div>
+
+                        <div class="bigUsd" id="heroUsd">
+                            $0.00 accumulated
+                        </div>
+
+                        <div class="progress">
+                            <div class="progressBar"
+                                 id="heroProgress">
+                            </div>
+                        </div>
+
+                        <div class="progressInfo">
+                            <span id="heroProgressText">
+                                0%
+                            </span>
+
+                            <span id="heroTarget">
+                                Target: $0
+                            </span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="card">
+
+                        <div class="cardTitle">
+                            <h3>Performance</h3>
+                        </div>
+
+                        <div class="metricList">
+
+                            <div class="metric">
+                                <span>Hashrate</span>
+                                <span id="sideHashrate">
+                                    0 TH/s
+                                </span>
+                            </div>
+
+                            <div class="metric">
+                                <span>Average</span>
+                                <span id="sideAverage">
+                                    0 TH/s
+                                </span>
+                            </div>
+
+                            <div class="metric">
+                                <span>Efficiency</span>
+                                <span id="sideEfficiency">
+                                    0 J/TH
+                                </span>
+                            </div>
+
+                            <div class="metric">
+                                <span>Temperature</span>
+                                <span id="sideTemp">
+                                    0°C
+                                </span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- MINER -->
+            <section id="minerPage" class="page">
+
+                <div class="pageHeader">
+
+                    <div>
+                        <h1>BTC Miner</h1>
+                        <p>
+                            Configure your mining cycle and monitor
+                            performance.
+                        </p>
+                    </div>
+
+                    <div class="miningStatus">
+                        <span class="statusDot"></span>
+                        <span id="minerHeaderStatus">
+                            Ready
+                        </span>
+                    </div>
+
+                </div>
+
+
+                <div class="minerSetup">
+
+                    <!-- SETUP -->
+                    <div class="card">
+
+                        <div class="cardTitle">
+                            <h3>Mining Configuration</h3>
+                            <span>Minimum $25</span>
+                        </div>
+
+                        <div class="formGroup">
+
+                            <label>
+                                Mining Amount
+                            </label>
+
+                            <div class="amountInput">
+                                <span>$</span>
+
+                                <input
+                                    type="number"
+                                    id="miningAmount"
+                                    min="25"
+                                    step="1"
+                                    value="25"
+                                >
+                            </div>
+
+                        </div>
+
+                        <div class="targetBox">
+
+                            <small>
+                                10× mining target calculation
+                            </small>
+
+                            <div class="targetAmount"
+                                 id="targetAmount">
+                                $250.00
+                            </div>
+
+                        </div>
+
+                        <div style="height:18px"></div>
+
+                        <div class="proofArea"
+                             id="proofArea">
+
+                            <strong>
+                                Payment Verification Upload
+                            </strong>
+
+                            <p style="color:#718198;font-size:12px;margin:8px 0 15px">
+                                Upload an image before starting the
+                                mining cycle.
+                            </p>
+
+                            <label class="uploadBtn"
+                                   id="uploadLabel">
+
+                                Upload Proof
+
+                                <input
+                                    type="file"
+                                    id="proofInput"
+                                    accept="image/*"
+                                >
+
+                            </label>
+
+                            <div class="proofStatus"
+                                 id="proofStatus">
+                                No proof uploaded.
+                            </div>
+
+                        </div>
+
+                        <div class="minerControls">
+
+                            <button
+                                class="primaryBtn"
+                                id="startMinerBtn"
+                                disabled>
+                                Start Miner
+                            </button>
+
+                            <button
+                                class="secondaryBtn"
+                                id="resetMinerBtn">
+                                Reset
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- TARGET -->
+                    <div class="card">
+
+                        <div class="cardTitle">
+                            <h3>Mining Target</h3>
+                        </div>
+
+                        <div class="metricList">
+
+                            <div class="metric">
+                                <span>Starting Amount</span>
+                                <span id="startingAmount">
+                                    $25.00
+                                </span>
+                            </div>
+
+                            <div class="metric">
+                                <span>Target Multiplier</span>
+                                <span class="greenText">
+                                    10×
+                                </span>
+                            </div>
+
+                            <div class="metric">
+                                <span>Target Value</span>
+                                <span id="minerTarget">
+                                    $250.00
+                                </span>
+                            </div>
+
+                            <div class="metric">
+                                <span>Miner Status</span>
+                                <span id="minerStatusText">
+                                    Awaiting setup
+                                </span>
+                            </div>
+
+                            <div class="metric">
+                                <span>Elapsed Time</span>
+                                <span id="elapsedTime">
+                                    00:00:00
+                                </span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- LIVE MINER -->
+                <div class="card minerDashboard">
+
+                    <div class="cardTitle">
+
+                        <h3>
+                            Live Mining Monitor
+                        </h3>
+
+                        <span id="liveClock">
+                            00:00:00
+                        </span>
+
+                    </div>
+
+
+                    <div class="metricCards">
+
+                        <div class="miniMetric">
+                            <small>Hashrate</small>
+                            <strong id="hashrate">
+                                0.00 TH/s
+                            </strong>
+                        </div>
+
+                        <div class="miniMetric">
+                            <small>Average Hashrate</small>
+                            <strong id="averageHashrate">
+                                0.00 TH/s
+                            </strong>
+                        </div>
+
+                        <div class="miniMetric">
+                            <small>Uptime</small>
+                            <strong id="uptime">
+                                100%
+                            </strong>
+                        </div>
+
+                        <div class="miniMetric">
+                            <small>Energy Efficiency</small>
+                            <strong id="efficiency">
+                                0 J/TH
+                            </strong>
+                        </div>
+
+                    </div>
+
+
+                    <div class="metricCards"
+                         style="margin-top:12px">
+
+                        <div class="miniMetric">
+                            <small>Temperature</small>
+                            <strong id="temperature">
+                                0°C
+                            </strong>
+                        </div>
+
+                        <div class="miniMetric">
+                            <small>Fan Speed</small>
+                            <strong id="fanSpeed">
+                                0 RPM
+                            </strong>
+                        </div>
+
+                        <div class="miniMetric">
+                            <small>BTC Price</small>
+                            <strong id="btcPrice">
+                                $0
+                            </strong>
+                        </div>
+
+                        <div class="miniMetric">
+                            <small>Live Earnings</small>
+                            <strong id="liveEarnings">
+                                $0.00
+                            </strong>
+                        </div>
+
+                    </div>
+
+
+                    <div style="margin-top:25px">
+
+                        <div class="progress">
+                            <div class="progressBar"
+                                 id="minerProgress">
+                            </div>
+                        </div>
+
+                        <div class="progressInfo">
+
+                            <span id="minerProgressText">
+                                0%
+                            </span>
+
+                            <span id="remainingTarget">
+                                Remaining: $0
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- HARDWARE -->
+                <div class="card"
+                     style="margin-top:18px">
+
+                    <div class="cardTitle">
+
+                        <h3>
+                            Hardware Status
+                        </h3>
+
+                        <span>
+                            Worker monitoring
+                        </span>
+
+                    </div>
+
+                    <table class="workerTable">
+
+                        <thead>
+                            <tr>
+                                <th>Worker</th>
+                                <th>Status</th>
+                                <th>Hashrate</th>
+                                <th>Temp</th>
+                                <th>Fan</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <tr>
+                                <td>ASIC-01</td>
+                                <td class="online"
+                                    id="workerStatus">
+                                    ● Online
+                                </td>
+                                <td id="workerHashrate">
+                                    0 TH/s
+                                </td>
+                                <td id="workerTemp">
+                                    0°C
+                                </td>
+                                <td id="workerFan">
+                                    0 RPM
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>ASIC-02</td>
+                                <td class="online">
+                                    ● Online
+                                </td>
+                                <td>
+                                    0 TH/s
+                                </td>
+                                <td>
+                                    0°C
+                                </td>
+                                <td>
+                                    0 RPM
+                                </td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+
+            <!-- WITHDRAW -->
+            <section id="withdrawPage" class="page">
+
+                <div class="pageHeader">
+
+                    <div>
+                        <h1>Withdrawal</h1>
+                        <p>
+                            Submit your withdrawal information.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="withdrawGrid">
+
+                    <div class="card">
+
+                        <div class="cardTitle">
+                            <h3>Bank Details</h3>
+                        </div>
+
+                        <div class="formGrid">
+
+                            <div class="formGroup">
+
+                                <label>
+                                    Bank
+                                </label>
+
+                                <select id="bankSelect">
+                                    <option>
+                                        Select bank
+                                    </option>
+                                </select>
+
+                            </div>
+
+                            <div class="formGroup">
+
+                                <label>
+                                    Account Type
+                                </label>
+
+                                <select id="accountType">
+
+                                    <option value="">
+                                        Select type
+                                    </option>
+
+                                    <option>
+                                        Savings
+                                    </option>
+
+                                    <option>
+                                        Current
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="formGroup">
+
+                            <label>
+                                Account Holder
+                            </label>
+
+                            <input
+                                id="accountHolder"
+                                type="text"
+                                placeholder="Account holder name"
+                            >
+
+                        </div>
+
+
+                        <div class="formGroup">
+
+                            <label>
+                                Account Number
+                            </label>
+
+                            <input
+                                id="accountNumber"
+                                type="text"
+                                placeholder="Account number"
+                            >
+
+                        </div>
+
+
+                        <button
+                            class="primaryBtn"
+                            id="withdrawBtn">
+                            Submit Withdrawal
+                        </button>
+
+                    </div>
+
+
+                    <div class="card withdrawSummary">
+
+                        <div class="cardTitle">
+                            <h3>Withdrawal Summary</h3>
+                        </div>
+
+                        <div style="color:#91a0b5;font-size:12px">
+                            Available balance
+                        </div>
+
+                        <div class="balanceBig"
+                             id="withdrawBalance">
+                            $0.00
+                        </div>
+
+                        <div class="metricList">
+
+                            <div class="metric">
+                                <span>Currency</span>
+                                <span>USD</span>
+                            </div>
+
+                            <div class="metric">
+                                <span>Status</span>
+                                <span class="greenText">
+                                    Available
+                                </span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
 
     </div>
 
-</section>
 
+    <!-- MOBILE NAV -->
+    <nav class="mobileNav">
 
-<!-- =========================
-     WITHDRAWAL PAGE
-========================= -->
-
-<section id="withdrawPage" class="page">
-
-    <button class="back-btn"
-            onclick="navigateTo('homePage')">
-
-        ← Back to Account
-
-    </button>
-
-    <h1 class="page-title">
-        Withdrawal
-    </h1>
-
-    <p class="page-subtitle">
-        Complete your withdrawal information.
-    </p>
-
-
-    <div class="card">
-
-        <div class="fee-box">
-
-            <div class="fee-label">
-                Withdrawal Fee
-            </div>
-
-            <div class="fee">
-                $150
-            </div>
-
-        </div>
-
-
-        <div class="withdraw-info">
-            Select your bank and account details below before submitting your withdrawal request.
-        </div>
-
-
-        <div class="form-group">
-
-            <label>
-                Bank
-            </label>
-
-            <select id="bankSelect">
-            </select>
-
-        </div>
-
-
-        <div class="form-group">
-
-            <label>
-                Account Type
-            </label>
-
-            <div class="account-types">
-
-                <label class="account-type">
-
-                    <input
-                        type="radio"
-                        name="accountType"
-                        value="Savings"
-                    >
-
-                    Savings
-
-                </label>
-
-                <label class="account-type">
-
-                    <input
-                        type="radio"
-                        name="accountType"
-                        value="Current"
-                    >
-
-                    Current
-
-                </label>
-
-            </div>
-
-        </div>
-
-
-        <div class="form-group">
-
-            <label>
-                Account Number
-            </label>
-
-            <input
-                id="accountNumber"
-                type="text"
-                placeholder="Enter account number"
-            >
-
-        </div>
-
-
-        <div class="form-group">
-
-            <label>
-                Account Holder Name
-            </label>
-
-            <input
-                id="accountHolder"
-                type="text"
-                placeholder="Account holder name"
-            >
-
-        </div>
-
-
-        <button class="withdraw-btn"
-                onclick="submitWithdrawal()">
-
-            Withdrawal
-
+        <button class="active"
+                data-page="dashboardPage">
+            Dashboard
         </button>
 
-    </div>
+        <button data-page="minerPage">
+            Miner
+        </button>
+
+        <button data-page="withdrawPage">
+            Withdraw
+        </button>
+
+        <button id="mobileLogout">
+            Logout
+        </button>
+
+    </nav>
 
 </section>
 
-</div>
 
+<!-- WITHDRAWAL MODAL -->
+<div class="modal hidden"
+     id="withdrawModal">
 
-<!-- =========================
-     WITHDRAWAL MODAL
-========================= -->
+    <div class="modalBox">
 
-<div id="withdrawModal"
-     class="modal">
-
-    <div class="modal-box">
-
-        <div class="success-icon">
+        <div class="successIcon">
             ✓
         </div>
 
-        <h3>
+        <h2>
             Withdrawal Submitted
-        </h3>
+        </h2>
 
         <p>
             Your withdrawal request has been submitted successfully.
             You should receive your withdrawal within 1 hour.
         </p>
 
-        <button class="modal-btn"
-                onclick="closeWithdrawalModal()">
-
-            Done
-
+        <button
+            class="primaryBtn"
+            onclick="closeWithdrawalModal()">
+            Continue
         </button>
 
     </div>
@@ -1321,17 +1699,15 @@ select:focus{
 
 <script>
 
-/* =========================
+/* =========================================
    COUNTRY DATA
-========================= */
+========================================= */
 
-const countryData = {
+const countries = {
 
-    "Peru":{
+    Peru:{
         currency:"PEN",
         symbol:"S/",
-        rate:3.50,
-        language:"es",
         banks:[
             "BCP",
             "Interbank",
@@ -1340,11 +1716,9 @@ const countryData = {
         ]
     },
 
-    "Ecuador":{
+    Ecuador:{
         currency:"USD",
         symbol:"$",
-        rate:1,
-        language:"es",
         banks:[
             "Banco Pichincha",
             "Banco Guayaquil",
@@ -1353,11 +1727,9 @@ const countryData = {
         ]
     },
 
-    "Mexico":{
+    Mexico:{
         currency:"MXN",
         symbol:"MX$",
-        rate:19,
-        language:"es",
         banks:[
             "BBVA México",
             "Banorte",
@@ -1370,8 +1742,6 @@ const countryData = {
     "El Salvador":{
         currency:"USD",
         symbol:"$",
-        rate:1,
-        language:"es",
         banks:[
             "Banco Agrícola",
             "Banco Cuscatlán",
@@ -1380,11 +1750,9 @@ const countryData = {
         ]
     },
 
-    "Brazil":{
+    Brazil:{
         currency:"BRL",
         symbol:"R$",
-        rate:5.40,
-        language:"en",
         banks:[
             "Banco do Brasil",
             "Itaú",
@@ -1394,11 +1762,9 @@ const countryData = {
         ]
     },
 
-    "Colombia":{
+    Colombia:{
         currency:"COP",
         symbol:"$",
-        rate:3900,
-        language:"es",
         banks:[
             "Bancolombia",
             "Banco de Bogotá",
@@ -1407,11 +1773,9 @@ const countryData = {
         ]
     },
 
-    "Venezuela":{
+    Venezuela:{
         currency:"VES",
         symbol:"Bs.",
-        rate:130,
-        language:"es",
         banks:[
             "Banco de Venezuela",
             "Banesco",
@@ -1420,11 +1784,9 @@ const countryData = {
         ]
     },
 
-    "Guatemala":{
+    Guatemala:{
         currency:"GTQ",
         symbol:"Q",
-        rate:7.70,
-        language:"es",
         banks:[
             "Banco Industrial",
             "Banrural",
@@ -1433,11 +1795,9 @@ const countryData = {
         ]
     },
 
-    "Nigeria":{
+    Nigeria:{
         currency:"NGN",
         symbol:"₦",
-        rate:1500,
-        language:"en",
         banks:[
             "Access Bank",
             "GTBank",
@@ -1452,8 +1812,6 @@ const countryData = {
     "South Africa":{
         currency:"ZAR",
         symbol:"R",
-        rate:17.50,
-        language:"en",
         banks:[
             "Capitec Bank",
             "Standard Bank",
@@ -1463,11 +1821,9 @@ const countryData = {
         ]
     },
 
-    "Kenya":{
+    Kenya:{
         currency:"KES",
         symbol:"KSh",
-        rate:129,
-        language:"en",
         banks:[
             "KCB Bank",
             "Equity Bank",
@@ -1477,11 +1833,9 @@ const countryData = {
         ]
     },
 
-    "Ghana":{
+    Ghana:{
         currency:"GHS",
         symbol:"GH₵",
-        rate:12,
-        language:"en",
         banks:[
             "GCB Bank",
             "Ecobank Ghana",
@@ -1491,11 +1845,9 @@ const countryData = {
         ]
     },
 
-    "Tanzania":{
+    Tanzania:{
         currency:"TZS",
         symbol:"TSh",
-        rate:2600,
-        language:"en",
         banks:[
             "CRDB Bank",
             "NMB Bank",
@@ -1505,11 +1857,9 @@ const countryData = {
         ]
     },
 
-    "Uganda":{
+    Uganda:{
         currency:"UGX",
         symbol:"USh",
-        rate:3500,
-        language:"en",
         banks:[
             "Stanbic Bank Uganda",
             "Centenary Bank",
@@ -1519,11 +1869,9 @@ const countryData = {
         ]
     },
 
-    "Rwanda":{
+    Rwanda:{
         currency:"RWF",
         symbol:"FRw",
-        rate:1450,
-        language:"en",
         banks:[
             "Bank of Kigali",
             "I&M Bank Rwanda",
@@ -1536,528 +1884,100 @@ const countryData = {
 };
 
 
-/* =========================
-   BONUS
-========================= */
-
-const bonuses=[
-    300,
-    700,
-    800,
-    600,
-    1300,
-    3000,
-    7000
-];
-
-
-/* =========================
+/* =========================================
    STORAGE
-========================= */
+========================================= */
 
-function getUsers(){
+const USERS_KEY = "nexavestUsers";
+const CURRENT_KEY = "nexavestCurrentUser";
 
-    return JSON.parse(
-        localStorage.getItem("nexavestUsers") || "{}"
-    );
+let users =
+    JSON.parse(localStorage.getItem(USERS_KEY) || "{}");
 
-}
-
-function saveUsers(users){
-
-    localStorage.setItem(
-        "nexavestUsers",
-        JSON.stringify(users)
-    );
-
-}
-
-function currentUser(){
-
-    const email=
-        localStorage.getItem("nexavestCurrentUser");
-
-    if(!email) return null;
-
-    const users=getUsers();
-
-    return users[email] || null;
-
-}
+let currentUser =
+    JSON.parse(localStorage.getItem(CURRENT_KEY) || "null");
 
 
-/* =========================
-   ERROR
-========================= */
+/* =========================================
+   MINER STATE
+========================================= */
 
-function showError(message){
+let minerInterval = null;
 
-    const box=
-        document.getElementById("errorBox");
+let minerState = {
 
-    box.innerText=message;
-    box.style.display="block";
+    running:false,
 
-}
+    proofUploaded:false,
 
-function hideError(){
+    amount:25,
 
-    document.getElementById("errorBox")
-        .style.display="none";
+    target:250,
 
-}
+    earnings:0,
 
+    startTime:null,
 
-/* =========================
-   LOGIN / REGISTER
-========================= */
+    elapsed:0,
 
-function showLogin(){
+    hashrate:0,
 
-    document.getElementById("loginForm")
-        .classList.remove("hidden");
+    averageHashrate:0,
 
-    document.getElementById("registerForm")
-        .classList.add("hidden");
+    uptime:100,
 
-    document.getElementById("loginTab")
-        .classList.add("active");
+    efficiency:0,
 
-    document.getElementById("registerTab")
-        .classList.remove("active");
+    temperature:0,
 
-    hideError();
+    fanSpeed:0,
 
-}
+    btcPrice:0
+
+};
 
 
-function showRegister(){
+/* =========================================
+   INITIALIZATION
+========================================= */
 
-    document.getElementById("loginForm")
-        .classList.add("hidden");
+window.addEventListener("load",()=>{
 
-    document.getElementById("registerForm")
-        .classList.remove("hidden");
+    populateCountries();
 
-    document.getElementById("loginTab")
-        .classList.remove("active");
+    setTimeout(()=>{
 
-    document.getElementById("registerTab")
-        .classList.add("active");
+        document.getElementById("loadingScreen")
+            .classList.add("hidden");
 
-    hideError();
+        if(currentUser){
 
-}
+            openApp();
 
+        }else{
 
-/* =========================
-   2 SECOND LOADING
-========================= */
-
-function showLoading(callback){
-
-    const screen=
-        document.getElementById("loadingScreen");
-
-    screen.classList.add("show");
-
-    setTimeout(function(){
-
-        screen.classList.remove("show");
-
-        callback();
-
-    },2000);
-
-}
-
-
-/* =========================
-   NAVIGATION
-========================= */
-
-function navigateTo(pageId){
-
-    showLoading(function(){
-
-        document.querySelectorAll(".page")
-            .forEach(function(page){
-
-                page.classList.remove("active");
-
-            });
-
-        document.getElementById(pageId)
-            .classList.add("active");
-
-        const user=currentUser();
-
-        if(user){
-
-            if(pageId==="homePage"){
-                updateHome(user);
-            }
-
-            if(pageId==="minerPage"){
-                setupMiner(user);
-            }
-
-            if(pageId==="withdrawPage"){
-                setupBanks(user.country);
-            }
+            document.getElementById("authPage")
+                .classList.remove("hidden");
 
         }
 
-        window.scrollTo({
-            top:0,
-            behavior:"instant"
-        });
+    },700);
 
-    });
+});
 
-}
 
+function populateCountries(){
 
-/* =========================
-   REGISTER
-========================= */
+    const select =
+        document.getElementById("registerCountry");
 
-function registerUser(){
+    Object.keys(countries).forEach(country=>{
 
-    hideError();
-
-    const name=
-        document.getElementById("registerName")
-        .value.trim();
-
-    const email=
-        document.getElementById("registerEmail")
-        .value.trim()
-        .toLowerCase();
-
-    const password=
-        document.getElementById("registerPassword")
-        .value;
-
-    const country=
-        document.getElementById("registerCountry")
-        .value;
-
-    if(!name || !email || !password || !country){
-
-        showError("Please complete all fields.");
-
-        return;
-    }
-
-    const users=getUsers();
-
-    if(users[email]){
-
-        showError("This email is already registered.");
-
-        return;
-    }
-
-    const bonus=
-        bonuses[
-            Math.floor(
-                Math.random()*bonuses.length
-            )
-        ];
-
-    const duration=
-        (
-            15*60*60+
-            41*60+
-            55
-        )*1000;
-
-    const miner={
-        started:false,
-        finished:false,
-        proofSelected:false,
-        startTime:null,
-        endTime:null
-    };
-
-    users[email]={
-
-        name:name,
-        email:email,
-        password:password,
-        country:country,
-        bonus:bonus,
-        expiresAt:Date.now()+duration,
-        createdAt:Date.now(),
-        miner:miner
-
-    };
-
-    saveUsers(users);
-
-    localStorage.setItem(
-        "nexavestCurrentUser",
-        email
-    );
-
-    showLoading(function(){
-
-        openHome(users[email]);
-
-    });
-
-}
-
-
-/* =========================
-   LOGIN
-========================= */
-
-function loginUser(){
-
-    hideError();
-
-    const email=
-        document.getElementById("loginEmail")
-        .value.trim()
-        .toLowerCase();
-
-    const password=
-        document.getElementById("loginPassword")
-        .value;
-
-    const users=getUsers();
-
-    if(!users[email]){
-
-        showError(
-            "No account exists with this email."
-        );
-
-        return;
-    }
-
-    if(users[email].password!==password){
-
-        showError(
-            "Incorrect password."
-        );
-
-        return;
-    }
-
-    localStorage.setItem(
-        "nexavestCurrentUser",
-        email
-    );
-
-    showLoading(function(){
-
-        openHome(users[email]);
-
-    });
-
-}
-
-
-/* =========================
-   HOME
-========================= */
-
-function openHome(user){
-
-    document.getElementById("authPage")
-        .classList.remove("active");
-
-    document.getElementById("minerPage")
-        .classList.remove("active");
-
-    document.getElementById("withdrawPage")
-        .classList.remove("active");
-
-    document.getElementById("homePage")
-        .classList.add("active");
-
-    updateHome(user);
-
-}
-
-
-function updateHome(user){
-
-    document.getElementById("userName")
-        .innerText=user.name;
-
-    document.getElementById("countryDisplay")
-        .innerText=user.country;
-
-    const data=
-        countryData[user.country];
-
-    if(!data) return;
-
-    document.getElementById("currencyDisplay")
-        .innerText=
-        data.currency+
-        " ("+
-        data.symbol+
-        ")";
-
-    updateBonus(user);
-
-    updateBonusCountdown(user);
-
-    setupBanks(user.country);
-
-    autoLanguage(user.country);
-
-}
-
-
-/* =========================
-   BONUS
-========================= */
-
-function updateBonus(user){
-
-    if(Date.now()>=user.expiresAt){
-
-        user.bonus=0;
-
-        const users=getUsers();
-
-        users[user.email]=user;
-
-        saveUsers(users);
-
-        document.getElementById("bonusAmount")
-            .innerText="$0.00";
-
-        return;
-    }
-
-    const data=
-        countryData[user.country];
-
-    const value=
-        user.bonus*data.rate;
-
-    document.getElementById("bonusAmount")
-        .innerText=
-        data.symbol+
-        formatNumber(value);
-
-}
-
-
-function formatNumber(value){
-
-    return new Intl.NumberFormat(
-        "en-US",
-        {
-            maximumFractionDigits:2
-        }
-    ).format(value);
-
-}
-
-
-/* =========================
-   BONUS COUNTDOWN
-========================= */
-
-let bonusTimer=null;
-
-function updateBonusCountdown(user){
-
-    if(bonusTimer){
-        clearInterval(bonusTimer);
-    }
-
-    function tick(){
-
-        const remaining=
-            user.expiresAt-Date.now();
-
-        if(remaining<=0){
-
-            document.getElementById("countdown")
-                .innerText="00:00:00";
-
-            user.bonus=0;
-
-            const users=getUsers();
-
-            users[user.email]=user;
-
-            saveUsers(users);
-
-            document.getElementById("bonusAmount")
-                .innerText="$0.00";
-
-            clearInterval(bonusTimer);
-
-            return;
-        }
-
-        const seconds=
-            Math.floor(remaining/1000);
-
-        const h=
-            Math.floor(seconds/3600);
-
-        const m=
-            Math.floor(
-                (seconds%3600)/60
-            );
-
-        const s=
-            seconds%60;
-
-        document.getElementById("countdown")
-            .innerText=
-            String(h).padStart(2,"0")+
-            ":"+
-            String(m).padStart(2,"0")+
-            ":"+
-            String(s).padStart(2,"0");
-
-        updateBonus(user);
-
-    }
-
-    tick();
-
-    bonusTimer=
-        setInterval(tick,1000);
-
-}
-
-
-/* =========================
-   BANKS
-========================= */
-
-function setupBanks(country){
-
-    const data=
-        countryData[country];
-
-    const select=
-        document.getElementById("bankSelect");
-
-    select.innerHTML="";
-
-    if(!data) return;
-
-    data.banks.forEach(function(bank){
-
-        const option=
+        const option =
             document.createElement("option");
 
-        option.value=bank;
-        option.innerText=bank;
+        option.value = country;
+        option.textContent = country;
 
         select.appendChild(option);
 
@@ -2066,346 +1986,1012 @@ function setupBanks(country){
 }
 
 
-/* =========================
-   MINER
-========================= */
+/* =========================================
+   LOADING
+========================================= */
 
-const MINER_DURATION=
-    48*60*60*1000;
+function showLoading(callback){
 
-let minerTimer=null;
+    const loading =
+        document.getElementById("loadingScreen");
+
+    loading.classList.remove("hidden");
+
+    setTimeout(()=>{
+
+        loading.classList.add("hidden");
+
+        callback();
+
+    },2000);
+
+}
 
 
-function proofSelected(){
+/* =========================================
+   AUTH TABS
+========================================= */
 
-    const input=
-        document.getElementById("proofFile");
+document.getElementById("loginTab")
+.addEventListener("click",()=>{
 
-    const button=
-        document.getElementById("minerStartButton");
+    document.getElementById("loginTab")
+        .classList.add("active");
 
-    const name=
-        document.getElementById("fileName");
+    document.getElementById("registerTab")
+        .classList.remove("active");
 
-    if(!input.files.length){
+    document.getElementById("loginForm")
+        .classList.remove("hidden");
 
-        button.disabled=true;
+    document.getElementById("registerForm")
+        .classList.add("hidden");
 
-        button.innerText=
-            "Upload proof to continue";
+});
 
-        name.innerText="";
+
+document.getElementById("registerTab")
+.addEventListener("click",()=>{
+
+    document.getElementById("registerTab")
+        .classList.add("active");
+
+    document.getElementById("loginTab")
+        .classList.remove("active");
+
+    document.getElementById("registerForm")
+        .classList.remove("hidden");
+
+    document.getElementById("loginForm")
+        .classList.add("hidden");
+
+});
+
+
+/* =========================================
+   REGISTER
+========================================= */
+
+document.getElementById("registerForm")
+.addEventListener("submit",e=>{
+
+    e.preventDefault();
+
+    const name =
+        document.getElementById("registerName").value.trim();
+
+    const email =
+        document.getElementById("registerEmail").value.trim()
+        .toLowerCase();
+
+    const password =
+        document.getElementById("registerPassword").value;
+
+    const country =
+        document.getElementById("registerCountry").value;
+
+    if(users[email]){
+
+        alert("An account with this email already exists.");
 
         return;
+
     }
 
-    const file=input.files[0];
+    const user = {
+
+        name,
+        email,
+        password,
+        country,
+
+        balance:0,
+
+        miner:{
+
+            amount:0,
+            target:0,
+            earnings:0,
+            running:false,
+            proofUploaded:false,
+            completed:false
+
+        }
+
+    };
+
+    users[email] = user;
+
+    localStorage.setItem(
+        USERS_KEY,
+        JSON.stringify(users)
+    );
+
+    currentUser = user;
+
+    localStorage.setItem(
+        CURRENT_KEY,
+        JSON.stringify(currentUser)
+    );
+
+    showLoading(()=>openApp());
+
+});
+
+
+/* =========================================
+   LOGIN
+========================================= */
+
+document.getElementById("loginForm")
+.addEventListener("submit",e=>{
+
+    e.preventDefault();
+
+    const email =
+        document.getElementById("loginEmail")
+        .value.trim()
+        .toLowerCase();
+
+    const password =
+        document.getElementById("loginPassword")
+        .value;
+
+    const user = users[email];
+
+    if(!user || user.password !== password){
+
+        alert("Invalid email or password.");
+
+        return;
+
+    }
+
+    currentUser = user;
+
+    localStorage.setItem(
+        CURRENT_KEY,
+        JSON.stringify(currentUser)
+    );
+
+    showLoading(()=>openApp());
+
+});
+
+
+/* =========================================
+   OPEN APP
+========================================= */
+
+function openApp(){
+
+    document.getElementById("authPage")
+        .classList.add("hidden");
+
+    document.getElementById("app")
+        .classList.remove("hidden");
+
+    updateUserInterface();
+
+    setupBanks();
+
+    updateMinerUI();
+
+}
+
+
+/* =========================================
+   USER UI
+========================================= */
+
+function updateUserInterface(){
+
+    if(!currentUser) return;
+
+    document.getElementById("profileName")
+        .textContent = currentUser.name;
+
+    document.getElementById("avatar")
+        .textContent =
+        currentUser.name.charAt(0).toUpperCase();
+
+    document.getElementById("dashboardBalance")
+        .textContent =
+        "$" + Number(currentUser.balance || 0)
+        .toFixed(2);
+
+    document.getElementById("withdrawBalance")
+        .textContent =
+        "$" + Number(currentUser.balance || 0)
+        .toFixed(2);
+
+}
+
+
+/* =========================================
+   NAVIGATION
+========================================= */
+
+document.querySelectorAll("[data-page]")
+.forEach(button=>{
+
+    button.addEventListener("click",()=>{
+
+        const page =
+            button.dataset.page;
+
+        navigateTo(page);
+
+    });
+
+});
+
+
+function navigateTo(pageId){
+
+    showLoading(()=>{
+
+        document.querySelectorAll(".page")
+        .forEach(page=>{
+            page.classList.remove("active");
+        });
+
+        const page =
+            document.getElementById(pageId);
+
+        if(page){
+            page.classList.add("active");
+        }
+
+        document.querySelectorAll(".navItem")
+        .forEach(item=>{
+
+            item.classList.toggle(
+                "active",
+                item.dataset.page === pageId
+            );
+
+        });
+
+        document.querySelectorAll(".mobileNav button")
+        .forEach(item=>{
+
+            item.classList.toggle(
+                "active",
+                item.dataset.page === pageId
+            );
+
+        });
+
+        if(pageId === "withdrawPage"){
+            setupBanks();
+        }
+
+    });
+
+}
+
+
+/* =========================================
+   BANKS
+========================================= */
+
+function setupBanks(){
+
+    if(!currentUser) return;
+
+    const bankSelect =
+        document.getElementById("bankSelect");
+
+    const data =
+        countries[currentUser.country];
+
+    if(!data) return;
+
+    bankSelect.innerHTML =
+        '<option value="">Select bank</option>';
+
+    data.banks.forEach(bank=>{
+
+        const option =
+            document.createElement("option");
+
+        option.value = bank;
+        option.textContent = bank;
+
+        bankSelect.appendChild(option);
+
+    });
+
+}
+
+
+/* =========================================
+   AMOUNT / TARGET
+========================================= */
+
+const amountInput =
+    document.getElementById("miningAmount");
+
+amountInput.addEventListener("input",updateTarget);
+
+
+function updateTarget(){
+
+    let amount =
+        Number(amountInput.value);
+
+    if(!amount || amount < 25){
+        amount = 25;
+    }
+
+    const target =
+        amount * 10;
+
+    document.getElementById("targetAmount")
+        .textContent =
+        "$" + target.toFixed(2);
+
+    document.getElementById("startingAmount")
+        .textContent =
+        "$" + amount.toFixed(2);
+
+    document.getElementById("minerTarget")
+        .textContent =
+        "$" + target.toFixed(2);
+
+}
+
+
+/* =========================================
+   PROOF UPLOAD
+========================================= */
+
+document.getElementById("proofInput")
+.addEventListener("change",function(){
+
+    const file = this.files[0];
+
+    if(!file) return;
 
     if(!file.type.startsWith("image/")){
 
-        input.value="";
+        alert("Please select an image.");
 
-        button.disabled=true;
-
-        name.innerText=
-            "Please select an image.";
+        this.value = "";
 
         return;
+
     }
 
-    name.innerText=
-        "Selected: "+file.name;
+    minerState.proofUploaded = true;
 
-    button.disabled=false;
+    document.getElementById("uploadLabel")
+        .classList.add("hidden");
 
-    button.innerText=
-        "Start Miner";
+    document.getElementById("proofStatus")
+        .textContent =
+        "Proof uploaded successfully. You can start the miner.";
 
-}
+    document.getElementById("proofStatus")
+        .style.color =
+        "var(--green)";
+
+    document.getElementById("startMinerBtn")
+        .disabled = false;
+
+});
+
+
+/* =========================================
+   START MINER
+========================================= */
+
+document.getElementById("startMinerBtn")
+.addEventListener("click",startMiner);
 
 
 function startMiner(){
 
-    const input=
-        document.getElementById("proofFile");
+    if(!minerState.proofUploaded){
 
-    if(!input.files.length) return;
+        alert("Upload the required image first.");
 
-    const user=currentUser();
-
-    if(!user) return;
-
-    if(!user.miner){
-
-        user.miner={
-            started:false,
-            finished:false,
-            proofSelected:false,
-            startTime:null,
-            endTime:null
-        };
+        return;
 
     }
 
-    if(user.miner.started) return;
+    let amount =
+        Number(amountInput.value);
 
-    user.miner.proofSelected=true;
-    user.miner.started=true;
-    user.miner.finished=false;
-    user.miner.startTime=Date.now();
-    user.miner.endTime=
-        Date.now()+MINER_DURATION;
+    if(amount < 25){
 
-    const users=getUsers();
+        alert("Minimum mining amount is $25.");
 
-    users[user.email]=user;
+        amountInput.value = 25;
 
-    saveUsers(users);
+        updateTarget();
 
-    setupMiner(user);
+        return;
+
+    }
+
+    minerState.amount = amount;
+
+    minerState.target = amount * 10;
+
+    minerState.earnings = 0;
+
+    minerState.running = true;
+
+    minerState.startTime = Date.now();
+
+    minerState.elapsed = 0;
+
+    minerState.hashrate = 0;
+
+    minerState.averageHashrate = 0;
+
+    currentUser.miner = {
+
+        amount:amount,
+
+        target:amount * 10,
+
+        earnings:0,
+
+        running:true,
+
+        proofUploaded:true,
+
+        completed:false
+
+    };
+
+    saveCurrentUser();
+
+    document.getElementById("startMinerBtn")
+        .disabled = true;
+
+    document.getElementById("miningAmount")
+        .disabled = true;
+
+    document.getElementById("minerStatusText")
+        .textContent = "Mining";
+
+    document.getElementById("minerHeaderStatus")
+        .textContent = "Mining";
+
+    document.getElementById("heroStatus")
+        .textContent = "Mining active";
+
+    document.getElementById("dashboardMinerStatus")
+        .textContent = "Mining";
+
+    if(minerInterval){
+        clearInterval(minerInterval);
+    }
+
+    minerInterval =
+        setInterval(updateMiner,1000);
+
+    updateMiner();
 
 }
 
 
-function setupMiner(user){
+/* =========================================
+   MINER ENGINE
+========================================= */
 
-    if(!user.miner){
+function updateMiner(){
 
-        user.miner={
-            started:false,
-            finished:false,
-            proofSelected:false,
-            startTime:null,
-            endTime:null
-        };
+    if(!minerState.running) return;
 
-    }
-
-    const status=
-        document.getElementById("minerStatus");
-
-    const button=
-        document.getElementById("minerStartButton");
-
-    const message=
-        document.getElementById("minerMessage");
-
-    if(user.miner.finished){
-
-        status.innerText="Finished";
-        status.className=
-            "miner-status finished";
-
-        button.disabled=true;
-        button.innerText=
-            "Mining Completed";
-
-        message.innerText=
-            "The 48-hour mining period has ended.";
-
-        updateMinerDisplay(user);
-
-        return;
-    }
-
-    if(user.miner.started){
-
-        status.innerText="Mining";
-        status.className=
-            "miner-status active";
-
-        button.disabled=true;
-        button.innerText=
-            "Miner Active";
-
-        message.innerText=
-            "Mining is currently active.";
-
-        updateMinerDisplay(user);
-
-        startMinerTimer();
-
-        return;
-    }
-
-    status.innerText="Inactive";
-    status.className=
-        "miner-status";
-
-    button.disabled=
-        !user.miner.proofSelected;
-
-    button.innerText=
-        user.miner.proofSelected
-        ? "Start Miner"
-        : "Upload proof to continue";
-
-    updateMinerDisplay(user);
-
-}
-
-
-function startMinerTimer(){
-
-    if(minerTimer){
-        clearInterval(minerTimer);
-    }
-
-    function tick(){
-
-        const user=currentUser();
-
-        if(!user || !user.miner.started){
-            return;
-        }
-
-        const remaining=
-            user.miner.endTime-Date.now();
-
-        if(remaining<=0){
-
-            user.miner.finished=true;
-            user.miner.started=false;
-
-            const users=getUsers();
-
-            users[user.email]=user;
-
-            saveUsers(users);
-
-            clearInterval(minerTimer);
-
-            setupMiner(user);
-
-            return;
-        }
-
-        updateMinerDisplay(user);
-
-    }
-
-    tick();
-
-    minerTimer=
-        setInterval(tick,1000);
-
-}
-
-
-function updateMinerDisplay(user){
-
-    const time=
-        document.getElementById("minerTime");
-
-    const progress=
-        document.getElementById("minerProgress");
-
-    const percent=
-        document.getElementById("minerPercent");
-
-    if(!user.miner.started){
-
-        if(user.miner.finished){
-
-            time.innerText="00:00:00";
-            progress.style.width="100%";
-            percent.innerText="100%";
-
-        }else{
-
-            time.innerText="48:00:00";
-            progress.style.width="0%";
-            percent.innerText="0%";
-
-        }
-
-        return;
-    }
-
-    const remaining=
-        Math.max(
-            0,
-            user.miner.endTime-Date.now()
-        );
-
-    const elapsed=
-        MINER_DURATION-remaining;
-
-    let p=
-        elapsed/MINER_DURATION*100;
-
-    p=Math.max(0,Math.min(100,p));
-
-    const seconds=
-        Math.floor(remaining/1000);
-
-    const h=
-        Math.floor(seconds/3600);
-
-    const m=
+    minerState.elapsed =
         Math.floor(
-            (seconds%3600)/60
+            (Date.now() - minerState.startTime) / 1000
         );
 
-    const s=
-        seconds%60;
+    /*
+       This is a visual simulation engine.
+       Earnings progress toward the selected
+       target instead of representing real BTC
+       mining or a guaranteed financial return.
+    */
 
-    time.innerText=
-        String(h).padStart(2,"0")+
-        ":"+
-        String(m).padStart(2,"0")+
-        ":"+
-        String(s).padStart(2,"0");
+    const cycleSeconds = 48 * 60 * 60;
 
-    progress.style.width=p+"%";
+    const progress =
+        Math.min(
+            minerState.elapsed / cycleSeconds,
+            1
+        );
 
-    percent.innerText=
-        Math.floor(p)+"%";
+    minerState.earnings =
+        minerState.target * progress;
+
+    minerState.hashrate =
+        85 +
+        Math.random() * 35;
+
+    minerState.averageHashrate =
+        92 +
+        Math.random() * 12;
+
+    minerState.uptime =
+        99.5 + Math.random() * .5;
+
+    minerState.efficiency =
+        28 + Math.random() * 5;
+
+    minerState.temperature =
+        58 + Math.random() * 10;
+
+    minerState.fanSpeed =
+        3200 + Math.random() * 600;
+
+    minerState.btcPrice =
+        95000 +
+        Math.random() * 4000;
+
+    if(minerState.earnings >= minerState.target){
+
+        minerState.earnings =
+            minerState.target;
+
+        finishMiner();
+
+    }
+
+    updateMinerUI();
 
 }
 
 
-/* =========================
+/* =========================================
+   MINER UI
+========================================= */
+
+function updateMinerUI(){
+
+    const target =
+        minerState.target || 0;
+
+    const earnings =
+        minerState.earnings || 0;
+
+    const progress =
+        target > 0
+        ? Math.min((earnings / target) * 100,100)
+        : 0;
+
+    const btcPrice =
+        minerState.btcPrice || 0;
+
+    const btc =
+        btcPrice > 0
+        ? earnings / btcPrice
+        : 0;
+
+    document.getElementById("heroBtc")
+        .textContent =
+        btc.toFixed(8) + " BTC";
+
+    document.getElementById("heroUsd")
+        .textContent =
+        "$" + earnings.toFixed(2) +
+        " accumulated";
+
+    document.getElementById("heroProgress")
+        .style.width =
+        progress + "%";
+
+    document.getElementById("heroProgressText")
+        .textContent =
+        progress.toFixed(1) + "%";
+
+    document.getElementById("heroTarget")
+        .textContent =
+        "Target: $" + target.toFixed(2);
+
+    document.getElementById("minerProgress")
+        .style.width =
+        progress + "%";
+
+    document.getElementById("minerProgressText")
+        .textContent =
+        progress.toFixed(1) + "%";
+
+    document.getElementById("remainingTarget")
+        .textContent =
+        "Remaining: $" +
+        Math.max(target - earnings,0)
+        .toFixed(2);
+
+    document.getElementById("hashrate")
+        .textContent =
+        minerState.hashrate.toFixed(2) +
+        " TH/s";
+
+    document.getElementById("averageHashrate")
+        .textContent =
+        minerState.averageHashrate.toFixed(2) +
+        " TH/s";
+
+    document.getElementById("uptime")
+        .textContent =
+        minerState.uptime.toFixed(2) + "%";
+
+    document.getElementById("efficiency")
+        .textContent =
+        minerState.efficiency.toFixed(1) +
+        " J/TH";
+
+    document.getElementById("temperature")
+        .textContent =
+        minerState.temperature.toFixed(1) +
+        "°C";
+
+    document.getElementById("fanSpeed")
+        .textContent =
+        Math.round(minerState.fanSpeed) +
+        " RPM";
+
+    document.getElementById("btcPrice")
+        .textContent =
+        "$" + Math.round(btcPrice).toLocaleString();
+
+    document.getElementById("liveEarnings")
+        .textContent =
+        "$" + earnings.toFixed(2);
+
+    document.getElementById("sideHashrate")
+        .textContent =
+        minerState.hashrate.toFixed(2) +
+        " TH/s";
+
+    document.getElementById("sideAverage")
+        .textContent =
+        minerState.averageHashrate.toFixed(2) +
+        " TH/s";
+
+    document.getElementById("sideEfficiency")
+        .textContent =
+        minerState.efficiency.toFixed(1) +
+        " J/TH";
+
+    document.getElementById("sideTemp")
+        .textContent =
+        minerState.temperature.toFixed(1) +
+        "°C";
+
+    document.getElementById("workerHashrate")
+        .textContent =
+        minerState.hashrate.toFixed(2) +
+        " TH/s";
+
+    document.getElementById("workerTemp")
+        .textContent =
+        minerState.temperature.toFixed(1) +
+        "°C";
+
+    document.getElementById("workerFan")
+        .textContent =
+        Math.round(minerState.fanSpeed) +
+        " RPM";
+
+    document.getElementById("dashboardBtcPrice")
+        .textContent =
+        "$" + Math.round(btcPrice).toLocaleString();
+
+    document.getElementById("dashboardUptime")
+        .textContent =
+        minerState.uptime.toFixed(1) + "%";
+
+    document.getElementById("withdrawBalance")
+        .textContent =
+        "$" + Number(currentUser?.balance || 0)
+        .toFixed(2);
+
+    updateElapsed();
+
+}
+
+
+/* =========================================
+   ELAPSED TIME
+========================================= */
+
+function updateElapsed(){
+
+    const seconds =
+        minerState.elapsed || 0;
+
+    const h =
+        String(Math.floor(seconds / 3600))
+        .padStart(2,"0");
+
+    const m =
+        String(Math.floor((seconds % 3600) / 60))
+        .padStart(2,"0");
+
+    const s =
+        String(seconds % 60)
+        .padStart(2,"0");
+
+    const time =
+        `${h}:${m}:${s}`;
+
+    document.getElementById("elapsedTime")
+        .textContent = time;
+
+    document.getElementById("liveClock")
+        .textContent = time;
+
+}
+
+
+/* =========================================
+   FINISH MINER
+========================================= */
+
+function finishMiner(){
+
+    minerState.running = false;
+
+    if(minerInterval){
+
+        clearInterval(minerInterval);
+
+        minerInterval = null;
+
+    }
+
+    currentUser.miner.running = false;
+
+    currentUser.miner.completed = true;
+
+    currentUser.miner.earnings =
+        minerState.earnings;
+
+    saveCurrentUser();
+
+    document.getElementById("minerStatusText")
+        .textContent = "Completed";
+
+    document.getElementById("minerHeaderStatus")
+        .textContent = "Completed";
+
+    document.getElementById("heroStatus")
+        .textContent = "Mining completed";
+
+    document.getElementById("dashboardMinerStatus")
+        .textContent = "Completed";
+
+    document.getElementById("workerStatus")
+        .textContent = "● Stopped";
+
+    document.getElementById("workerStatus")
+        .className = "warning";
+
+    /*
+       The upload option becomes available again
+       for the next cycle.
+    */
+
+    minerState.proofUploaded = false;
+
+    document.getElementById("proofInput")
+        .value = "";
+
+    document.getElementById("uploadLabel")
+        .classList.remove("hidden");
+
+    document.getElementById("proofStatus")
+        .textContent =
+        "Mining cycle completed. Upload new verification image for another cycle.";
+
+    document.getElementById("proofStatus")
+        .style.color =
+        "var(--muted)";
+
+    document.getElementById("startMinerBtn")
+        .disabled = true;
+
+    document.getElementById("miningAmount")
+        .disabled = false;
+
+    alert("Mining cycle completed.");
+
+}
+
+
+/* =========================================
+   RESET MINER
+========================================= */
+
+document.getElementById("resetMinerBtn")
+.addEventListener("click",()=>{
+
+    if(minerInterval){
+
+        clearInterval(minerInterval);
+
+        minerInterval = null;
+
+    }
+
+    minerState = {
+
+        running:false,
+
+        proofUploaded:false,
+
+        amount:25,
+
+        target:250,
+
+        earnings:0,
+
+        startTime:null,
+
+        elapsed:0,
+
+        hashrate:0,
+
+        averageHashrate:0,
+
+        uptime:100,
+
+        efficiency:0,
+
+        temperature:0,
+
+        fanSpeed:0,
+
+        btcPrice:0
+
+    };
+
+    amountInput.value = 25;
+
+    amountInput.disabled = false;
+
+    document.getElementById("proofInput")
+        .value = "";
+
+    document.getElementById("uploadLabel")
+        .classList.remove("hidden");
+
+    document.getElementById("proofStatus")
+        .textContent =
+        "No proof uploaded.";
+
+    document.getElementById("proofStatus")
+        .style.color =
+        "var(--muted)";
+
+    document.getElementById("startMinerBtn")
+        .disabled = true;
+
+    document.getElementById("minerStatusText")
+        .textContent =
+        "Awaiting setup";
+
+    document.getElementById("minerHeaderStatus")
+        .textContent =
+        "Ready";
+
+    document.getElementById("heroStatus")
+        .textContent =
+        "Miner ready";
+
+    document.getElementById("dashboardMinerStatus")
+        .textContent =
+        "Ready";
+
+    document.getElementById("workerStatus")
+        .textContent =
+        "● Online";
+
+    document.getElementById("workerStatus")
+        .className =
+        "online";
+
+    updateTarget();
+
+    updateMinerUI();
+
+});
+
+
+/* =========================================
+   SAVE
+========================================= */
+
+function saveCurrentUser(){
+
+    if(!currentUser) return;
+
+    users[currentUser.email] =
+        currentUser;
+
+    localStorage.setItem(
+        USERS_KEY,
+        JSON.stringify(users)
+    );
+
+    localStorage.setItem(
+        CURRENT_KEY,
+        JSON.stringify(currentUser)
+    );
+
+}
+
+
+/* =========================================
    WITHDRAWAL
-========================= */
+========================================= */
+
+document.getElementById("withdrawBtn")
+.addEventListener("click",submitWithdrawal);
+
 
 function submitWithdrawal(){
 
-    const bank=
+    const bank =
         document.getElementById("bankSelect")
         .value;
 
-    const accountNumber=
-        document.getElementById("accountNumber")
-        .value.trim();
+    const type =
+        document.getElementById("accountType")
+        .value;
 
-    const holder=
+    const holder =
         document.getElementById("accountHolder")
         .value.trim();
 
-    const type=
-        document.querySelector(
-            'input[name="accountType"]:checked'
-        );
+    const number =
+        document.getElementById("accountNumber")
+        .value.trim();
 
-    if(
-        !bank ||
-        !accountNumber ||
-        !holder ||
-        !type
-    ){
+    if(!bank){
 
-        alert(
-            "Please complete all withdrawal information."
-        );
+        alert("Select your bank.");
 
         return;
+
     }
 
-    showLoading(function(){
+    if(!type){
+
+        alert("Select your account type.");
+
+        return;
+
+    }
+
+    if(!holder){
+
+        alert("Enter the account holder.");
+
+        return;
+
+    }
+
+    if(!number){
+
+        alert("Enter the account number.");
+
+        return;
+
+    }
+
+    showLoading(()=>{
 
         document.getElementById("withdrawModal")
-            .classList.add("show");
+            .classList.remove("hidden");
 
     });
 
@@ -2415,130 +3001,49 @@ function submitWithdrawal(){
 function closeWithdrawalModal(){
 
     document.getElementById("withdrawModal")
-        .classList.remove("show");
+        .classList.add("hidden");
 
 }
 
 
-/* =========================
-   LANGUAGE
-========================= */
-
-function autoLanguage(country){
-
-    const data=
-        countryData[country];
-
-    if(!data) return;
-
-    const language=
-        document.getElementById(
-            "languageSelect"
-        );
-
-    language.value=
-        data.language==="es"
-        ? "es"
-        : "en";
-
-}
-
-
-function changeLanguage(){
-
-    const language=
-        document.getElementById(
-            "languageSelect"
-        ).value;
-
-    if(language==="es"){
-
-        document.getElementById("loginTab")
-            .innerText="Iniciar sesión";
-
-        document.getElementById("registerTab")
-            .innerText="Registrarse";
-
-    }else{
-
-        document.getElementById("loginTab")
-            .innerText="Login";
-
-        document.getElementById("registerTab")
-            .innerText="Register";
-
-    }
-
-}
-
-
-/* =========================
+/* =========================================
    LOGOUT
-========================= */
+========================================= */
 
-function logoutUser(){
+document.getElementById("logoutBtn")
+.addEventListener("click",logout);
 
-    localStorage.removeItem(
-        "nexavestCurrentUser"
-    );
+document.getElementById("mobileLogout")
+.addEventListener("click",logout);
 
-    if(bonusTimer){
-        clearInterval(bonusTimer);
-    }
 
-    if(minerTimer){
-        clearInterval(minerTimer);
-    }
+function logout(){
 
-    showLoading(function(){
+    showLoading(()=>{
 
-        document.querySelectorAll(".page")
-            .forEach(function(page){
+        currentUser = null;
 
-                page.classList.remove("active");
+        localStorage.removeItem(CURRENT_KEY);
 
-            });
+        document.getElementById("app")
+            .classList.add("hidden");
 
         document.getElementById("authPage")
-            .classList.add("active");
+            .classList.remove("hidden");
 
-        showLogin();
+        document.getElementById("loginTab")
+            .click();
 
     });
 
 }
 
 
-/* =========================
-   AUTO LOGIN
-========================= */
+/* =========================================
+   FIRST TARGET UPDATE
+========================================= */
 
-window.addEventListener(
-    "DOMContentLoaded",
-    function(){
-
-        const email=
-            localStorage.getItem(
-                "nexavestCurrentUser"
-            );
-
-        if(!email) return;
-
-        const users=getUsers();
-
-        if(!users[email]){
-
-            localStorage.removeItem(
-                "nexavestCurrentUser"
-            );
-
-            return;
-        }
-
-        openHome(users[email]);
-
-    }
-);
+updateTarget();
 
 </script>
 
