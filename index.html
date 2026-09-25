@@ -24,40 +24,6 @@ select {
     font: inherit;
 }
 
-/* LOADING SCREEN */
-.loading-screen {
-    position: fixed;
-    inset: 0;
-    background: #ffffff;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    z-index: 9999;
-}
-
-.loading-spinner {
-    width: 45px;
-    height: 45px;
-    border: 4px solid #e5e7eb;
-    border-top: 4px solid #0b5cff;
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-}
-
-.loading-text {
-    margin-top: 15px;
-    font-size: 14px;
-    color: #687386;
-    font-weight: 600;
-}
-
-@keyframes spin {
-    to {
-        transform: rotate(360deg);
-    }
-}
-
 .header {
     height: 64px;
     background: #ffffff;
@@ -178,6 +144,11 @@ select {
     background: #064edc;
 }
 
+.primary-btn:disabled {
+    opacity: .65;
+    cursor: wait;
+}
+
 .error {
     color: #d92d20;
     background: #fff1f0;
@@ -295,7 +266,7 @@ select {
     border: 1px solid #f3d58a;
     border-radius: 10px;
     padding: 14px;
-    margin-bottom: 14px;
+    margin-bottom: 16px;
 }
 
 .fee-label {
@@ -322,10 +293,74 @@ select {
     border: 0;
     padding: 13px;
     border-radius: 9px;
-    background: #eef1f5;
-    color: #929baa;
+    background: #0b5cff;
+    color: white;
     font-weight: 700;
-    cursor: not-allowed;
+    cursor: pointer;
+}
+
+.withdraw-btn:hover {
+    background: #064edc;
+}
+
+.withdraw-form {
+    display: none;
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px solid #e7eaf0;
+}
+
+.withdraw-form.show {
+    display: block;
+}
+
+.withdraw-summary {
+    background: #f5f7fa;
+    border-radius: 10px;
+    padding: 13px;
+    margin-bottom: 16px;
+}
+
+.withdraw-summary div {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 7px;
+    font-size: 13px;
+}
+
+.withdraw-summary div:last-child {
+    margin-bottom: 0;
+}
+
+.withdraw-summary span {
+    color: #687386;
+}
+
+.withdraw-summary strong {
+    color: #172033;
+    text-align: right;
+}
+
+.submit-withdraw {
+    width: 100%;
+    border: 0;
+    border-radius: 9px;
+    padding: 14px;
+    background: #0b5cff;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.withdraw-message {
+    display: none;
+    margin-top: 12px;
+    padding: 11px;
+    border-radius: 8px;
+    background: #eef7ee;
+    color: #27702c;
+    font-size: 13px;
 }
 
 .logout {
@@ -352,6 +387,7 @@ select {
 }
 
 @media (max-width: 400px) {
+
     .container {
         padding: 16px 12px 30px;
     }
@@ -363,301 +399,984 @@ select {
     .balance {
         font-size: 33px;
     }
+
 }
 </style>
 </head>
 
 <body>
 
-<!-- LOADING -->
-<div id="loadingScreen" class="loading-screen">
-    <div class="loading-spinner"></div>
-    <div id="loadingText" class="loading-text">Cargando...</div>
-</div>
-
 <header class="header">
-    <div class="logo">Nexa Bonus</div>
 
-    <select id="languageSelect" class="lang-select" onchange="changeLanguage()">
+    <div class="logo">
+        Nexa Bonus
+    </div>
+
+    <select
+        id="languageSelect"
+        class="lang-select"
+        onchange="changeLanguage()"
+    >
         <option value="es">Español</option>
         <option value="en">English</option>
+        <option value="sw">Kiswahili</option>
     </select>
+
 </header>
 
 <div class="container">
 
-    <!-- AUTH SECTION -->
-    <section id="authSection" class="auth-card">
+<section id="authSection" class="auth-card">
 
-        <div class="tabs">
-            <button id="loginTab" class="tab active" onclick="showLogin()">
-                Iniciar sesión
-            </button>
+    <div class="tabs">
 
-            <button id="registerTab" class="tab" onclick="showRegister()">
-                Registrarse
-            </button>
-        </div>
-
-        <div id="errorBox" class="error"></div>
-
-        <!-- LOGIN -->
-        <div id="loginForm">
-
-            <h1 class="auth-title">Bienvenido</h1>
-
-            <p class="auth-subtitle">
-                Inicia sesión para acceder a tu cuenta.
-            </p>
-
-            <div class="form-group">
-                <label>Correo electrónico</label>
-                <input
-                    type="email"
-                    id="loginEmail"
-                    placeholder="tu@email.com"
-                >
-            </div>
-
-            <div class="form-group">
-                <label>Contraseña</label>
-                <input
-                    type="password"
-                    id="loginPassword"
-                    placeholder="Contraseña"
-                >
-            </div>
-
-            <button class="primary-btn" onclick="loginUser()">
-                Iniciar sesión
-            </button>
-
-        </div>
-
-        <!-- REGISTER -->
-        <div id="registerForm" class="hidden">
-
-            <h1 class="auth-title">Crear cuenta</h1>
-
-            <p class="auth-subtitle">
-                Registra tus datos para crear tu cuenta.
-            </p>
-
-            <div class="form-group">
-                <label>Nombre completo</label>
-                <input
-                    type="text"
-                    id="registerName"
-                    placeholder="Nombre completo"
-                >
-            </div>
-
-            <div class="form-group">
-                <label>Correo electrónico</label>
-                <input
-                    type="email"
-                    id="registerEmail"
-                    placeholder="tu@email.com"
-                >
-            </div>
-
-            <div class="form-group">
-                <label>Contraseña</label>
-                <input
-                    type="password"
-                    id="registerPassword"
-                    placeholder="Crear contraseña"
-                >
-            </div>
-
-            <div class="form-group">
-                <label>País</label>
-
-                <select id="registerCountry">
-                    <option value="">Selecciona tu país</option>
-                    <option value="Peru">Perú</option>
-                    <option value="Ecuador">Ecuador</option>
-                    <option value="Mexico">México</option>
-                    <option value="El Salvador">El Salvador</option>
-                    <option value="Brazil">Brasil</option>
-                    <option value="Colombia">Colombia</option>
-                    <option value="Venezuela">Venezuela</option>
-                    <option value="Guatemala">Guatemala</option>
-                </select>
-            </div>
-
-            <button class="primary-btn" onclick="registerUser()">
-                Crear cuenta
-            </button>
-
-        </div>
-
-    </section>
-
-    <!-- DASHBOARD -->
-    <section id="dashboard" class="dashboard">
-
-        <div class="welcome">
-
-            <h2>
-                Hola, <span id="userName"></span>
-            </h2>
-
-            <p>
-                Tu cuenta de bonificación
-            </p>
-
-        </div>
-
-        <div class="balance-card">
-
-            <div class="balance-label">
-                Bonus disponible
-            </div>
-
-            <div class="balance" id="bonusAmount">
-                $0
-            </div>
-
-            <div class="balance-note">
-                SIMULACIÓN
-            </div>
-
-        </div>
-
-        <div class="info-grid">
-
-            <div class="info-card">
-
-                <span>País</span>
-
-                <strong id="countryDisplay">
-                    -
-                </strong>
-
-            </div>
-
-            <div class="info-card">
-
-                <span>Moneda</span>
-
-                <strong id="currencyDisplay">
-                    -
-                </strong>
-
-            </div>
-
-        </div>
-
-        <div class="countdown-card">
-
-            <div class="countdown-title">
-                Tiempo restante del bonus
-            </div>
-
-            <div class="countdown" id="countdown">
-                15:41:55
-            </div>
-
-        </div>
-
-        <div class="withdrawal-card">
-
-            <h3>
-                Withdrawal
-            </h3>
-
-            <div class="fee-box">
-
-                <div class="fee-label">
-                    Bonus Fee
-                </div>
-
-                <div class="fee-amount">
-                    $45
-                </div>
-
-            </div>
-
-            <p class="withdraw-text">
-                Pay the fee before the withdrawal button and bank options is displayed for you.
-            </p>
-
-            <button
-                class="withdraw-btn"
-                onclick="withdrawNotice()"
-                disabled
-            >
-                Withdrawal
-            </button>
-
-        </div>
-
-        <button class="logout" onclick="logoutUser()">
-            Cerrar sesión
+        <button
+            id="loginTab"
+            class="tab active"
+            onclick="showLogin()"
+        >
+            Iniciar sesión
         </button>
 
-        <div class="footer">
+        <button
+            id="registerTab"
+            class="tab"
+            onclick="showRegister()"
+        >
+            Registrarse
+        </button>
+
+    </div>
+
+    <div id="errorBox" class="error"></div>
+
+    <!-- LOGIN -->
+
+    <div id="loginForm">
+
+        <h1 id="loginTitle" class="auth-title">
+            Bienvenido
+        </h1>
+
+        <p id="loginSubtitle" class="auth-subtitle">
+            Inicia sesión para acceder a tu cuenta.
+        </p>
+
+        <div class="form-group">
+
+            <label id="loginEmailLabel">
+                Correo electrónico
+            </label>
+
+            <input
+                type="email"
+                id="loginEmail"
+                placeholder="tu@email.com"
+            >
+
+        </div>
+
+        <div class="form-group">
+
+            <label id="loginPasswordLabel">
+                Contraseña
+            </label>
+
+            <input
+                type="password"
+                id="loginPassword"
+                placeholder="Contraseña"
+            >
+
+        </div>
+
+        <button
+            class="primary-btn"
+            id="loginButton"
+            onclick="loginUser()"
+        >
+            Iniciar sesión
+        </button>
+
+    </div>
+
+
+    <!-- REGISTER -->
+
+    <div id="registerForm" class="hidden">
+
+        <h1 id="registerTitle" class="auth-title">
+            Crear cuenta
+        </h1>
+
+        <p id="registerSubtitle" class="auth-subtitle">
+            Registra tus datos para crear tu cuenta.
+        </p>
+
+        <div class="form-group">
+
+            <label id="nameLabel">
+                Nombre completo
+            </label>
+
+            <input
+                type="text"
+                id="registerName"
+                placeholder="Nombre completo"
+            >
+
+        </div>
+
+        <div class="form-group">
+
+            <label id="emailLabel">
+                Correo electrónico
+            </label>
+
+            <input
+                type="email"
+                id="registerEmail"
+                placeholder="tu@email.com"
+            >
+
+        </div>
+
+        <div class="form-group">
+
+            <label id="passwordLabel">
+                Contraseña
+            </label>
+
+            <input
+                type="password"
+                id="registerPassword"
+                placeholder="Crear contraseña"
+            >
+
+        </div>
+
+        <div class="form-group">
+
+            <label id="countryLabel">
+                País
+            </label>
+
+            <select id="registerCountry">
+
+                <option value="">
+                    Selecciona tu país
+                </option>
+
+                <!-- SPANISH COUNTRIES -->
+
+                <option value="Argentina">Argentina</option>
+                <option value="Bolivia">Bolivia</option>
+                <option value="Chile">Chile</option>
+                <option value="Colombia">Colombia</option>
+                <option value="Costa Rica">Costa Rica</option>
+                <option value="Cuba">Cuba</option>
+                <option value="Dominican Republic">
+                    República Dominicana
+                </option>
+                <option value="Ecuador">Ecuador</option>
+                <option value="El Salvador">El Salvador</option>
+                <option value="Equatorial Guinea">
+                    Guinea Ecuatorial
+                </option>
+                <option value="Guatemala">Guatemala</option>
+                <option value="Honduras">Honduras</option>
+                <option value="Mexico">México</option>
+                <option value="Nicaragua">Nicaragua</option>
+                <option value="Panama">Panamá</option>
+                <option value="Paraguay">Paraguay</option>
+                <option value="Peru">Perú</option>
+                <option value="Spain">España</option>
+                <option value="Uruguay">Uruguay</option>
+                <option value="Venezuela">Venezuela</option>
+
+                <!-- AFRICA -->
+
+                <option value="Nigeria">Nigeria</option>
+                <option value="South Africa">South Africa</option>
+                <option value="Ghana">Ghana</option>
+                <option value="Kenya">Kenya</option>
+                <option value="Tanzania">Tanzania</option>
+                <option value="Uganda">Uganda</option>
+                <option value="Rwanda">Rwanda</option>
+
+            </select>
+
+        </div>
+
+        <button
+            class="primary-btn"
+            id="registerButton"
+            onclick="registerUser()"
+        >
+            Crear cuenta
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- DASHBOARD -->
+
+<section id="dashboard" class="dashboard">
+
+    <div class="welcome">
+
+        <h2>
+            <span id="welcomeText">Hola</span>,
+            <span id="userName"></span>
+        </h2>
+
+        <p id="dashboardSubtitle">
+            Tu cuenta de bonificación
+        </p>
+
+    </div>
+
+
+    <!-- BALANCE -->
+
+    <div class="balance-card">
+
+        <div
+            class="balance-label"
+            id="bonusAvailable"
+        >
+            Bonus disponible
+        </div>
+
+        <div
+            class="balance"
+            id="bonusAmount"
+        >
+            $0
+        </div>
+
+        <div class="balance-note">
             Nexa Bonus
         </div>
 
-    </section>
+    </div>
+
+
+    <!-- INFORMATION -->
+
+    <div class="info-grid">
+
+        <div class="info-card">
+
+            <span id="countryInfoLabel">
+                País
+            </span>
+
+            <strong id="countryDisplay">
+                -
+            </strong>
+
+        </div>
+
+        <div class="info-card">
+
+            <span id="currencyInfoLabel">
+                Moneda
+            </span>
+
+            <strong id="currencyDisplay">
+                -
+            </strong>
+
+        </div>
+
+    </div>
+
+
+    <!-- COUNTDOWN -->
+
+    <div class="countdown-card">
+
+        <div
+            class="countdown-title"
+            id="countdownTitle"
+        >
+            Tiempo restante del bonus
+        </div>
+
+        <div
+            class="countdown"
+            id="countdown"
+        >
+            15:41:55
+        </div>
+
+    </div>
+
+
+    <!-- WITHDRAWAL -->
+
+    <div class="withdrawal-card">
+
+        <h3 id="withdrawalTitle">
+            Retiro
+        </h3>
+
+        <div class="fee-box">
+
+            <div
+                class="fee-label"
+                id="feeLabel"
+            >
+                Withdrawal Fee
+            </div>
+
+            <div class="fee-amount">
+                $150
+            </div>
+
+        </div>
+
+        <p
+            class="withdraw-text"
+            id="withdrawText"
+        >
+            Selecciona tu banco y completa los datos de tu cuenta para solicitar un retiro.
+        </p>
+
+        <button
+            class="withdraw-btn"
+            id="withdrawButton"
+            onclick="openWithdrawalForm()"
+        >
+            Withdrawal
+        </button>
+
+
+        <!-- WITHDRAWAL FORM -->
+
+        <div
+            id="withdrawForm"
+            class="withdraw-form"
+        >
+
+            <div class="form-group">
+
+                <label id="bankLabel">
+                    Bank
+                </label>
+
+                <select id="bankSelect">
+
+                    <option value="">
+                        Select your bank
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label id="accountHolderLabel">
+                    Account holder name
+                </label>
+
+                <input
+                    type="text"
+                    id="accountHolder"
+                    placeholder="Full name"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label id="accountNumberLabel">
+                    Account number
+                </label>
+
+                <input
+                    type="text"
+                    id="accountNumber"
+                    placeholder="Account number"
+                    inputmode="numeric"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label id="accountTypeLabel">
+                    Account type
+                </label>
+
+                <select id="accountType">
+
+                    <option value="">
+                        Select account type
+                    </option>
+
+                    <option value="Savings">
+                        Savings
+                    </option>
+
+                    <option value="Current">
+                        Current
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label id="currencyWithdrawLabel">
+                    Currency
+                </label>
+
+                <select id="withdrawCurrency">
+
+                    <option value="">
+                        Select currency
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label id="amountLabel">
+                    Withdrawal amount
+                </label>
+
+                <input
+                    type="number"
+                    id="withdrawAmount"
+                    placeholder="0.00"
+                    min="0"
+                >
+
+            </div>
+
+
+            <div class="withdraw-summary">
+
+                <div>
+
+                    <span id="summaryCountry">
+                        Country
+                    </span>
+
+                    <strong id="summaryCountryValue">
+                        -
+                    </strong>
+
+                </div>
+
+                <div>
+
+                    <span id="summaryBank">
+                        Bank
+                    </span>
+
+                    <strong id="summaryBankValue">
+                        -
+                    </strong>
+
+                </div>
+
+                <div>
+
+                    <span id="summaryFee">
+                        Withdrawal Fee
+                    </span>
+
+                    <strong>
+                        $150
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <button
+                class="submit-withdraw"
+                id="submitWithdrawButton"
+                onclick="submitWithdrawal()"
+            >
+                Submit Withdrawal
+            </button>
+
+            <div
+                id="withdrawMessage"
+                class="withdraw-message"
+            ></div>
+
+        </div>
+
+    </div>
+
+
+    <button
+        class="logout"
+        id="logoutButton"
+        onclick="logoutUser()"
+    >
+        Cerrar sesión
+    </button>
+
+    <div class="footer">
+        Nexa Bonus
+    </div>
+
+</section>
 
 </div>
 
+
 <script>
+
+/* =====================================================
+   COUNTRY DATA
+===================================================== */
 
 const countryData = {
 
-    "Peru": {
-        currency: "PEN",
-        symbol: "S/",
-        rate: 3.50
-    },
+    /* ================= SPANISH ================= */
 
-    "Ecuador": {
-        currency: "USD",
+    "Argentina": {
+        currency: "ARS",
         symbol: "$",
-        rate: 1
+        rate: 1450,
+        language: "es",
+        banks: [
+            "Banco de la Nación Argentina",
+            "Banco Galicia",
+            "BBVA Argentina",
+            "Banco Santander Argentina",
+            "Banco Macro",
+            "Banco Provincia"
+        ]
     },
 
-    "Mexico": {
-        currency: "MXN",
-        symbol: "MX$",
-        rate: 19
+    "Bolivia": {
+        currency: "BOB",
+        symbol: "Bs.",
+        rate: 6.96,
+        language: "es",
+        banks: [
+            "Banco Nacional de Bolivia",
+            "Banco Mercantil Santa Cruz",
+            "Banco Bisa",
+            "Banco Unión",
+            "Banco Económico",
+            "Banco Ganadero"
+        ]
     },
 
-    "El Salvador": {
-        currency: "USD",
+    "Chile": {
+        currency: "CLP",
         symbol: "$",
-        rate: 1
-    },
-
-    "Brazil": {
-        currency: "BRL",
-        symbol: "R$",
-        rate: 5.40
+        rate: 950,
+        language: "es",
+        banks: [
+            "Banco de Chile",
+            "BancoEstado",
+            "Banco Santander Chile",
+            "Banco de Crédito e Inversiones",
+            "Scotiabank Chile",
+            "Banco BICE"
+        ]
     },
 
     "Colombia": {
         currency: "COP",
         symbol: "$",
-        rate: 3900
+        rate: 3900,
+        language: "es",
+        banks: [
+            "Bancolombia",
+            "Banco de Bogotá",
+            "Davivienda",
+            "BBVA Colombia",
+            "Banco de Occidente",
+            "Banco Popular",
+            "Scotiabank Colpatria"
+        ]
     },
 
-    "Venezuela": {
-        currency: "VES",
-        symbol: "Bs.",
-        rate: 130
+    "Costa Rica": {
+        currency: "CRC",
+        symbol: "₡",
+        rate: 510,
+        language: "es",
+        banks: [
+            "Banco Nacional de Costa Rica",
+            "Banco de Costa Rica",
+            "BAC Credomatic",
+            "Banco Popular",
+            "Scotiabank Costa Rica"
+        ]
+    },
+
+    "Cuba": {
+        currency: "CUP",
+        symbol: "$",
+        rate: 24,
+        language: "es",
+        banks: [
+            "Banco Metropolitano",
+            "Banco Popular de Ahorro",
+            "Banco de Crédito y Comercio",
+            "Banco Financiero Internacional"
+        ]
+    },
+
+    "Dominican Republic": {
+        currency: "DOP",
+        symbol: "RD$",
+        rate: 63,
+        language: "es",
+        banks: [
+            "Banco Popular Dominicano",
+            "Banco de Reservas",
+            "BHD",
+            "Scotiabank República Dominicana",
+            "Banco Santa Cruz",
+            "Banco Promerica"
+        ]
+    },
+
+    "Ecuador": {
+        currency: "USD",
+        symbol: "$",
+        rate: 1,
+        language: "es",
+        banks: [
+            "Banco Pichincha",
+            "Banco del Pacífico",
+            "Banco Guayaquil",
+            "Produbanco",
+            "Banco Internacional",
+            "Banco Bolivariano"
+        ]
+    },
+
+    "El Salvador": {
+        currency: "USD",
+        symbol: "$",
+        rate: 1,
+        language: "es",
+        banks: [
+            "Banco Agrícola",
+            "Banco Cuscatlán",
+            "Banco Davivienda Salvadoreño",
+            "Banco Promerica",
+            "Banco Azul",
+            "Banco Atlántida"
+        ]
+    },
+
+    "Equatorial Guinea": {
+        currency: "XAF",
+        symbol: "FCFA",
+        rate: 600,
+        language: "es",
+        banks: [
+            "BGFIBank Guinea Ecuatorial",
+            "Banco Nacional de Guinea Ecuatorial",
+            "Ecobank Guinea Ecuatorial",
+            "CBG Bank"
+        ]
     },
 
     "Guatemala": {
         currency: "GTQ",
         symbol: "Q",
-        rate: 7.70
+        rate: 7.70,
+        language: "es",
+        banks: [
+            "Banco Industrial",
+            "Banrural",
+            "Banco G&T Continental",
+            "Banco Agromercantil",
+            "Banco Promerica",
+            "BAC Guatemala"
+        ]
+    },
+
+    "Honduras": {
+        currency: "HNL",
+        symbol: "L",
+        rate: 25,
+        language: "es",
+        banks: [
+            "Banco Atlántida",
+            "Ficohsa",
+            "Banco de Occidente",
+            "BAC Honduras",
+            "Banpaís",
+            "Banco Promerica"
+        ]
+    },
+
+    "Mexico": {
+        currency: "MXN",
+        symbol: "MX$",
+        rate: 19,
+        language: "es",
+        banks: [
+            "BBVA México",
+            "Banorte",
+            "Santander México",
+            "Citibanamex",
+            "HSBC México",
+            "Scotiabank México",
+            "Banco Azteca"
+        ]
+    },
+
+    "Nicaragua": {
+        currency: "NIO",
+        symbol: "C$",
+        rate: 36.8,
+        language: "es",
+        banks: [
+            "Banco de América Central",
+            "Banpro",
+            "Banco Lafise",
+            "Banco de Finanzas",
+            "Banco Avanz"
+        ]
+    },
+
+    "Panama": {
+        currency: "PAB",
+        symbol: "B/.",
+        rate: 1,
+        language: "es",
+        banks: [
+            "Banco General",
+            "Banistmo",
+            "BAC Panamá",
+            "Global Bank",
+            "Multibank",
+            "Caja de Ahorros"
+        ]
+    },
+
+    "Paraguay": {
+        currency: "PYG",
+        symbol: "₲",
+        rate: 7800,
+        language: "es",
+        banks: [
+            "Banco Nacional de Fomento",
+            "Banco Continental",
+            "Banco Itaú Paraguay",
+            "Banco GNB Paraguay",
+            "Banco Atlas",
+            "Sudameris Bank"
+        ]
+    },
+
+    "Peru": {
+        currency: "PEN",
+        symbol: "S/",
+        rate: 3.50,
+        language: "es",
+        banks: [
+            "Banco de Crédito del Perú",
+            "BBVA Perú",
+            "Interbank",
+            "Scotiabank Perú",
+            "Banco de la Nación",
+            "Banco Pichincha Perú",
+            "BanBif"
+        ]
+    },
+
+    "Spain": {
+        currency: "EUR",
+        symbol: "€",
+        rate: 0.85,
+        language: "es",
+        banks: [
+            "Banco Santander",
+            "BBVA",
+            "CaixaBank",
+            "Banco Sabadell",
+            "Bankinter",
+            "Unicaja Banco"
+        ]
+    },
+
+    "Uruguay": {
+        currency: "UYU",
+        symbol: "$U",
+        rate: 40,
+        language: "es",
+        banks: [
+            "Banco República",
+            "Banco Itaú Uruguay",
+            "Santander Uruguay",
+            "BBVA Uruguay",
+            "Scotiabank Uruguay",
+            "HSBC Uruguay"
+        ]
+    },
+
+    "Venezuela": {
+        currency: "VES",
+        symbol: "Bs.",
+        rate: 130,
+        language: "es",
+        banks: [
+            "Banco de Venezuela",
+            "Banesco",
+            "Banco Mercantil",
+            "BBVA Provincial",
+            "Banco Nacional de Crédito",
+            "Banco del Tesoro",
+            "Banco Exterior"
+        ]
+    },
+
+
+    /* ================= AFRICA ================= */
+
+    "Nigeria": {
+        currency: "NGN",
+        symbol: "₦",
+        rate: 1500,
+        language: "en",
+        banks: [
+            "Access Bank",
+            "Guaranty Trust Bank",
+            "Zenith Bank",
+            "First Bank of Nigeria",
+            "United Bank for Africa",
+            "Fidelity Bank",
+            "First City Monument Bank",
+            "Sterling Bank",
+            "Union Bank",
+            "Wema Bank",
+            "Stanbic IBTC Bank"
+        ]
+    },
+
+    "South Africa": {
+        currency: "ZAR",
+        symbol: "R",
+        rate: 17.5,
+        language: "en",
+        banks: [
+            "Standard Bank",
+            "First National Bank",
+            "Absa Bank",
+            "Nedbank",
+            "Capitec Bank",
+            "Investec Bank",
+            "African Bank"
+        ]
+    },
+
+    "Ghana": {
+        currency: "GHS",
+        symbol: "GH₵",
+        rate: 12.5,
+        language: "en",
+        banks: [
+            "GCB Bank",
+            "Ecobank Ghana",
+            "Absa Bank Ghana",
+            "Stanbic Bank Ghana",
+            "Fidelity Bank Ghana",
+            "CalBank",
+            "Republic Bank Ghana"
+        ]
+    },
+
+    "Kenya": {
+        currency: "KES",
+        symbol: "KSh",
+        rate: 129,
+        language: "sw",
+        banks: [
+            "KCB Bank Kenya",
+            "Equity Bank Kenya",
+            "Co-operative Bank of Kenya",
+            "Absa Bank Kenya",
+            "NCBA Bank Kenya",
+            "Stanbic Bank Kenya",
+            "I&M Bank Kenya"
+        ]
+    },
+
+    "Tanzania": {
+        currency: "TZS",
+        symbol: "TSh",
+        rate: 2500,
+        language: "sw",
+        banks: [
+            "CRDB Bank",
+            "NMB Bank",
+            "NBC Tanzania",
+            "Absa Bank Tanzania",
+            "Stanbic Bank Tanzania",
+            "Exim Bank Tanzania",
+            "DTB Tanzania"
+        ]
+    },
+
+    "Uganda": {
+        currency: "UGX",
+        symbol: "USh",
+        rate: 3600,
+        language: "sw",
+        banks: [
+            "Stanbic Bank Uganda",
+            "Centenary Bank",
+            "Absa Bank Uganda",
+            "Bank of Baroda Uganda",
+            "DFCU Bank",
+            "Equity Bank Uganda",
+            "Standard Chartered Uganda"
+        ]
+    },
+
+    "Rwanda": {
+        currency: "RWF",
+        symbol: "FRw",
+        rate: 1450,
+        language: "sw",
+        banks: [
+            "Bank of Kigali",
+            "I&M Bank Rwanda",
+            "Equity Bank Rwanda",
+            "KCB Bank Rwanda",
+            "Cogebanque",
+            "Access Bank Rwanda",
+            "Ecobank Rwanda"
+        ]
     }
 
 };
+
+
+/* =====================================================
+   BONUS VALUES
+===================================================== */
 
 const bonuses = [
     300,
@@ -668,6 +1387,388 @@ const bonuses = [
     3000,
     7000
 ];
+
+
+/* =====================================================
+   LANGUAGE DATA
+===================================================== */
+
+const languageData = {
+
+    es: {
+
+        login: "Iniciar sesión",
+        register: "Registrarse",
+
+        welcome: "Bienvenido",
+        loginSubtitle:
+            "Inicia sesión para acceder a tu cuenta.",
+
+        createAccount:
+            "Crear cuenta",
+
+        registerSubtitle:
+            "Registra tus datos para crear tu cuenta.",
+
+        name:
+            "Nombre completo",
+
+        email:
+            "Correo electrónico",
+
+        password:
+            "Contraseña",
+
+        country:
+            "País",
+
+        selectCountry:
+            "Selecciona tu país",
+
+        create:
+            "Crear cuenta",
+
+        hello:
+            "Hola",
+
+        dashboard:
+            "Tu cuenta de bonificación",
+
+        bonus:
+            "Bonus disponible",
+
+        countryInfo:
+            "País",
+
+        currency:
+            "Moneda",
+
+        countdown:
+            "Tiempo restante del bonus",
+
+        withdrawal:
+            "Retiro",
+
+        fee:
+            "Withdrawal Fee",
+
+        withdrawalText:
+            "Selecciona tu banco y completa los datos de tu cuenta para solicitar un retiro.",
+
+        withdrawalButton:
+            "Withdrawal",
+
+        bank:
+            "Banco",
+
+        selectBank:
+            "Selecciona tu banco",
+
+        holder:
+            "Nombre del titular",
+
+        holderPlaceholder:
+            "Nombre completo",
+
+        accountNumber:
+            "Número de cuenta",
+
+        accountNumberPlaceholder:
+            "Número de cuenta",
+
+        accountType:
+            "Tipo de cuenta",
+
+        selectAccountType:
+            "Selecciona el tipo de cuenta",
+
+        savings:
+            "Ahorros",
+
+        current:
+            "Corriente",
+
+        withdrawalCurrency:
+            "Moneda",
+
+        selectCurrency:
+            "Selecciona moneda",
+
+        amount:
+            "Monto del retiro",
+
+        summaryCountry:
+            "País",
+
+        summaryBank:
+            "Banco",
+
+        summaryFee:
+            "Withdrawal Fee",
+
+        submit:
+            "Solicitar retiro",
+
+        logout:
+            "Cerrar sesión",
+
+        submitted:
+            "Solicitud de retiro registrada."
+
+    },
+
+
+    en: {
+
+        login: "Login",
+        register: "Register",
+
+        welcome: "Welcome",
+        loginSubtitle:
+            "Sign in to access your account.",
+
+        createAccount:
+            "Create account",
+
+        registerSubtitle:
+            "Enter your details to create your account.",
+
+        name:
+            "Full name",
+
+        email:
+            "Email address",
+
+        password:
+            "Password",
+
+        country:
+            "Country",
+
+        selectCountry:
+            "Select your country",
+
+        create:
+            "Create account",
+
+        hello:
+            "Hello",
+
+        dashboard:
+            "Your bonus account",
+
+        bonus:
+            "Available bonus",
+
+        countryInfo:
+            "Country",
+
+        currency:
+            "Currency",
+
+        countdown:
+            "Bonus time remaining",
+
+        withdrawal:
+            "Withdrawal",
+
+        fee:
+            "Withdrawal Fee",
+
+        withdrawalText:
+            "Select your bank and complete your account details to submit a withdrawal request.",
+
+        withdrawalButton:
+            "Withdrawal",
+
+        bank:
+            "Bank",
+
+        selectBank:
+            "Select your bank",
+
+        holder:
+            "Account holder name",
+
+        holderPlaceholder:
+            "Full name",
+
+        accountNumber:
+            "Account number",
+
+        accountNumberPlaceholder:
+            "Account number",
+
+        accountType:
+            "Account type",
+
+        selectAccountType:
+            "Select account type",
+
+        savings:
+            "Savings",
+
+        current:
+            "Current",
+
+        withdrawalCurrency:
+            "Currency",
+
+        selectCurrency:
+            "Select currency",
+
+        amount:
+            "Withdrawal amount",
+
+        summaryCountry:
+            "Country",
+
+        summaryBank:
+            "Bank",
+
+        summaryFee:
+            "Withdrawal Fee",
+
+        submit:
+            "Submit Withdrawal",
+
+        logout:
+            "Logout",
+
+        submitted:
+            "Withdrawal request submitted."
+
+    },
+
+
+    sw: {
+
+        login: "Ingia",
+        register: "Jisajili",
+
+        welcome: "Karibu",
+        loginSubtitle:
+            "Ingia ili kufikia akaunti yako.",
+
+        createAccount:
+            "Fungua akaunti",
+
+        registerSubtitle:
+            "Weka taarifa zako ili kufungua akaunti.",
+
+        name:
+            "Jina kamili",
+
+        email:
+            "Barua pepe",
+
+        password:
+            "Nenosiri",
+
+        country:
+            "Nchi",
+
+        selectCountry:
+            "Chagua nchi yako",
+
+        create:
+            "Fungua akaunti",
+
+        hello:
+            "Habari",
+
+        dashboard:
+            "Akaunti yako ya bonasi",
+
+        bonus:
+            "Bonasi inayopatikana",
+
+        countryInfo:
+            "Nchi",
+
+        currency:
+            "Sarafu",
+
+        countdown:
+            "Muda uliobaki wa bonasi",
+
+        withdrawal:
+            "Kutoa fedha",
+
+        fee:
+            "Ada ya kutoa fedha",
+
+        withdrawalText:
+            "Chagua benki yako na ujaze taarifa za akaunti yako ili kutuma ombi la kutoa fedha.",
+
+        withdrawalButton:
+            "Kutoa fedha",
+
+        bank:
+            "Benki",
+
+        selectBank:
+            "Chagua benki yako",
+
+        holder:
+            "Jina la mwenye akaunti",
+
+        holderPlaceholder:
+            "Jina kamili",
+
+        accountNumber:
+            "Nambari ya akaunti",
+
+        accountNumberPlaceholder:
+            "Nambari ya akaunti",
+
+        accountType:
+            "Aina ya akaunti",
+
+        selectAccountType:
+            "Chagua aina ya akaunti",
+
+        savings:
+            "Akiba",
+
+        current:
+            "Current",
+
+        withdrawalCurrency:
+            "Sarafu",
+
+        selectCurrency:
+            "Chagua sarafu",
+
+        amount:
+            "Kiasi cha kutoa",
+
+        summaryCountry:
+            "Nchi",
+
+        summaryBank:
+            "Benki",
+
+        summaryFee:
+            "Ada ya kutoa fedha",
+
+        submit:
+            "Tuma ombi la kutoa",
+
+        logout:
+            "Ondoka",
+
+        submitted:
+            "Ombi la kutoa fedha limetumwa."
+
+    }
+
+};
+
+
+/* =====================================================
+   STORAGE
+===================================================== */
 
 function getUsers() {
 
@@ -686,22 +1787,229 @@ function saveUsers(users) {
 
 }
 
+
+/* =====================================================
+   ERROR
+===================================================== */
+
 function showError(message) {
 
-    const box = document.getElementById("errorBox");
+    const box =
+        document.getElementById("errorBox");
 
     box.innerText = message;
+
     box.style.display = "block";
 
 }
 
 function hideError() {
 
-    const box = document.getElementById("errorBox");
+    const box =
+        document.getElementById("errorBox");
 
     box.style.display = "none";
 
 }
+
+
+/* =====================================================
+   LANGUAGE
+===================================================== */
+
+let currentLanguage = "es";
+
+
+function applyLanguage(language) {
+
+    if (!languageData[language]) {
+        language = "en";
+    }
+
+    currentLanguage = language;
+
+    const t =
+        languageData[language];
+
+    document.getElementById("languageSelect")
+        .value = language;
+
+    document.getElementById("loginTab")
+        .innerText = t.login;
+
+    document.getElementById("registerTab")
+        .innerText = t.register;
+
+    document.getElementById("loginTitle")
+        .innerText = t.welcome;
+
+    document.getElementById("loginSubtitle")
+        .innerText = t.loginSubtitle;
+
+    document.getElementById("registerTitle")
+        .innerText = t.createAccount;
+
+    document.getElementById("registerSubtitle")
+        .innerText = t.registerSubtitle;
+
+    document.getElementById("loginEmailLabel")
+        .innerText = t.email;
+
+    document.getElementById("loginPasswordLabel")
+        .innerText = t.password;
+
+    document.getElementById("loginButton")
+        .innerText = t.login;
+
+    document.getElementById("nameLabel")
+        .innerText = t.name;
+
+    document.getElementById("emailLabel")
+        .innerText = t.email;
+
+    document.getElementById("passwordLabel")
+        .innerText = t.password;
+
+    document.getElementById("countryLabel")
+        .innerText = t.country;
+
+    document.getElementById("registerButton")
+        .innerText = t.create;
+
+    document.getElementById("welcomeText")
+        .innerText = t.hello;
+
+    document.getElementById("dashboardSubtitle")
+        .innerText = t.dashboard;
+
+    document.getElementById("bonusAvailable")
+        .innerText = t.bonus;
+
+    document.getElementById("countryInfoLabel")
+        .innerText = t.countryInfo;
+
+    document.getElementById("currencyInfoLabel")
+        .innerText = t.currency;
+
+    document.getElementById("countdownTitle")
+        .innerText = t.countdown;
+
+    document.getElementById("withdrawalTitle")
+        .innerText = t.withdrawal;
+
+    document.getElementById("feeLabel")
+        .innerText = t.fee;
+
+    document.getElementById("withdrawText")
+        .innerText = t.withdrawalText;
+
+    document.getElementById("withdrawButton")
+        .innerText = t.withdrawalButton;
+
+    document.getElementById("bankLabel")
+        .innerText = t.bank;
+
+    document.getElementById("accountHolderLabel")
+        .innerText = t.holder;
+
+    document.getElementById("accountNumberLabel")
+        .innerText = t.accountNumber;
+
+    document.getElementById("accountTypeLabel")
+        .innerText = t.accountType;
+
+    document.getElementById("currencyWithdrawLabel")
+        .innerText = t.withdrawalCurrency;
+
+    document.getElementById("amountLabel")
+        .innerText = t.amount;
+
+    document.getElementById("summaryCountry")
+        .innerText = t.summaryCountry;
+
+    document.getElementById("summaryBank")
+        .innerText = t.summaryBank;
+
+    document.getElementById("summaryFee")
+        .innerText = t.summaryFee;
+
+    document.getElementById("submitWithdrawButton")
+        .innerText = t.submit;
+
+    document.getElementById("logoutButton")
+        .innerText = t.logout;
+
+    document.getElementById("registerCountry")
+        .options[0]
+        .innerText = t.selectCountry;
+
+    document.getElementById("bankSelect")
+        .options[0]
+        .innerText = t.selectBank;
+
+    document.getElementById("accountHolder")
+        .placeholder = t.holderPlaceholder;
+
+    document.getElementById("accountNumber")
+        .placeholder = t.accountNumberPlaceholder;
+
+    document.getElementById("withdrawCurrency")
+        .options[0]
+        .innerText = t.selectCurrency;
+
+    document.getElementById("accountType")
+        .options[0]
+        .innerText = t.selectAccountType;
+
+    document.getElementById("accountType")
+        .options[1]
+        .innerText = t.savings;
+
+    document.getElementById("accountType")
+        .options[2]
+        .innerText = t.current;
+
+}
+
+
+/* =====================================================
+   LANGUAGE CHANGE
+===================================================== */
+
+function changeLanguage() {
+
+    const language =
+        document.getElementById("languageSelect")
+        .value;
+
+    applyLanguage(language);
+
+}
+
+
+/* =====================================================
+   AUTO COUNTRY LANGUAGE
+===================================================== */
+
+function detectCountryLanguage(country) {
+
+    const data =
+        countryData[country];
+
+    if (!data) {
+
+        return "en";
+
+    }
+
+    return data.language || "en";
+
+}
+
+
+/* =====================================================
+   TABS
+===================================================== */
 
 function showLogin() {
 
@@ -720,6 +2028,7 @@ function showLogin() {
     hideError();
 
 }
+
 
 function showRegister() {
 
@@ -740,31 +2049,9 @@ function showRegister() {
 }
 
 
-/* =========================
-   LOADING
-========================= */
-
-function showLoading(text) {
-
-    document.getElementById("loadingText")
-        .innerText = text;
-
-    document.getElementById("loadingScreen")
-        .style.display = "flex";
-
-}
-
-function hideLoading() {
-
-    document.getElementById("loadingScreen")
-        .style.display = "none";
-
-}
-
-
-/* =========================
+/* =====================================================
    REGISTER
-========================= */
+===================================================== */
 
 function registerUser() {
 
@@ -787,10 +2074,19 @@ function registerUser() {
         document.getElementById("registerCountry")
         .value;
 
-    if (!name || !email || !password || !country) {
+    if (
+        !name ||
+        !email ||
+        !password ||
+        !country
+    ) {
 
         showError(
-            "Completa todos los campos."
+            currentLanguage === "es"
+                ? "Completa todos los campos."
+                : currentLanguage === "sw"
+                    ? "Jaza sehemu zote."
+                    : "Please complete all fields."
         );
 
         return;
@@ -801,7 +2097,11 @@ function registerUser() {
     if (users[email]) {
 
         showError(
-            "Este correo ya está registrado."
+            currentLanguage === "es"
+                ? "Este correo ya está registrado."
+                : currentLanguage === "sw"
+                    ? "Barua pepe hii tayari imesajiliwa."
+                    : "This email is already registered."
         );
 
         return;
@@ -849,22 +2149,25 @@ function registerUser() {
         email
     );
 
-    showLoading("Creando cuenta...");
+    /*
+       Automatically switch the interface
+       according to the selected country.
+    */
 
-    setTimeout(function() {
+    applyLanguage(
+        detectCountryLanguage(country)
+    );
 
-        hideLoading();
-
-        openDashboard(users[email]);
-
-    }, 3000);
+    openDashboard(
+        users[email]
+    );
 
 }
 
 
-/* =========================
+/* =====================================================
    LOGIN
-========================= */
+===================================================== */
 
 function loginUser() {
 
@@ -884,16 +2187,26 @@ function loginUser() {
     if (!users[email]) {
 
         showError(
-            "No existe una cuenta con este correo."
+            currentLanguage === "es"
+                ? "No existe una cuenta con este correo."
+                : currentLanguage === "sw"
+                    ? "Hakuna akaunti yenye barua pepe hii."
+                    : "No account exists with this email."
         );
 
         return;
     }
 
-    if (users[email].password !== password) {
+    if (
+        users[email].password !== password
+    ) {
 
         showError(
-            "Contraseña incorrecta."
+            currentLanguage === "es"
+                ? "Contraseña incorrecta."
+                : currentLanguage === "sw"
+                    ? "Nenosiri si sahihi."
+                    : "Incorrect password."
         );
 
         return;
@@ -904,22 +2217,27 @@ function loginUser() {
         email
     );
 
-    showLoading("Iniciando sesión...");
+    /*
+       Detect language from the user's
+       registered country every time they log in.
+    */
 
-    setTimeout(function() {
+    applyLanguage(
+        detectCountryLanguage(
+            users[email].country
+        )
+    );
 
-        hideLoading();
-
-        openDashboard(users[email]);
-
-    }, 3000);
+    openDashboard(
+        users[email]
+    );
 
 }
 
 
-/* =========================
+/* =====================================================
    DASHBOARD
-========================= */
+===================================================== */
 
 function openDashboard(user) {
 
@@ -955,9 +2273,16 @@ function openDashboard(user) {
         data.symbol +
         formatNumber(localValue);
 
+    prepareWithdrawal(user);
+
     startCountdown(user);
 
 }
+
+
+/* =====================================================
+   NUMBER FORMAT
+===================================================== */
 
 function formatNumber(number) {
 
@@ -969,6 +2294,11 @@ function formatNumber(number) {
     ).format(number);
 
 }
+
+
+/* =====================================================
+   COUNTDOWN
+===================================================== */
 
 let countdownTimer = null;
 
@@ -982,7 +2312,8 @@ function startCountdown(user) {
 
     function updateCountdown() {
 
-        const now = Date.now();
+        const now =
+            Date.now();
 
         let remaining =
             user.expiresAt - now;
@@ -992,7 +2323,9 @@ function startCountdown(user) {
             document.getElementById("countdown")
                 .innerText = "00:00:00";
 
-            clearInterval(countdownTimer);
+            clearInterval(
+                countdownTimer
+            );
 
             return;
         }
@@ -1035,13 +2368,210 @@ function startCountdown(user) {
 
 }
 
-function withdrawNotice() {
 
-    alert(
-        "Bonus Fee: $45"
+/* =====================================================
+   WITHDRAWAL PREPARATION
+===================================================== */
+
+function prepareWithdrawal(user) {
+
+    const data =
+        countryData[user.country];
+
+    if (!data) return;
+
+    const bankSelect =
+        document.getElementById("bankSelect");
+
+    bankSelect.innerHTML = "";
+
+    const language =
+        currentLanguage;
+
+    const firstOption =
+        document.createElement("option");
+
+    firstOption.value = "";
+
+    firstOption.innerText =
+        language === "es"
+            ? "Selecciona tu banco"
+            : language === "sw"
+                ? "Chagua benki yako"
+                : "Select your bank";
+
+    bankSelect.appendChild(
+        firstOption
     );
 
+    data.banks.forEach(
+        function(bank) {
+
+            const option =
+                document.createElement("option");
+
+            option.value = bank;
+
+            option.innerText = bank;
+
+            bankSelect.appendChild(
+                option
+            );
+
+        }
+    );
+
+
+    const currencySelect =
+        document.getElementById(
+            "withdrawCurrency"
+        );
+
+    currencySelect.innerHTML = "";
+
+    const currencyOption =
+        document.createElement("option");
+
+    currencyOption.value =
+        data.currency;
+
+    currencyOption.innerText =
+        data.currency +
+        " (" +
+        data.symbol +
+        ")";
+
+    currencySelect.appendChild(
+        currencyOption
+    );
+
+
+    document.getElementById(
+        "summaryCountryValue"
+    ).innerText =
+        user.country;
+
 }
+
+
+/* =====================================================
+   OPEN WITHDRAWAL FORM
+===================================================== */
+
+function openWithdrawalForm() {
+
+    const form =
+        document.getElementById(
+            "withdrawForm"
+        );
+
+    form.classList.toggle("show");
+
+}
+
+
+/* =====================================================
+   BANK SUMMARY
+===================================================== */
+
+document.addEventListener(
+    "change",
+    function(event) {
+
+        if (
+            event.target.id ===
+            "bankSelect"
+        ) {
+
+            document.getElementById(
+                "summaryBankValue"
+            ).innerText =
+                event.target.value ||
+                "-";
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   SUBMIT WITHDRAWAL
+===================================================== */
+
+function submitWithdrawal() {
+
+    const bank =
+        document.getElementById(
+            "bankSelect"
+        ).value;
+
+    const holder =
+        document.getElementById(
+            "accountHolder"
+        ).value.trim();
+
+    const accountNumber =
+        document.getElementById(
+            "accountNumber"
+        ).value.trim();
+
+    const accountType =
+        document.getElementById(
+            "accountType"
+        ).value;
+
+    const currency =
+        document.getElementById(
+            "withdrawCurrency"
+        ).value;
+
+    const amount =
+        document.getElementById(
+            "withdrawAmount"
+        ).value;
+
+    if (
+        !bank ||
+        !holder ||
+        !accountNumber ||
+        !accountType ||
+        !currency ||
+        !amount
+    ) {
+
+        showError(
+            currentLanguage === "es"
+                ? "Completa todos los datos de retiro."
+                : currentLanguage === "sw"
+                    ? "Jaza taarifa zote za kutoa fedha."
+                    : "Please complete all withdrawal details."
+        );
+
+        return;
+    }
+
+    hideError();
+
+    const message =
+        document.getElementById(
+            "withdrawMessage"
+        );
+
+    message.innerText =
+        languageData[
+            currentLanguage
+        ].submitted;
+
+    message.style.display =
+        "block";
+
+}
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
 
 function logoutUser() {
 
@@ -1051,7 +2581,9 @@ function logoutUser() {
 
     if (countdownTimer) {
 
-        clearInterval(countdownTimer);
+        clearInterval(
+            countdownTimer
+        );
 
     }
 
@@ -1061,35 +2593,17 @@ function logoutUser() {
     document.getElementById("authSection")
         .style.display = "block";
 
+    document.getElementById("withdrawForm")
+        .classList.remove("show");
+
     showLogin();
 
 }
 
-function changeLanguage() {
 
-    const language =
-        document.getElementById("languageSelect")
-        .value;
-
-    if (language === "en") {
-
-        document.querySelector("#loginTab")
-            .innerText = "Login";
-
-        document.querySelector("#registerTab")
-            .innerText = "Register";
-
-    } else {
-
-        document.querySelector("#loginTab")
-            .innerText = "Iniciar sesión";
-
-        document.querySelector("#registerTab")
-            .innerText = "Registrarse";
-
-    }
-
-}
+/* =====================================================
+   AUTO LOGIN
+===================================================== */
 
 window.addEventListener(
     "DOMContentLoaded",
@@ -1100,7 +2614,13 @@ window.addEventListener(
                 "nexaCurrentUser"
             );
 
-        if (!currentUser) return;
+        if (!currentUser) {
+
+            applyLanguage("es");
+
+            return;
+
+        }
 
         const users =
             getUsers();
@@ -1111,12 +2631,27 @@ window.addEventListener(
                 "nexaCurrentUser"
             );
 
+            applyLanguage("es");
+
             return;
+
         }
 
-        openDashboard(
-            users[currentUser]
+        const user =
+            users[currentUser];
+
+        /*
+           Automatically detect language
+           from the registered country.
+        */
+
+        applyLanguage(
+            detectCountryLanguage(
+                user.country
+            )
         );
+
+        openDashboard(user);
 
     }
 );
