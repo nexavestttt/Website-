@@ -1336,11 +1336,21 @@ td{
       <span id="mobileHistory">History</span>
     </button>
 
-    <!-- ADDED: MOBILE SETTINGS -->
+    <!-- MOBILE SETTINGS -->
     <button data-page="settings">
       ⚙️
       <br>
       <span id="mobileSettings">Settings</span>
+    </button>
+
+    <!-- MOBILE LOGOUT -->
+    <button
+      type="button"
+      id="mobileLogoutBtn"
+    >
+      🚪
+      <br>
+      <span id="mobileLogout">Logout</span>
     </button>
 
   </nav>
@@ -2514,7 +2524,7 @@ const translations = {
     createAccount:"Créer un compte",
     login:"Connexion",
     register:"S'inscrire",
-    alreadyAccount:"Vous avez déjà un compte ?",
+    alreadyAccount:"Vous avez déjà une compte ?",
     noAccount:"Vous n'avez pas de compte ?",
     accountBalance:"Solde du compte",
     bonusBalance:"Solde du bonus",
@@ -2671,9 +2681,10 @@ function applyLanguage(lang){
   setText("mobileBonus","bonus");
   setText("mobileWithdraw","withdrawal");
   setText("mobileHistory","history");
-
-  /* ADDED: MOBILE SETTINGS TRANSLATION */
   setText("mobileSettings","settings");
+
+  /* ADDED: MOBILE LOGOUT TRANSLATION */
+  setText("mobileLogout","logout");
 
   setText("labelFullName","fullName");
   setText("labelEmail","email");
@@ -4813,57 +4824,72 @@ document
    LOGOUT
    ========================================================= */
 
+function logoutUser(){
+
+  localStorage.removeItem(
+    STORAGE_CURRENT
+  );
+
+  if(minerInterval){
+
+    clearInterval(
+      minerInterval
+    );
+
+    minerInterval = null;
+
+  }
+
+  if(bonusInterval){
+
+    clearInterval(
+      bonusInterval
+    );
+
+    bonusInterval = null;
+
+  }
+
+  if(withdrawalInterval){
+
+    clearInterval(
+      withdrawalInterval
+    );
+
+    withdrawalInterval = null;
+
+  }
+
+  document
+    .getElementById(
+      "authForm"
+    )
+    .reset();
+
+  showAuth("login");
+
+}
+
+/* DESKTOP LOGOUT */
+
 document
   .getElementById(
     "logoutBtn"
   )
   .addEventListener(
     "click",
-    () => {
+    logoutUser
+  );
 
-      localStorage.removeItem(
-        STORAGE_CURRENT
-      );
+/* MOBILE LOGOUT */
 
-      if(minerInterval){
-
-        clearInterval(
-          minerInterval
-        );
-
-        minerInterval = null;
-
-      }
-
-      if(bonusInterval){
-
-        clearInterval(
-          bonusInterval
-        );
-
-        bonusInterval = null;
-
-      }
-
-      if(withdrawalInterval){
-
-        clearInterval(
-          withdrawalInterval
-        );
-
-        withdrawalInterval = null;
-
-      }
-
-      document
-        .getElementById(
-          "authForm"
-        )
-        .reset();
-
-      showAuth("login");
-
-    }
+document
+  .getElementById(
+    "mobileLogoutBtn"
+  )
+  .addEventListener(
+    "click",
+    logoutUser
   );
 
 /* =========================================================
