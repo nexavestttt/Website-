@@ -703,41 +703,24 @@ td{
 
       <div id="nameGroup" class="form-group">
         <label id="labelFullName">Full Name</label>
-        <input
-          id="authName"
-          type="text"
-          placeholder="Full name"
-        >
+        <input id="authName" type="text" placeholder="Full name">
       </div>
 
       <div class="form-group">
         <label id="labelEmail">Email</label>
-        <input
-          id="authEmail"
-          type="email"
-          required
-          placeholder="Email address"
-        >
+        <input id="authEmail" type="email" required placeholder="Email address">
       </div>
 
       <div class="form-group">
         <label id="labelPassword">Password</label>
-        <input
-          id="authPassword"
-          type="password"
-          required
-          placeholder="Password"
-        >
+        <input id="authPassword" type="password" required placeholder="Password">
       </div>
 
       <div id="countryGroup" class="form-group">
-
         <label id="labelCountry">Country</label>
 
         <select id="authCountry">
-
           <option value="">Select country</option>
-
           <option value="Peru">Peru</option>
           <option value="Ecuador">Ecuador</option>
           <option value="Mexico">Mexico</option>
@@ -753,35 +736,21 @@ td{
           <option value="Tanzania">Tanzania</option>
           <option value="Uganda">Uganda</option>
           <option value="Rwanda">Rwanda</option>
-
         </select>
-
       </div>
 
-      <button
-        id="authSubmit"
-        type="submit"
-        class="primary-btn"
-      >
+      <button id="authSubmit" type="submit" class="primary-btn">
         Create Account
       </button>
 
     </form>
 
     <div class="auth-switch">
-
-      <span id="authSwitchText">
-        Already have an account?
-      </span>
-
-      <button id="authSwitch">
-        Login
-      </button>
-
+      <span id="authSwitchText">Already have an account?</span>
+      <button id="authSwitch" type="button">Login</button>
     </div>
 
   </div>
-
 </div>
 
 <!-- APP -->
@@ -793,27 +762,27 @@ td{
       <div class="logo">Nexa<span>Vest</span></div>
     </div>
 
-    <button class="nav-item active" data-page="dashboard">
+    <button class="nav-item active" data-page="dashboard" type="button">
       📊 <span id="navDashboard">Dashboard</span>
     </button>
 
-    <button class="nav-item" data-page="miner">
+    <button class="nav-item" data-page="miner" type="button">
       ⛏️ <span id="navMiner">BTC Miner</span>
     </button>
 
-    <button class="nav-item" data-page="bonus">
+    <button class="nav-item" data-page="bonus" type="button">
       🎁 <span id="navBonus">Bonus</span>
     </button>
 
-    <button class="nav-item" data-page="withdrawal">
+    <button class="nav-item" data-page="withdrawal" type="button">
       💸 <span id="navWithdrawal">Withdrawal</span>
     </button>
 
-    <button class="nav-item" data-page="history">
+    <button class="nav-item" data-page="history" type="button">
       📜 <span id="navHistory">History</span>
     </button>
 
-    <button class="nav-item" data-page="settings">
+    <button class="nav-item" data-page="settings" type="button">
       ⚙️ <span id="navSettings">Settings</span>
     </button>
 
@@ -824,9 +793,7 @@ td{
     <div class="topbar">
 
       <div>
-        <div class="page-title" id="pageTitle">
-          Dashboard
-        </div>
+        <div class="page-title" id="pageTitle">Dashboard</div>
 
         <div class="page-subtitle" id="pageSubtitle">
           Welcome back to NexaVest
@@ -835,13 +802,9 @@ td{
 
       <div class="user-chip">
 
-        <div id="userNameTop">
-          User
-        </div>
+        <div id="userNameTop">User</div>
 
-        <div class="avatar" id="userAvatar">
-          U
-        </div>
+        <div class="avatar" id="userAvatar">U</div>
 
       </div>
 
@@ -929,7 +892,6 @@ td{
           </div>
 
         </div>
-
       </div>
 
     </section>
@@ -1027,6 +989,7 @@ td{
             id="startMiningBtn"
             class="primary-btn"
             style="margin-top:18px;"
+            type="button"
           >
             Start Mining
           </button>
@@ -1067,6 +1030,7 @@ td{
           id="bonusWithdrawBtn"
           class="primary-btn"
           style="margin-top:25px;"
+          type="button"
         >
           Withdraw Bonus
         </button>
@@ -1199,6 +1163,7 @@ td{
         <button
           id="submitWithdrawalBtn"
           class="primary-btn"
+          type="button"
         >
           Submit Withdrawal
         </button>
@@ -1270,28 +1235,59 @@ td{
 
         <div class="language-grid">
 
-          <button class="lang-btn active" data-lang="en">
+          <button
+            class="lang-btn active"
+            data-lang="en"
+            type="button"
+          >
             🇬🇧 English
           </button>
 
-          <button class="lang-btn" data-lang="es">
+          <button
+            class="lang-btn"
+            data-lang="es"
+            type="button"
+          >
             🇪🇸 Español
           </button>
 
-          <button class="lang-btn" data-lang="pt">
+          <button
+            class="lang-btn"
+            data-lang="pt"
+            type="button"
+          >
             🇧🇷 Português
           </button>
 
-          <button class="lang-btn" data-lang="fr">
+          <button
+            class="lang-btn"
+            data-lang="fr"
+            type="button"
+          >
             🇫🇷 Français
           </button>
 
         </div>
 
+        <!-- LOGOUT BUTTON -->
+
         <button
           id="logoutBtn"
+          type="button"
           class="secondary-btn"
-          style="margin-top:25px;width:100%;"
+          style="
+            display:block;
+            width:100%;
+            margin-top:25px;
+            padding:14px;
+            background:#182b40;
+            color:#ffffff;
+            border:1px solid rgba(255,255,255,.15);
+            border-radius:12px;
+            font-weight:800;
+            text-align:center;
+            cursor:pointer;
+          "
         >
           Logout
         </button>
@@ -1306,51 +1302,40 @@ td{
 
   <nav class="mobile-nav">
 
-    <button data-page="dashboard" class="active">
+    <button data-page="dashboard" class="active" type="button">
       📊
       <br>
       <span id="mobileDashboard">Dashboard</span>
     </button>
 
-    <button data-page="miner">
+    <button data-page="miner" type="button">
       ⛏️
       <br>
       <span id="mobileMiner">Miner</span>
     </button>
 
-    <button data-page="bonus">
+    <button data-page="bonus" type="button">
       🎁
       <br>
       <span id="mobileBonus">Bonus</span>
     </button>
 
-    <button data-page="withdrawal">
+    <button data-page="withdrawal" type="button">
       💸
       <br>
       <span id="mobileWithdraw">Withdraw</span>
     </button>
 
-    <button data-page="history">
+    <button data-page="history" type="button">
       📜
       <br>
       <span id="mobileHistory">History</span>
     </button>
 
-    <!-- MOBILE SETTINGS -->
-    <button data-page="settings">
+    <button data-page="settings" type="button">
       ⚙️
       <br>
       <span id="mobileSettings">Settings</span>
-    </button>
-
-    <!-- MOBILE LOGOUT -->
-    <button
-      type="button"
-      id="mobileLogoutBtn"
-    >
-      🚪
-      <br>
-      <span id="mobileLogout">Logout</span>
     </button>
 
   </nav>
@@ -1367,14 +1352,15 @@ td{
       Transaction Record
     </div>
 
-    <div
-      id="transactionDetails"
-      style="margin-top:18px;"
-    ></div>
+    <div id="transactionDetails" style="margin-top:18px;"></div>
 
     <div class="modal-actions">
 
-      <button id="closeModal" class="secondary-btn">
+      <button
+        id="closeModal"
+        class="secondary-btn"
+        type="button"
+      >
         Close
       </button>
 
@@ -1639,38 +1625,34 @@ const countryBanks = {
 
 function getCurrency(country){
 
-  return countryCurrency[country] ||
-    {
-      code:"USD",
-      symbol:"$",
-      rate:1
-    };
+  return countryCurrency[country] || {
+    code:"USD",
+    symbol:"$",
+    rate:1
+  };
 
 }
 
 function formatMoney(usdAmount,user){
 
-  const amount =
-    Number(usdAmount || 0);
+  const amount = Number(usdAmount || 0);
 
   const currency =
-    getCurrency(
-      user && user.country
-    );
+    getCurrency(user && user.country);
 
   const localAmount =
     amount * currency.rate;
 
   let decimals = 2;
 
-  if(currency.code === "COP" ||
-     currency.code === "VES" ||
-     currency.code === "TZS" ||
-     currency.code === "UGX" ||
-     currency.code === "RWF"){
-
+  if(
+    currency.code === "COP" ||
+    currency.code === "VES" ||
+    currency.code === "TZS" ||
+    currency.code === "UGX" ||
+    currency.code === "RWF"
+  ){
     decimals = 0;
-
   }
 
   return (
@@ -1689,9 +1671,7 @@ function formatMoney(usdAmount,user){
 function formatUSD(usdAmount){
 
   return "$" +
-    Number(
-      usdAmount || 0
-    ).toFixed(2);
+    Number(usdAmount || 0).toFixed(2);
 
 }
 
@@ -1704,9 +1684,7 @@ function getUsers(){
   try{
 
     return JSON.parse(
-      localStorage.getItem(
-        STORAGE_USERS
-      )
+      localStorage.getItem(STORAGE_USERS)
     ) || [];
 
   }catch(error){
@@ -1729,16 +1707,13 @@ function saveUsers(users){
 function getCurrentUser(){
 
   const id =
-    localStorage.getItem(
-      STORAGE_CURRENT
-    );
+    localStorage.getItem(STORAGE_CURRENT);
 
   if(!id){
     return null;
   }
 
-  const users =
-    getUsers();
+  const users = getUsers();
 
   return users.find(
     user => user.id === id
@@ -1752,23 +1727,17 @@ function saveCurrentUser(user){
     return;
   }
 
-  const users =
-    getUsers();
+  const users = getUsers();
 
   const index =
     users.findIndex(
-      item =>
-        item.id === user.id
+      item => item.id === user.id
     );
 
   if(index !== -1){
-
     users[index] = user;
-
   }else{
-
     users.push(user);
-
   }
 
   saveUsers(users);
@@ -1787,8 +1756,7 @@ function saveCurrentUser(user){
 function generateRandomBonus(){
 
   return Math.floor(
-    Math.random() *
-    (3400 - 600 + 1)
+    Math.random() * (3400 - 600 + 1)
   ) + 600;
 
 }
@@ -1797,15 +1765,9 @@ function generateRandomBonus(){
    CREATE USER
    ========================================================= */
 
-function createUser(
-  name,
-  email,
-  password,
-  country
-){
+function createUser(name,email,password,country){
 
-  const users =
-    getUsers();
+  const users = getUsers();
 
   const normalizedEmail =
     email.trim().toLowerCase();
@@ -1813,9 +1775,7 @@ function createUser(
   const existing =
     users.find(
       user =>
-        String(
-          user.email || ""
-        ).toLowerCase() ===
+        String(user.email || "").toLowerCase() ===
         normalizedEmail
     );
 
@@ -1836,33 +1796,22 @@ function createUser(
 
     id:
       "USR-" +
-      Date.now()
-        .toString(36)
-        .toUpperCase() +
+      Date.now().toString(36).toUpperCase() +
       Math.random()
         .toString(36)
         .substring(2,6)
         .toUpperCase(),
 
-    name:
-      name.trim(),
-
-    email:
-      normalizedEmail,
-
-    password:
-      password,
-
-    country:
-      country,
+    name:name.trim(),
+    email:normalizedEmail,
+    password:password,
+    country:country,
 
     balance:0,
 
-    bonusBalance:
-      randomBonus,
+    bonusBalance:randomBonus,
 
     miner:{
-
       running:false,
       amount:0,
       target:0,
@@ -1872,7 +1821,6 @@ function createUser(
       startTime:null,
       endTime:null,
       proofName:""
-
     },
 
     transactions:[]
@@ -1890,10 +1838,7 @@ function createUser(
 
   alert(
     "Account created successfully. Your registration bonus is " +
-    formatMoney(
-      randomBonus,
-      user
-    ) +
+    formatMoney(randomBonus,user) +
     "."
   );
 
@@ -1927,24 +1872,19 @@ function repairUser(user){
     typeof user.balance !== "number" &&
     typeof user.balance !== "string"
   ){
-
     user.balance = 0;
-
   }
 
   if(
     typeof user.bonusBalance !== "number" &&
     typeof user.bonusBalance !== "string"
   ){
-
     user.bonusBalance = 0;
-
   }
 
   if(!user.miner){
 
     user.miner = {
-
       running:false,
       amount:0,
       target:0,
@@ -1954,7 +1894,6 @@ function repairUser(user){
       startTime:null,
       endTime:null,
       proofName:""
-
     };
 
   }
@@ -2008,13 +1947,8 @@ function showAuth(mode){
     nameGroup.classList.remove("hidden");
     countryGroup.classList.remove("hidden");
 
-    document
-      .getElementById("authName")
-      .required = true;
-
-    document
-      .getElementById("authCountry")
-      .required = true;
+    document.getElementById("authName").required = true;
+    document.getElementById("authCountry").required = true;
 
     subtitle.textContent =
       getText("authRegisterSubtitle");
@@ -2033,13 +1967,8 @@ function showAuth(mode){
     nameGroup.classList.add("hidden");
     countryGroup.classList.add("hidden");
 
-    document
-      .getElementById("authName")
-      .required = false;
-
-    document
-      .getElementById("authCountry")
-      .required = false;
+    document.getElementById("authName").required = false;
+    document.getElementById("authCountry").required = false;
 
     subtitle.textContent =
       getText("authLoginSubtitle");
@@ -2060,9 +1989,7 @@ function showAuth(mode){
 function enterApp(){
 
   const user =
-    repairUser(
-      getCurrentUser()
-    );
+    repairUser(getCurrentUser());
 
   if(!user){
 
@@ -2083,126 +2010,106 @@ function enterApp(){
   renderAll();
 
   startBonusTimer();
-
   startWithdrawalStatusTimer();
 
 }
 
 document
   .getElementById("authSwitch")
-  .addEventListener(
-    "click",
-    () => {
+  .addEventListener("click",() => {
 
-      showAuth(
-        authMode === "register"
-          ? "login"
-          : "register"
-      );
+    showAuth(
+      authMode === "register"
+        ? "login"
+        : "register"
+    );
 
-    }
-  );
+  });
 
 document
   .getElementById("authForm")
-  .addEventListener(
-    "submit",
-    event => {
+  .addEventListener("submit",event => {
 
-      event.preventDefault();
+    event.preventDefault();
 
-      const name =
-        document
-          .getElementById("authName")
-          .value;
+    const name =
+      document.getElementById("authName").value;
 
-      const email =
-        document
-          .getElementById("authEmail")
-          .value;
+    const email =
+      document.getElementById("authEmail").value;
 
-      const password =
-        document
-          .getElementById("authPassword")
-          .value;
+    const password =
+      document.getElementById("authPassword").value;
 
-      const country =
-        document
-          .getElementById("authCountry")
-          .value;
+    const country =
+      document.getElementById("authCountry").value;
 
-      if(authMode === "register"){
+    if(authMode === "register"){
 
-        if(
-          !name.trim() ||
-          !email.trim() ||
-          !password.trim() ||
-          !country
-        ){
+      if(
+        !name.trim() ||
+        !email.trim() ||
+        !password.trim() ||
+        !country
+      ){
 
-          alert(
-            getText("completeRegistration")
-          );
-
-          return;
-
-        }
-
-        const user =
-          createUser(
-            name,
-            email,
-            password,
-            country
-          );
-
-        if(user){
-
-          enterApp();
-
-        }
-
-      }else{
-
-        const users =
-          getUsers();
-
-        const normalizedEmail =
-          email.trim().toLowerCase();
-
-        const user =
-          users.find(
-            item =>
-              String(
-                item.email || ""
-              ).toLowerCase() ===
-                normalizedEmail &&
-              item.password === password
-          );
-
-        if(!user){
-
-          alert(
-            getText("incorrectLogin")
-          );
-
-          return;
-
-        }
-
-        repairUser(user);
-
-        localStorage.setItem(
-          STORAGE_CURRENT,
-          user.id
+        alert(
+          getText("completeRegistration")
         );
 
-        enterApp();
+        return;
 
       }
 
+      const user =
+        createUser(
+          name,
+          email,
+          password,
+          country
+        );
+
+      if(user){
+        enterApp();
+      }
+
+    }else{
+
+      const users = getUsers();
+
+      const normalizedEmail =
+        email.trim().toLowerCase();
+
+      const user =
+        users.find(
+          item =>
+            String(item.email || "").toLowerCase() ===
+            normalizedEmail &&
+            item.password === password
+        );
+
+      if(!user){
+
+        alert(
+          getText("incorrectLogin")
+        );
+
+        return;
+
+      }
+
+      repairUser(user);
+
+      localStorage.setItem(
+        STORAGE_CURRENT,
+        user.id
+      );
+
+      enterApp();
+
     }
-  );
+
+  });
 
 /* =========================================================
    TRANSLATIONS
@@ -2524,7 +2431,7 @@ const translations = {
     createAccount:"Créer un compte",
     login:"Connexion",
     register:"S'inscrire",
-    alreadyAccount:"Vous avez déjà une compte ?",
+    alreadyAccount:"Vous avez déjà un compte ?",
     noAccount:"Vous n'avez pas de compte ?",
     accountBalance:"Solde du compte",
     bonusBalance:"Solde du bonus",
@@ -2597,9 +2504,7 @@ const translations = {
 };
 
 let currentLanguage =
-  localStorage.getItem(
-    STORAGE_LANG
-  ) || "en";
+  localStorage.getItem(STORAGE_LANG) || "en";
 
 function getText(key){
 
@@ -2624,13 +2529,9 @@ function applyLanguage(lang){
 
   currentLanguage = lang;
 
-  localStorage.setItem(
-    STORAGE_LANG,
-    lang
-  );
+  localStorage.setItem(STORAGE_LANG,lang);
 
-  document.documentElement.lang =
-    lang;
+  document.documentElement.lang = lang;
 
   document
     .querySelectorAll(".lang-btn")
@@ -2643,31 +2544,27 @@ function applyLanguage(lang){
 
     });
 
-  const setText =
-    (id,key) => {
+  const setText = (id,key) => {
 
-      const el =
-        document.getElementById(id);
+    const el =
+      document.getElementById(id);
 
-      if(el){
-        el.textContent =
-          getText(key);
-      }
+    if(el){
+      el.textContent = getText(key);
+    }
 
-    };
+  };
 
-  const setPlaceholder =
-    (id,key) => {
+  const setPlaceholder = (id,key) => {
 
-      const el =
-        document.getElementById(id);
+    const el =
+      document.getElementById(id);
 
-      if(el){
-        el.placeholder =
-          getText(key);
-      }
+    if(el){
+      el.placeholder = getText(key);
+    }
 
-    };
+  };
 
   setText("navDashboard","dashboard");
   setText("navMiner","miner");
@@ -2683,58 +2580,21 @@ function applyLanguage(lang){
   setText("mobileHistory","history");
   setText("mobileSettings","settings");
 
-  /* ADDED: MOBILE LOGOUT TRANSLATION */
-  setText("mobileLogout","logout");
-
   setText("labelFullName","fullName");
   setText("labelEmail","email");
   setText("labelPassword","password");
   setText("labelCountry","country");
 
-  setText(
-    "labelAccountBalance",
-    "accountBalance"
-  );
+  setText("labelAccountBalance","accountBalance");
+  setText("labelBonusBalance","bonusBalance");
+  setText("labelMiningEarnings","miningEarnings");
+  setText("labelTransactions","transactions");
 
-  setText(
-    "labelBonusBalance",
-    "bonusBalance"
-  );
-
-  setText(
-    "labelMiningEarnings",
-    "miningEarnings"
-  );
-
-  setText(
-    "labelTransactions",
-    "transactions"
-  );
-
-  setText(
-    "accountOverviewTitle",
-    "accountOverview"
-  );
-
-  setText(
-    "overviewAccountNameLabel",
-    "accountName"
-  );
-
-  setText(
-    "overviewEmailLabel",
-    "email"
-  );
-
-  setText(
-    "overviewCountryLabel",
-    "country"
-  );
-
-  setText(
-    "overviewMiningLabel",
-    "miningStatus"
-  );
+  setText("accountOverviewTitle","accountOverview");
+  setText("overviewAccountNameLabel","accountName");
+  setText("overviewEmailLabel","email");
+  setText("overviewCountryLabel","country");
+  setText("overviewMiningLabel","miningStatus");
 
   setText("minerTitle","btcMiner");
   setText("minerSubtitle","start48");
@@ -2778,115 +2638,59 @@ function applyLanguage(lang){
   setText("settingsSubtitle","settingsSubtitle");
   setText("logoutBtn","logout");
 
-  setText(
-    "transactionRecordTitle",
-    "transactionRecord"
-  );
-
+  setText("transactionRecordTitle","transactionRecord");
   setText("closeModal","close");
 
-  setPlaceholder(
-    "authName",
-    "fullNamePlaceholder"
-  );
-
-  setPlaceholder(
-    "authEmail",
-    "emailPlaceholder"
-  );
-
-  setPlaceholder(
-    "authPassword",
-    "passwordPlaceholder"
-  );
-
-  setPlaceholder(
-    "minerAmount",
-    "minimumMining"
-  );
-
-  setPlaceholder(
-    "withdrawAmount",
-    "enterAmount"
-  );
-
-  setPlaceholder(
-    "withdrawAccount",
-    "accountNumberPlaceholder"
-  );
-
-  setPlaceholder(
-    "withdrawName",
-    "accountHolderPlaceholder"
-  );
+  setPlaceholder("authName","fullNamePlaceholder");
+  setPlaceholder("authEmail","emailPlaceholder");
+  setPlaceholder("authPassword","passwordPlaceholder");
+  setPlaceholder("minerAmount","minimumMining");
+  setPlaceholder("withdrawAmount","enterAmount");
+  setPlaceholder("withdrawAccount","accountNumberPlaceholder");
+  setPlaceholder("withdrawName","accountHolderPlaceholder");
 
   const countrySelect =
-    document.getElementById(
-      "authCountry"
-    );
+    document.getElementById("authCountry");
 
-  if(countrySelect &&
-     countrySelect.options[0]){
-
-    countrySelect.options[0]
-      .textContent =
+  if(countrySelect && countrySelect.options[0]){
+    countrySelect.options[0].textContent =
       getText("selectCountry");
-
   }
 
   const bankSelect =
-    document.getElementById(
-      "withdrawBank"
-    );
+    document.getElementById("withdrawBank");
 
-  if(bankSelect &&
-     bankSelect.options[0]){
-
-    bankSelect.options[0]
-      .textContent =
+  if(bankSelect && bankSelect.options[0]){
+    bankSelect.options[0].textContent =
       getText("selectBank");
-
   }
 
   updateAuthLanguage();
-
   updatePageLanguage();
-
   renderAll();
 
 }
 
 function updateAuthLanguage(){
 
-  const mode =
-    authMode;
+  const mode = authMode;
 
   const subtitle =
-    document.getElementById(
-      "authSubtitle"
-    );
+    document.getElementById("authSubtitle");
 
   const submit =
-    document.getElementById(
-      "authSubmit"
-    );
+    document.getElementById("authSubmit");
 
   const switchText =
-    document.getElementById(
-      "authSwitchText"
-    );
+    document.getElementById("authSwitchText");
 
   const switchButton =
-    document.getElementById(
-      "authSwitch"
-    );
+    document.getElementById("authSwitch");
 
   if(mode === "register"){
 
     subtitle.textContent =
-      getText(
-        "authRegisterSubtitle"
-      );
+      getText("authRegisterSubtitle");
 
     submit.textContent =
       getText("createAccount");
@@ -2900,9 +2704,7 @@ function updateAuthLanguage(){
   }else{
 
     subtitle.textContent =
-      getText(
-        "authLoginSubtitle"
-      );
+      getText("authLoginSubtitle");
 
     submit.textContent =
       getText("login");
@@ -2920,55 +2722,42 @@ function updateAuthLanguage(){
 function updatePageLanguage(){
 
   const page =
-    document.querySelector(
-      ".page:not(.hidden)"
-    );
+    document.querySelector(".page:not(.hidden)");
 
   if(!page){
     return;
   }
 
   const pageId =
-    page.id.replace(
-      "page-",
-      ""
-    );
+    page.id.replace("page-","");
 
   const titleMap = {
-
     dashboard:"dashboard",
     miner:"miner",
     bonus:"bonus",
     withdrawal:"withdrawal",
     history:"history",
     settings:"settings"
-
   };
 
   const subtitleMap = {
-
     dashboard:"welcome",
     miner:"manageMining",
     bonus:"registrationBonus",
     withdrawal:"withdrawAvailable",
     history:"transactionHistory",
     settings:"accountPreferences"
-
   };
 
   document
     .getElementById("pageTitle")
     .textContent =
-      getText(
-        titleMap[pageId]
-      );
+      getText(titleMap[pageId]);
 
   document
     .getElementById("pageSubtitle")
     .textContent =
-      getText(
-        subtitleMap[pageId]
-      );
+      getText(subtitleMap[pageId]);
 
 }
 
@@ -3015,28 +2804,18 @@ function showPage(page){
   document
     .querySelectorAll(".page")
     .forEach(section => {
-
       section.classList.add("hidden");
-
     });
 
   const selected =
-    document.getElementById(
-      "page-" + page
-    );
+    document.getElementById("page-" + page);
 
   if(selected){
-
-    selected.classList.remove(
-      "hidden"
-    );
-
+    selected.classList.remove("hidden");
   }
 
   document
-    .querySelectorAll(
-      ".nav-item,.mobile-nav button"
-    )
+    .querySelectorAll(".nav-item,.mobile-nav button")
     .forEach(button => {
 
       button.classList.toggle(
@@ -3053,55 +2832,28 @@ function showPage(page){
   document
     .getElementById("pageTitle")
     .textContent =
-      getText(
-        info.titleKey
-      );
+      getText(info.titleKey);
 
   document
     .getElementById("pageSubtitle")
     .textContent =
-      getText(
-        info.subtitleKey
-      );
+      getText(info.subtitleKey);
 
-  if(page === "dashboard"){
-    updateDashboard();
-  }
-
-  if(page === "miner"){
-    renderMiner();
-  }
-
-  if(page === "bonus"){
-    renderBonus();
-  }
-
-  if(page === "withdrawal"){
-    renderWithdrawal();
-  }
-
-  if(page === "history"){
-    renderHistory();
-  }
+  if(page === "dashboard") updateDashboard();
+  if(page === "miner") renderMiner();
+  if(page === "bonus") renderBonus();
+  if(page === "withdrawal") renderWithdrawal();
+  if(page === "history") renderHistory();
 
 }
 
 document
-  .querySelectorAll(
-    ".nav-item,.mobile-nav button"
-  )
+  .querySelectorAll(".nav-item,.mobile-nav button")
   .forEach(button => {
 
-    button.addEventListener(
-      "click",
-      () => {
-
-        showPage(
-          button.dataset.page
-        );
-
-      }
-    );
+    button.addEventListener("click",() => {
+      showPage(button.dataset.page);
+    });
 
   });
 
@@ -3116,13 +2868,10 @@ function getLiveMiningEarnings(user){
     !user.miner ||
     !user.miner.running
   ){
-
     return 0;
-
   }
 
-  const now =
-    Date.now();
+  const now = Date.now();
 
   const elapsed =
     Math.max(
@@ -3136,12 +2885,7 @@ function getLiveMiningEarnings(user){
   const progress =
     elapsed / MINING_DURATION;
 
-  return (
-    Number(
-      user.miner.target || 0
-    ) *
-    progress
-  );
+  return Number(user.miner.target || 0) * progress;
 
 }
 
@@ -3158,9 +2902,7 @@ function getAvailableBalance(user){
 function updateDashboard(){
 
   const user =
-    repairUser(
-      getCurrentUser()
-    );
+    repairUser(getCurrentUser());
 
   if(!user){
     return;
@@ -3169,80 +2911,40 @@ function updateDashboard(){
   const available =
     getAvailableBalance(user);
 
-  document
-    .getElementById("dashboardBalance")
-    .textContent =
-      formatMoney(
-        available,
-        user
-      );
+  document.getElementById("dashboardBalance").textContent =
+    formatMoney(available,user);
 
-  document
-    .getElementById("dashboardBonus")
-    .textContent =
-      formatMoney(
-        user.bonusBalance,
-        user
-      );
+  document.getElementById("dashboardBonus").textContent =
+    formatMoney(user.bonusBalance,user);
 
-  document
-    .getElementById("dashboardMining")
-    .textContent =
-      formatMoney(
-        getLiveMiningEarnings(user),
-        user
-      );
+  document.getElementById("dashboardMining").textContent =
+    formatMoney(getLiveMiningEarnings(user),user);
 
-  document
-    .getElementById("dashboardTransactions")
-    .textContent =
-      String(
-        user.transactions.length
-      );
+  document.getElementById("dashboardTransactions").textContent =
+    String(user.transactions.length);
 
-  document
-    .getElementById("overviewName")
-    .textContent =
-      user.name ||
-      "User";
+  document.getElementById("overviewName").textContent =
+    user.name || "User";
 
-  document
-    .getElementById("overviewEmail")
-    .textContent =
-      user.email ||
-      "—";
+  document.getElementById("overviewEmail").textContent =
+    user.email || "—";
 
-  document
-    .getElementById("overviewCountry")
-    .textContent =
-      user.country ||
-      "—";
+  document.getElementById("overviewCountry").textContent =
+    user.country || "—";
 
-  document
-    .getElementById("userNameTop")
-    .textContent =
-      user.name ||
-      "User";
+  document.getElementById("userNameTop").textContent =
+    user.name || "User";
 
-  document
-    .getElementById("userAvatar")
-    .textContent =
-      (
-        user.name ||
-        "U"
-      )
+  document.getElementById("userAvatar").textContent =
+    (user.name || "U")
       .trim()
       .charAt(0)
       .toUpperCase();
 
-  document
-    .getElementById(
-      "overviewMiningStatus"
-    )
-    .textContent =
-      user.miner.running
-        ? getText("miningActive")
-        : getText("notRunning");
+  document.getElementById("overviewMiningStatus").textContent =
+    user.miner.running
+      ? getText("miningActive")
+      : getText("notRunning");
 
 }
 
@@ -3253,93 +2955,73 @@ function updateDashboard(){
 function startMinerTimer(){
 
   if(minerInterval){
-
-    clearInterval(
-      minerInterval
-    );
-
+    clearInterval(minerInterval);
   }
 
   minerInterval =
-    setInterval(
-      () => {
+    setInterval(() => {
 
-        const user =
-          getCurrentUser();
+      const user = getCurrentUser();
 
-        if(!user){
+      if(!user){
 
-          clearInterval(
-            minerInterval
-          );
+        clearInterval(minerInterval);
 
-          return;
+        return;
 
-        }
+      }
 
-        if(
-          !user.miner ||
-          !user.miner.running
-        ){
-
-          renderMiner();
-          updateDashboard();
-
-          return;
-
-        }
-
-        if(
-          Date.now() >=
-          Number(
-            user.miner.endTime
-          )
-        ){
-
-          settleMining(user);
-
-          renderMiner();
-          updateDashboard();
-
-          return;
-
-        }
+      if(
+        !user.miner ||
+        !user.miner.running
+      ){
 
         renderMiner();
         updateDashboard();
 
-      },
-      1000
-    );
+        return;
+
+      }
+
+      if(
+        Date.now() >=
+        Number(user.miner.endTime)
+      ){
+
+        settleMining(user);
+
+        renderMiner();
+        updateDashboard();
+
+        return;
+
+      }
+
+      renderMiner();
+      updateDashboard();
+
+    },1000);
 
 }
 
 function renderMiner(){
 
-  const user =
-    getCurrentUser();
+  const user = getCurrentUser();
 
   if(!user){
     return;
   }
 
-  const m =
-    user.miner;
+  const m = user.miner;
 
   const amountInput =
-    document.getElementById(
-      "minerAmount"
-    );
+    document.getElementById("minerAmount");
 
   const proofInput =
-    document.getElementById(
-      "minerProof"
-    );
+    document.getElementById("minerProof");
 
   const startButton =
-    document.getElementById(
-      "startMiningBtn"
-    );
+    document.getElementById("startMiningBtn");
 
   if(m.running){
 
@@ -3347,102 +3029,53 @@ function renderMiner(){
     proofInput.disabled = true;
     startButton.disabled = true;
 
-    document
-      .getElementById(
-        "minerAmountDisplay"
-      )
-      .textContent =
-        formatMoney(
-          m.amount,
-          user
-        );
+    document.getElementById("minerAmountDisplay").textContent =
+      formatMoney(m.amount,user);
 
-    document
-      .getElementById(
-        "minerTargetDisplay"
-      )
-      .textContent =
-        formatMoney(
-          m.target,
-          user
-        );
+    document.getElementById("minerTargetDisplay").textContent =
+      formatMoney(m.target,user);
 
     const earnings =
       getLiveMiningEarnings(user);
 
-    document
-      .getElementById(
-        "minerEarningsDisplay"
-      )
-      .textContent =
-        formatMoney(
-          earnings,
-          user
-        );
+    document.getElementById("minerEarningsDisplay").textContent =
+      formatMoney(earnings,user);
 
     const elapsed =
       Math.max(
         0,
         Math.min(
-          Date.now() -
-            m.startTime,
+          Date.now() - m.startTime,
           MINING_DURATION
         )
       );
 
     const progress =
-      elapsed /
-      MINING_DURATION;
+      elapsed / MINING_DURATION;
 
-    document
-      .getElementById(
-        "minerProgress"
-      )
-      .style.width =
-        Math.min(
-          100,
-          progress * 100
-        ) + "%";
+    document.getElementById("minerProgress").style.width =
+      Math.min(100,progress * 100) + "%";
 
-    document
-      .getElementById(
-        "minerProgressText"
-      )
-      .textContent =
-        Math.floor(
-          progress * 100
-        ) + "%";
+    document.getElementById("minerProgressText").textContent =
+      Math.floor(progress * 100) + "%";
 
     const remaining =
       Math.max(
         0,
-        m.endTime -
-        Date.now()
+        m.endTime - Date.now()
       );
 
-    document
-      .getElementById(
-        "minerTimer"
-      )
-      .textContent =
-        formatDuration(
-          remaining
-        );
+    document.getElementById("minerTimer").textContent =
+      formatDuration(remaining);
 
     document
-      .getElementById(
-        "minerLockMessage"
-      )
+      .getElementById("minerLockMessage")
       .classList.add("show");
 
-    document
-      .getElementById("proofName")
-      .textContent =
-        m.proofName
-          ? getText("proof") +
-            " " +
-            m.proofName
-          : getText("uploadProof");
+    document.getElementById("proofName").textContent =
+      m.proofName
+        ? getText("proof") + " " + m.proofName
+        : getText("uploadProof");
 
     return;
 
@@ -3452,79 +3085,32 @@ function renderMiner(){
   proofInput.disabled = false;
   startButton.disabled = false;
 
-  document
-    .getElementById(
-      "minerAmountDisplay"
-    )
-    .textContent =
-      formatMoney(
-        m.amount,
-        user
-      );
+  document.getElementById("minerAmountDisplay").textContent =
+    formatMoney(m.amount,user);
+
+  document.getElementById("minerTargetDisplay").textContent =
+    formatMoney(m.target,user);
+
+  document.getElementById("minerEarningsDisplay").textContent =
+    formatMoney(m.earnings,user);
+
+  document.getElementById("minerProgress").style.width =
+    (Number(m.progress || 0) * 100) + "%";
+
+  document.getElementById("minerProgressText").textContent =
+    Math.floor(Number(m.progress || 0) * 100) + "%";
+
+  document.getElementById("minerTimer").textContent =
+    "48:00:00";
 
   document
-    .getElementById(
-      "minerTargetDisplay"
-    )
-    .textContent =
-      formatMoney(
-        m.target,
-        user
-      );
-
-  document
-    .getElementById(
-      "minerEarningsDisplay"
-    )
-    .textContent =
-      formatMoney(
-        m.earnings,
-        user
-      );
-
-  document
-    .getElementById(
-      "minerProgress"
-    )
-    .style.width =
-      (
-        Number(
-          m.progress || 0
-        ) * 100
-      ) + "%";
-
-  document
-    .getElementById(
-      "minerProgressText"
-    )
-    .textContent =
-      Math.floor(
-        Number(
-          m.progress || 0
-        ) * 100
-      ) + "%";
-
-  document
-    .getElementById(
-      "minerTimer"
-    )
-    .textContent =
-      "48:00:00";
-
-  document
-    .getElementById(
-      "minerLockMessage"
-    )
+    .getElementById("minerLockMessage")
     .classList.remove("show");
 
-  document
-    .getElementById("proofName")
-    .textContent =
-      m.proofName
-        ? getText("proof") +
-          " " +
-          m.proofName
-        : getText("noProof");
+  document.getElementById("proofName").textContent =
+    m.proofName
+      ? getText("proof") + " " + m.proofName
+      : getText("noProof");
 
 }
 
@@ -3533,15 +3119,11 @@ function formatDuration(ms){
   const totalSeconds =
     Math.max(
       0,
-      Math.floor(
-        ms / 1000
-      )
+      Math.floor(ms / 1000)
     );
 
   const hours =
-    Math.floor(
-      totalSeconds / 3600
-    );
+    Math.floor(totalSeconds / 3600);
 
   const minutes =
     Math.floor(
@@ -3568,20 +3150,14 @@ function settleMining(user){
     !user.miner ||
     !user.miner.running
   ){
-
     return;
-
   }
 
   const finalEarnings =
-    Number(
-      user.miner.target || 0
-    );
+    Number(user.miner.target || 0);
 
   user.balance =
-    Number(
-      user.balance || 0
-    ) +
+    Number(user.balance || 0) +
     finalEarnings;
 
   user.miner.earnings = 0;
@@ -3595,8 +3171,7 @@ function settleMining(user){
 
 function startMining(){
 
-  const user =
-    getCurrentUser();
+  const user = getCurrentUser();
 
   if(!user){
     return;
@@ -3611,24 +3186,15 @@ function startMining(){
   }
 
   const amountInput =
-    document.getElementById(
-      "minerAmount"
-    );
+    document.getElementById("minerAmount");
 
   const proofInput =
-    document.getElementById(
-      "minerProof"
-    );
+    document.getElementById("minerProof");
 
   const amount =
-    Number(
-      amountInput.value
-    );
+    Number(amountInput.value);
 
-  if(
-    !amount ||
-    amount < 25
-  ){
+  if(!amount || amount < 25){
 
     alert(
       getText("minMiningAlert")
@@ -3651,12 +3217,10 @@ function startMining(){
 
   }
 
-  const startTime =
-    Date.now();
+  const startTime = Date.now();
 
   const endTime =
-    startTime +
-    MINING_DURATION;
+    startTime + MINING_DURATION;
 
   user.miner = {
 
@@ -3668,8 +3232,7 @@ function startMining(){
     progress:0,
     startTime:startTime,
     endTime:endTime,
-    proofName:
-      proofInput.files[0].name
+    proofName:proofInput.files[0].name
 
   };
 
@@ -3679,9 +3242,7 @@ function startMining(){
   proofInput.disabled = true;
 
   document
-    .getElementById(
-      "startMiningBtn"
-    )
+    .getElementById("startMiningBtn")
     .disabled = true;
 
   renderMiner();
@@ -3690,37 +3251,23 @@ function startMining(){
 }
 
 document
-  .getElementById(
-    "startMiningBtn"
-  )
-  .addEventListener(
-    "click",
-    startMining
-  );
+  .getElementById("startMiningBtn")
+  .addEventListener("click",startMining);
 
 document
-  .getElementById(
-    "minerProof"
-  )
-  .addEventListener(
-    "change",
-    event => {
+  .getElementById("minerProof")
+  .addEventListener("change",event => {
 
-      const file =
-        event.target.files &&
-        event.target.files[0];
+    const file =
+      event.target.files &&
+      event.target.files[0];
 
-      document
-        .getElementById("proofName")
-        .textContent =
-        file
-          ? getText("proof") +
-            " " +
-            file.name
-          : getText("noProof");
+    document.getElementById("proofName").textContent =
+      file
+        ? getText("proof") + " " + file.name
+        : getText("noProof");
 
-    }
-  );
+  });
 
 /* =========================================================
    BONUS
@@ -3728,22 +3275,14 @@ document
 
 function renderBonus(){
 
-  const user =
-    getCurrentUser();
+  const user = getCurrentUser();
 
   if(!user){
     return;
   }
 
-  document
-    .getElementById(
-      "bonusAmount"
-    )
-    .textContent =
-      formatMoney(
-        user.bonusBalance,
-        user
-      );
+  document.getElementById("bonusAmount").textContent =
+    formatMoney(user.bonusBalance,user);
 
   updateBonusCountdown();
 
@@ -3751,105 +3290,64 @@ function renderBonus(){
 
 function updateBonusCountdown(){
 
-  const now =
-    new Date();
+  const now = new Date();
 
-  const tomorrow =
-    new Date();
+  const tomorrow = new Date();
 
-  tomorrow.setHours(
-    24,
-    0,
-    0,
-    0
-  );
+  tomorrow.setHours(24,0,0,0);
 
   const remaining =
-    tomorrow.getTime() -
-    now.getTime();
+    tomorrow.getTime() - now.getTime();
 
-  document
-    .getElementById(
-      "bonusCountdown"
-    )
-    .textContent =
-      formatDuration(
-        remaining
-      );
+  document.getElementById("bonusCountdown").textContent =
+    formatDuration(remaining);
 
 }
 
 function startBonusTimer(){
 
   if(bonusInterval){
-
-    clearInterval(
-      bonusInterval
-    );
-
+    clearInterval(bonusInterval);
   }
 
   updateBonusCountdown();
 
   bonusInterval =
-    setInterval(
-      updateBonusCountdown,
-      1000
-    );
+    setInterval(updateBonusCountdown,1000);
 
 }
 
 document
-  .getElementById(
-    "bonusWithdrawBtn"
-  )
-  .addEventListener(
-    "click",
-    () => {
+  .getElementById("bonusWithdrawBtn")
+  .addEventListener("click",() => {
 
-      const user =
-        getCurrentUser();
+    const user = getCurrentUser();
 
-      if(!user){
-        return;
-      }
+    if(!user){
+      return;
+    }
 
-      if(
-        Number(
-          user.bonusBalance || 0
-        ) <= 0
-      ){
+    if(Number(user.bonusBalance || 0) <= 0){
 
-        alert(
-          getText("noBonus")
-        );
+      alert(
+        getText("noBonus")
+      );
 
-        return;
-
-      }
-
-      document
-        .getElementById(
-          "withdrawSource"
-        )
-        .value =
-          "bonus";
-
-      document
-        .getElementById(
-          "withdrawAmount"
-        )
-        .value =
-          Number(
-            user.bonusBalance || 0
-          );
-
-      showPage("withdrawal");
-
-      updateWithdrawalCalculation();
+      return;
 
     }
-  );
+
+    document.getElementById("withdrawSource").value =
+      "bonus";
+
+    document.getElementById("withdrawAmount").value =
+      Number(user.bonusBalance || 0);
+
+    showPage("withdrawal");
+
+    updateWithdrawalCalculation();
+
+  });
 
 /* =========================================================
    WITHDRAWAL
@@ -3858,11 +3356,7 @@ document
 function getSelectedWithdrawalFee(){
 
   const source =
-    document
-      .getElementById(
-        "withdrawSource"
-      )
-      .value;
+    document.getElementById("withdrawSource").value;
 
   return source === "bonus"
     ? BONUS_WITHDRAWAL_FEE
@@ -3881,9 +3375,7 @@ function getWithdrawalBalance(user,source){
   }
 
   return (
-    Number(
-      user.balance || 0
-    ) +
+    Number(user.balance || 0) +
     getLiveMiningEarnings(user)
   );
 
@@ -3891,112 +3383,78 @@ function getWithdrawalBalance(user,source){
 
 function renderWithdrawal(){
 
-  const user =
-    getCurrentUser();
+  const user = getCurrentUser();
 
   if(!user){
     return;
   }
 
   updateBankOptions();
-
   updateWithdrawalCalculation();
 
 }
 
 function updateBankOptions(){
 
-  const user =
-    getCurrentUser();
+  const user = getCurrentUser();
 
   if(!user){
     return;
   }
 
   const bankSelect =
-    document.getElementById(
-      "withdrawBank"
-    );
+    document.getElementById("withdrawBank");
 
   const currentValue =
     bankSelect.value;
 
   const banks =
-    countryBanks[
-      user.country
-    ] || [];
+    countryBanks[user.country] || [];
 
-  bankSelect.innerHTML =
-    "";
+  bankSelect.innerHTML = "";
 
   const first =
-    document.createElement(
-      "option"
-    );
+    document.createElement("option");
 
   first.value = "";
 
   first.textContent =
     getText("selectBank");
 
-  bankSelect.appendChild(
-    first
-  );
+  bankSelect.appendChild(first);
 
-  banks.forEach(
-    bank => {
+  banks.forEach(bank => {
 
-      const option =
-        document.createElement(
-          "option"
-        );
+    const option =
+      document.createElement("option");
 
-      option.value = bank;
-      option.textContent = bank;
+    option.value = bank;
+    option.textContent = bank;
 
-      bankSelect.appendChild(
-        option
-      );
+    bankSelect.appendChild(option);
 
-    }
-  );
+  });
 
-  if(
-    banks.includes(
-      currentValue
-    )
-  ){
-
-    bankSelect.value =
-      currentValue;
-
+  if(banks.includes(currentValue)){
+    bankSelect.value = currentValue;
   }
 
 }
 
 function updateWithdrawalCalculation(){
 
-  const user =
-    getCurrentUser();
+  const user = getCurrentUser();
 
   if(!user){
     return;
   }
 
   const source =
-    document
-      .getElementById(
-        "withdrawSource"
-      )
-      .value;
+    document.getElementById("withdrawSource").value;
 
   const amount =
     Number(
-      document
-        .getElementById(
-          "withdrawAmount"
-        )
-        .value
+      document.getElementById("withdrawAmount").value
     ) || 0;
 
   const fee =
@@ -4005,73 +3463,35 @@ function updateWithdrawalCalculation(){
       : MINER_WITHDRAWAL_FEE;
 
   const net =
-    Math.max(
-      0,
-      amount - fee
-    );
+    Math.max(0,amount - fee);
 
-  document
-    .getElementById(
-      "withdrawFee"
-    )
-    .textContent =
-      formatMoney(
-        fee,
-        user
-      );
+  document.getElementById("withdrawFee").textContent =
+    formatMoney(fee,user);
 
-  document
-    .getElementById(
-      "withdrawNet"
-    )
-    .textContent =
-      formatMoney(
-        net,
-        user
-      );
+  document.getElementById("withdrawNet").textContent =
+    formatMoney(net,user);
 
   const balance =
-    getWithdrawalBalance(
-      user,
-      source
-    );
+    getWithdrawalBalance(user,source);
 
-  document
-    .getElementById(
-      "withdrawBalance"
-    )
-    .textContent =
-      formatMoney(
-        balance,
-        user
-      );
+  document.getElementById("withdrawBalance").textContent =
+    formatMoney(balance,user);
 
 }
 
 document
-  .getElementById(
-    "withdrawSource"
-  )
-  .addEventListener(
-    "change",
-    () => {
+  .getElementById("withdrawSource")
+  .addEventListener("change",() => {
 
-      document
-        .getElementById(
-          "withdrawAmount"
-        )
-        .value = "";
+    document.getElementById("withdrawAmount").value = "";
 
-      updateBankOptions();
-      updateWithdrawalCalculation();
+    updateBankOptions();
+    updateWithdrawalCalculation();
 
-    }
-  );
+  });
 
 document
-  .getElementById(
-    "withdrawAmount"
-  )
+  .getElementById("withdrawAmount")
   .addEventListener(
     "input",
     updateWithdrawalCalculation
@@ -4079,8 +3499,7 @@ document
 
 function submitWithdrawal(){
 
-  const user =
-    getCurrentUser();
+  const user = getCurrentUser();
 
   if(!user){
     return;
@@ -4088,20 +3507,13 @@ function submitWithdrawal(){
 
   if(
     user.miner.running &&
-    Date.now() >=
-    user.miner.endTime
+    Date.now() >= user.miner.endTime
   ){
-
     settleMining(user);
-
   }
 
   const source =
-    document
-      .getElementById(
-        "withdrawSource"
-      )
-      .value;
+    document.getElementById("withdrawSource").value;
 
   const isBonusWithdrawal =
     source === "bonus";
@@ -4113,46 +3525,28 @@ function submitWithdrawal(){
 
   const amount =
     Number(
-      document
-        .getElementById(
-          "withdrawAmount"
-        )
-        .value
+      document.getElementById("withdrawAmount").value
     );
 
   const bank =
-    document
-      .getElementById(
-        "withdrawBank"
-      )
-      .value;
+    document.getElementById("withdrawBank").value;
 
   const account =
     document
-      .getElementById(
-        "withdrawAccount"
-      )
+      .getElementById("withdrawAccount")
       .value
       .trim();
 
   const accountName =
     document
-      .getElementById(
-        "withdrawName"
-      )
+      .getElementById("withdrawName")
       .value
       .trim();
 
   const available =
-    getWithdrawalBalance(
-      user,
-      source
-    );
+    getWithdrawalBalance(user,source);
 
-  if(
-    !amount ||
-    amount <= 0
-  ){
+  if(!amount || amount <= 0){
 
     alert(
       getText("validWithdrawal")
@@ -4162,9 +3556,7 @@ function submitWithdrawal(){
 
   }
 
-  if(
-    amount > available
-  ){
+  if(amount > available){
 
     alert(
       getText("greaterBalance")
@@ -4174,9 +3566,7 @@ function submitWithdrawal(){
 
   }
 
-  if(
-    amount <= withdrawalFee
-  ){
+  if(amount <= withdrawalFee){
 
     alert(
       getText("greaterFee") +
@@ -4189,11 +3579,7 @@ function submitWithdrawal(){
 
   }
 
-  if(
-    !bank ||
-    !account ||
-    !accountName
-  ){
+  if(!bank || !account || !accountName){
 
     alert(
       getText("bankDetails")
@@ -4204,18 +3590,14 @@ function submitWithdrawal(){
   }
 
   const net =
-    amount -
-    withdrawalFee;
+    amount - withdrawalFee;
 
   if(isBonusWithdrawal){
 
     user.bonusBalance =
       Math.max(
         0,
-        Number(
-          user.bonusBalance || 0
-        ) -
-        amount
+        Number(user.bonusBalance || 0) - amount
       );
 
   }else{
@@ -4224,32 +3606,24 @@ function submitWithdrawal(){
       getLiveMiningEarnings(user);
 
     const settledBalance =
-      Number(
-        user.balance || 0
-      );
+      Number(user.balance || 0);
 
-    if(
-      amount <=
-      settledBalance
-    ){
+    if(amount <= settledBalance){
 
       user.balance =
-        settledBalance -
-        amount;
+        settledBalance - amount;
 
     }else{
 
       const livePortion =
-        amount -
-        settledBalance;
+        amount - settledBalance;
 
       user.balance = 0;
 
       user.miner.earnings =
         Math.max(
           0,
-          liveEarnings -
-          livePortion
+          liveEarnings - livePortion
         );
 
     }
@@ -4268,8 +3642,7 @@ function submitWithdrawal(){
         .toString()
         .slice(-8),
 
-    date:
-      new Date().toISOString(),
+    date:new Date().toISOString(),
 
     type:"Withdrawal",
 
@@ -4294,38 +3667,20 @@ function submitWithdrawal(){
 
   };
 
-  user.transactions.unshift(
-    transaction
-  );
+  user.transactions.unshift(transaction);
 
   saveCurrentUser(user);
 
-  document
-    .getElementById(
-      "withdrawAmount"
-    )
-    .value = "";
-
-  document
-    .getElementById(
-      "withdrawAccount"
-    )
-    .value = "";
-
-  document
-    .getElementById(
-      "withdrawName"
-    )
-    .value = "";
+  document.getElementById("withdrawAmount").value = "";
+  document.getElementById("withdrawAccount").value = "";
+  document.getElementById("withdrawName").value = "";
 
   updateWithdrawalCalculation();
   updateDashboard();
   renderHistory();
 
   alert(
-    getText(
-      "withdrawalSubmitted"
-    )
+    getText("withdrawalSubmitted")
   );
 
   showPage("history");
@@ -4333,9 +3688,7 @@ function submitWithdrawal(){
 }
 
 document
-  .getElementById(
-    "submitWithdrawalBtn"
-  )
+  .getElementById("submitWithdrawalBtn")
   .addEventListener(
     "click",
     submitWithdrawal
@@ -4347,52 +3700,38 @@ document
 
 function updateWithdrawalStatuses(){
 
-  const user =
-    getCurrentUser();
+  const user = getCurrentUser();
 
   if(
     !user ||
-    !Array.isArray(
-      user.transactions
-    )
+    !Array.isArray(user.transactions)
   ){
-
     return;
-
   }
 
   let changed = false;
 
-  user.transactions.forEach(
-    tx => {
+  user.transactions.forEach(tx => {
 
-      if(
-        tx.status === "Pending" &&
-        tx.pendingUntil &&
-        Date.now() >=
-        Number(
-          tx.pendingUntil
-        )
-      ){
+    if(
+      tx.status === "Pending" &&
+      tx.pendingUntil &&
+      Date.now() >= Number(tx.pendingUntil)
+    ){
 
-        tx.status =
-          "Withdrawn";
+      tx.status = "Withdrawn";
 
-        tx.approvedAt =
-          new Date()
-            .toISOString();
+      tx.approvedAt =
+        new Date().toISOString();
 
-        changed = true;
-
-      }
+      changed = true;
 
     }
-  );
+
+  });
 
   if(changed){
-
     saveCurrentUser(user);
-
   }
 
 }
@@ -4400,38 +3739,30 @@ function updateWithdrawalStatuses(){
 function startWithdrawalStatusTimer(){
 
   if(withdrawalInterval){
-
-    clearInterval(
-      withdrawalInterval
-    );
-
+    clearInterval(withdrawalInterval);
   }
 
   updateWithdrawalStatuses();
 
   withdrawalInterval =
-    setInterval(
-      () => {
+    setInterval(() => {
 
-        const user =
-          getCurrentUser();
+      const user = getCurrentUser();
 
-        if(!user){
+      if(!user){
 
-          clearInterval(
-            withdrawalInterval
-          );
+        clearInterval(
+          withdrawalInterval
+        );
 
-          return;
+        return;
 
-        }
+      }
 
-        updateWithdrawalStatuses();
-        renderHistory();
+      updateWithdrawalStatuses();
+      renderHistory();
 
-      },
-      1000
-    );
+    },1000);
 
 }
 
@@ -4441,8 +3772,7 @@ function startWithdrawalStatusTimer(){
 
 function renderHistory(){
 
-  const user =
-    getCurrentUser();
+  const user = getCurrentUser();
 
   if(!user){
     return;
@@ -4451,23 +3781,15 @@ function renderHistory(){
   updateWithdrawalStatuses();
 
   const body =
-    document.getElementById(
-      "historyBody"
-    );
+    document.getElementById("historyBody");
 
   const empty =
-    document.getElementById(
-      "historyEmpty"
-    );
+    document.getElementById("historyEmpty");
 
   const table =
-    document.getElementById(
-      "historyTable"
-    );
+    document.getElementById("historyTable");
 
-  if(
-    !user.transactions.length
-  ){
+  if(!user.transactions.length){
 
     empty.classList.remove("hidden");
     table.classList.add("hidden");
@@ -4481,80 +3803,66 @@ function renderHistory(){
 
   body.innerHTML =
     user.transactions
-      .map(
-        (tx,index) => {
+      .map((tx,index) => {
 
-          const date =
-            new Date(
-              tx.date
-            ).toLocaleString();
+        const date =
+          new Date(tx.date).toLocaleString();
 
-          return `
+        return `
 
-            <tr>
+          <tr>
 
-              <td>
-                ${escapeHtml(tx.id)}
-              </td>
+            <td>
+              ${escapeHtml(tx.id)}
+            </td>
 
-              <td>
-                ${escapeHtml(date)}
-              </td>
+            <td>
+              ${escapeHtml(date)}
+            </td>
 
-              <td>
-                ${formatMoney(
-                  tx.amount,
-                  user
-                )}
-              </td>
+            <td>
+              ${formatMoney(tx.amount,user)}
+            </td>
 
-              <td>
-                ${formatMoney(
-                  tx.fee,
-                  user
-                )}
-              </td>
+            <td>
+              ${formatMoney(tx.fee,user)}
+            </td>
 
-              <td>
-                ${formatMoney(
-                  tx.net,
-                  user
-                )}
-              </td>
+            <td>
+              ${formatMoney(tx.net,user)}
+            </td>
 
-              <td>
+            <td>
 
-                <span
-                  class="status ${
-                    tx.status === "Withdrawn"
-                      ? "completed"
-                      : "pending"
-                  }"
-                >
-                  ${escapeHtml(
-                    tx.status
-                  )}
-                </span>
+              <span
+                class="status ${
+                  tx.status === "Withdrawn"
+                    ? "completed"
+                    : "pending"
+                }"
+              >
+                ${escapeHtml(tx.status)}
+              </span>
 
-              </td>
+            </td>
 
-              <td>
+            <td>
 
-                <button
-                  class="secondary-btn"
-                  onclick="viewTransaction(${index})"
-                >
-                  ${getText("view")}
-                </button>
+              <button
+                class="secondary-btn"
+                type="button"
+                onclick="viewTransaction(${index})"
+              >
+                ${getText("view")}
+              </button>
 
-              </td>
+            </td>
 
-            </tr>
+          </tr>
 
-          `;
+        `;
 
-        }
-      )
+      })
       .join("");
 
 }
@@ -4562,8 +3870,7 @@ function renderHistory(){
 window.viewTransaction =
 function(index){
 
-  const user =
-    getCurrentUser();
+  const user = getCurrentUser();
 
   if(!user){
     return;
@@ -4575,8 +3882,7 @@ function(index){
     getCurrentUser();
 
   const tx =
-    refreshedUser
-      .transactions[index];
+    refreshedUser.transactions[index];
 
   if(!tx){
     return;
@@ -4584,9 +3890,7 @@ function(index){
 
   currentTransaction = tx;
 
-  let statusText =
-    tx.status;
-
+  let statusText = tx.status;
   let approvalText = "";
 
   if(
@@ -4597,17 +3901,12 @@ function(index){
     const remaining =
       Math.max(
         0,
-        Number(
-          tx.pendingUntil
-        ) -
-        Date.now()
+        Number(tx.pendingUntil) - Date.now()
       );
 
     statusText =
       "Pending — " +
-      formatPendingTime(
-        remaining
-      );
+      formatPendingTime(remaining);
 
   }
 
@@ -4639,9 +3938,7 @@ function(index){
   }
 
   document
-    .getElementById(
-      "transactionDetails"
-    )
+    .getElementById("transactionDetails")
     .innerHTML = `
 
       <div class="fee-box">
@@ -4655,9 +3952,7 @@ function(index){
           <span>${getText("date")}</span>
           <strong>
             ${escapeHtml(
-              new Date(
-                tx.date
-              ).toLocaleString()
+              new Date(tx.date).toLocaleString()
             )}
           </strong>
         </div>
@@ -4670,39 +3965,28 @@ function(index){
         <div class="fee-row">
           <span>${getText("source")}</span>
           <strong>
-            ${escapeHtml(
-              tx.source || "Miner"
-            )}
+            ${escapeHtml(tx.source || "Miner")}
           </strong>
         </div>
 
         <div class="fee-row">
           <span>${getText("amount")}</span>
           <strong>
-            ${formatMoney(
-              tx.amount,
-              refreshedUser
-            )}
+            ${formatMoney(tx.amount,refreshedUser)}
           </strong>
         </div>
 
         <div class="fee-row">
           <span>${getText("fee")}</span>
           <strong>
-            ${formatMoney(
-              tx.fee,
-              refreshedUser
-            )}
+            ${formatMoney(tx.fee,refreshedUser)}
           </strong>
         </div>
 
         <div class="fee-row">
           <span>${getText("net")}</span>
           <strong>
-            ${formatMoney(
-              tx.net,
-              refreshedUser
-            )}
+            ${formatMoney(tx.net,refreshedUser)}
           </strong>
         </div>
 
@@ -4741,12 +4025,8 @@ function(index){
     `;
 
   document
-    .getElementById(
-      "transactionModal"
-    )
-    .classList.remove(
-      "hidden"
-    );
+    .getElementById("transactionModal")
+    .classList.remove("hidden");
 
 };
 
@@ -4754,48 +4034,32 @@ function formatPendingTime(ms){
 
   const totalSeconds =
     Math.ceil(
-      Math.max(
-        0,
-        ms
-      ) / 1000
+      Math.max(0,ms) / 1000
     );
 
   const minutes =
-    Math.floor(
-      totalSeconds / 60
-    );
+    Math.floor(totalSeconds / 60);
 
   const seconds =
     totalSeconds % 60;
 
   return (
-    String(minutes)
-      .padStart(2,"0") +
+    String(minutes).padStart(2,"0") +
     ":" +
-    String(seconds)
-      .padStart(2,"0")
+    String(seconds).padStart(2,"0")
   );
 
 }
 
 document
-  .getElementById(
-    "closeModal"
-  )
-  .addEventListener(
-    "click",
-    () => {
+  .getElementById("closeModal")
+  .addEventListener("click",() => {
 
-      document
-        .getElementById(
-          "transactionModal"
-        )
-        .classList.add(
-          "hidden"
-        );
+    document
+      .getElementById("transactionModal")
+      .classList.add("hidden");
 
-    }
-  );
+  });
 
 /* =========================================================
    LANGUAGE BUTTONS
@@ -4803,94 +4067,58 @@ document
 
 document
   .querySelectorAll(".lang-btn")
-  .forEach(
-    btn => {
+  .forEach(btn => {
 
-      btn.addEventListener(
-        "click",
-        () => {
+    btn.addEventListener("click",() => {
 
-          applyLanguage(
-            btn.dataset.lang
-          );
-
-        }
+      applyLanguage(
+        btn.dataset.lang
       );
 
-    }
-  );
+    });
+
+  });
 
 /* =========================================================
    LOGOUT
    ========================================================= */
 
-function logoutUser(){
-
-  localStorage.removeItem(
-    STORAGE_CURRENT
-  );
-
-  if(minerInterval){
-
-    clearInterval(
-      minerInterval
-    );
-
-    minerInterval = null;
-
-  }
-
-  if(bonusInterval){
-
-    clearInterval(
-      bonusInterval
-    );
-
-    bonusInterval = null;
-
-  }
-
-  if(withdrawalInterval){
-
-    clearInterval(
-      withdrawalInterval
-    );
-
-    withdrawalInterval = null;
-
-  }
-
-  document
-    .getElementById(
-      "authForm"
-    )
-    .reset();
-
-  showAuth("login");
-
-}
-
-/* DESKTOP LOGOUT */
-
 document
-  .getElementById(
-    "logoutBtn"
-  )
-  .addEventListener(
-    "click",
-    logoutUser
-  );
+  .getElementById("logoutBtn")
+  .addEventListener("click",() => {
 
-/* MOBILE LOGOUT */
+    localStorage.removeItem(
+      STORAGE_CURRENT
+    );
 
-document
-  .getElementById(
-    "mobileLogoutBtn"
-  )
-  .addEventListener(
-    "click",
-    logoutUser
-  );
+    if(minerInterval){
+
+      clearInterval(minerInterval);
+      minerInterval = null;
+
+    }
+
+    if(bonusInterval){
+
+      clearInterval(bonusInterval);
+      bonusInterval = null;
+
+    }
+
+    if(withdrawalInterval){
+
+      clearInterval(withdrawalInterval);
+      withdrawalInterval = null;
+
+    }
+
+    document
+      .getElementById("authForm")
+      .reset();
+
+    showAuth("login");
+
+  });
 
 /* =========================================================
    UTILS
@@ -4898,9 +4126,7 @@ document
 
 function escapeHtml(value){
 
-  return String(
-    value ?? ""
-  )
+  return String(value ?? "")
     .replace(/&/g,"&amp;")
     .replace(/</g,"&lt;")
     .replace(/>/g,"&gt;")
@@ -4931,23 +4157,17 @@ function renderAll(){
 function boot(){
 
   currentLanguage =
-    localStorage.getItem(
-      STORAGE_LANG
-    ) || "en";
+    localStorage.getItem(STORAGE_LANG) || "en";
 
-  setTimeout(
-    () => {
+  setTimeout(() => {
 
-      document
-        .getElementById("loading")
-        .classList.add("hidden");
+    document
+      .getElementById("loading")
+      .classList.add("hidden");
 
-    },
-    300
-  );
+  },300);
 
-  const user =
-    getCurrentUser();
+  const user = getCurrentUser();
 
   if(user){
 
@@ -4960,13 +4180,10 @@ function boot(){
       refreshed &&
       refreshed.miner &&
       refreshed.miner.running &&
-      Date.now() >=
-      refreshed.miner.endTime
+      Date.now() >= refreshed.miner.endTime
     ){
 
-      settleMining(
-        refreshed
-      );
+      settleMining(refreshed);
 
     }
 
@@ -4993,9 +4210,7 @@ function boot(){
 
   }
 
-  applyLanguage(
-    currentLanguage
-  );
+  applyLanguage(currentLanguage);
 
 }
 
